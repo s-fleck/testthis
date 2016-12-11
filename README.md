@@ -1,3 +1,5 @@
+# Rstudio addins and utils for testthat
+
 This is  a (very simple) package that provides utility function functions that I have been missing for my developing workflow and I thought I'd share. This package is aimed at people that use Rstudio together with the testthat package.
 
 Assuming you currently have the file `my_fun.R` open in Rstudio:
