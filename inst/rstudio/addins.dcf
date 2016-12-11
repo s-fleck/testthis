@@ -3,7 +3,7 @@ Description: Calls testthat::test_file on "tests/test_that/test_CURRENT_FILE_NAM
 Binding: test_this
 Interactive: false
 
-Name: Load complete package and test this file
+Name: Load and test
 Description: Calls devtools::load_all() and then calls testthat::test_file on "tests/test_that/test_CURRENT_FILE_NAME.R"
 Binding: lest_this
 Interactive: false

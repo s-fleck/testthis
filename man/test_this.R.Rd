@@ -10,10 +10,8 @@ test_this()
 lest_this()
 }
 \description{
-If the current file is called "function.R", test_this calls
-testthat::test_file on "tests/testhat/test_function.R".
-
-If the current file is called "function.R", test_this calls
-testthat::test_file on "tests/testhat/test_function.R".
+If the file currently open in the Rstudio editor is called \code{my_function.R},
+\code{test_this()} calls \code{testthat::test_file()} on "tests/testhat/test_my_function.R".
+\code{lest_this()} does the same, but calls \code{devtools::load_all()} first.
 }
 

@@ -1,7 +1,7 @@
 Package: testthis
 Type: Package
 Title: Rstudio Addin to run tests associated with the current file
-Version: 0.1.0
+Version: 0.0.1
 Author: Stefan Fleck
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: An Rstudio addin designed to aid package development by providing two

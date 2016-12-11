@@ -1,7 +1,8 @@
 #' Test this file
 #'
-#' If the current file is called "function.R", test_this calls
-#' testthat::test_file on "tests/testhat/test_function.R".
+#' If the file currently open in the Rstudio editor is called \code{my_function.R},
+#' \code{test_this()} calls \code{testthat::test_file()} on "tests/testhat/test_my_function.R".
+#' \code{lest_this()} does the same, but calls \code{devtools::load_all()} first.
 #'
 #' @export
 #' @import rstudioapi testthat
@@ -22,12 +23,6 @@ test_this <- function(){
   }
 }
 
-
-#' Load complete package and test this file
-#'
-#' If the current file is called "function.R", test_this calls
-#' testthat::test_file on "tests/testhat/test_function.R".
-#'
 #' @export
 #' @rdname test_this.R
 lest_this <- function(){
