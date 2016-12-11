@@ -7,3 +7,8 @@ Name: Load and test
 Description: Calls devtools::load_all() and then calls testthat::test_file on "tests/test_that/test_CURRENT_FILE_NAME.R"
 Binding: lest_this
 Interactive: false
+
+Name: Open tests
+Description: Opens "tests/test_that/test_CURRENT_FILE_NAME.R" in the editor
+Binding: open_tests
+Interactive: false

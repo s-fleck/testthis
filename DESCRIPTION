@@ -1,12 +1,16 @@
 Package: testthis
 Type: Package
 Title: Rstudio Addin to run tests associated with the current file
-Version: 0.0.1
+Version: 0.0.2
 Author: Stefan Fleck
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: An Rstudio addin designed to aid package development by providing two
-    shortcut functions to run tests in tests/testthat.
+Description: This package automates menial tasks associated with creating and
+  running automated unit tests with the testthat package. It also provides 
+  Rstudio addins for the most common functions, so that hotkeys can easily be
+  assigned. Everything in this package assumes that tests for "myfun.R" go into
+  "tests/testthat/test_myfun.R"
 License: GPL-3
 Imports: testthat, devtools
 Encoding: UTF-8
 RoxygenNote: 5.0.1
+Suggests: testthat
