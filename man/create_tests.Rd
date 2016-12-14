@@ -4,7 +4,7 @@
 \alias{test_skeleton}
 \title{Create a test skeleton file  for the currently open .R file}
 \usage{
-test_skeleton(open = TRUE)
+test_skeleton(fname, open = TRUE)
 }
 \arguments{
 \item{open}{Should the test file be opend after it is created?}

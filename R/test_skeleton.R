@@ -9,8 +9,11 @@
 #' @rdname create_tests
 #' @export
 #' @import rstudioapi testthat
-test_skeleton <- function(open = TRUE){
-  fname <- get_testfile_name()
+test_skeleton <- function(fname, open = TRUE){
+  if(missing(fname)){
+    fname <- get_testfile_name()
+  }
+
 
   if(file.exists(fname)){
     message(sprintf('* File alread exists: %s', fname))

@@ -5,5 +5,12 @@
 #'
 #' @export
 open_tests <- function(){
-  rstudioapi::navigateToFile(get_testfile_name())
+  fname <- get_testfile_name()
+
+  if(file.exists(fname)){
+    rstudioapi::navigateToFile()
+  } else {
+    test_skeleton(fname, open = TRUE)
+  }
+
 }
