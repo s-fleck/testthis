@@ -1,9 +1,13 @@
 #' Test this file
 #'
+#' This is a convenice function to run testthat tests in a single .R file.
 #' If the file currently open in the Rstudio editor is called \code{my_function.R},
 #' \code{test_this()} calls \code{testthat::test_file()} on "tests/testhat/test_my_function.R".
+#' If the filename of the currently open file with starts with \code{test_} it
+#' will call \code{testthat::test_file()} on the current file.
+#'
 #' This is usefull in cases where you don't want to run all tests in a package
-#' via \code{devtools::test()} (CTRL+SHIFT+T)
+#' via \code{devtools::test()} (CTRL+SHIFT+T).
 #'
 #' @export
 #' @import rstudioapi testthat

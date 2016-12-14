@@ -1,10 +1,17 @@
 get_testfile_name <- function(){
 
-  bn <- basename(rstudioapi::getActiveDocumentContext()$path)
+  fname <- rstudioapi::getActiveDocumentContext()$path
 
-  if(identical(bn, '')){
-    bn <-  basename(rstudioapi::getSourceEditorContext()$path)
+  if(identical(fname, '')){
+    fname <-  rstudioapi::getSourceEditorContext()$path
   }
 
-  fname <- file.path(testthat::test_path(), paste0('test_', bn))
+  bn <- basename(fname)
+
+  if(grepl('^test_', bn)){
+    res <- fname
+  } else {
+    res <- file.path(testthat::test_path(), paste0('test_', bn))
+  }
+
 }
