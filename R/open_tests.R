@@ -8,7 +8,7 @@ open_tests <- function(){
   fname <- get_testfile_name()
 
   if(file.exists(fname)){
-    rstudioapi::navigateToFile()
+    rstudioapi::navigateToFile(fname)
   } else {
     test_skeleton(fname, open = TRUE)
   }
