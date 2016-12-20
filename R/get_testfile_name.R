@@ -9,7 +9,7 @@ get_testfile_name <- function(){
   scriptfile <- readLines(fname)
   opts       <- parse_options(fname)
 
-  if(is.null(opts$testfile)){
+  if(identical(length(opts), 0L)){
     bn <- basename(fname)
 
     if(grepl('^test_', bn)){
@@ -18,7 +18,7 @@ get_testfile_name <- function(){
       res <- file.path(testthat::test_path(), paste0('test_', bn))
     }
   } else {
-    bn  <- paste0(opts$testfile, '.R')
+    bn  <- paste0(opts, '.R')
     res <- file.path(testthat::test_path(), bn)
   }
 
@@ -28,15 +28,11 @@ get_testfile_name <- function(){
 parse_options <- function(fname){
   dat <- readLines(fname)
 
-  options    <- dat[grep('^#! ', dat)] %>%
-    stringi::stri_sub(4) %>%
-    stringi::stri_split(fixed = '=') %>%
-    lapply(trimws)
-
-  res <- list()
-  for(el in options){
-    res[[el[[1]]]] = el[[2]]
-  }
+  res <- dat[grep('^# testthis ', dat)] %>%
+    stringi::stri_sub(12) %>%
+    trimws()
 
   return(res)
 }
+
+
