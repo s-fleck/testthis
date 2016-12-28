@@ -24,9 +24,9 @@ test_that("test_parse_testthis_comments works as expected", {
 
 
   #* @testing testthis_tokenizer
-  expect_identical(testthis_tokenizer(tdat[[1]]), list(c("@testing", "detect_testthis_comments")))
-  expect_identical(testthis_tokenizer(tdat[[2]]), list(c("@testing", "extract_testthis_comments")))
-  expect_identical(testthis_tokenizer(tdat[[3]]), list(c("@testing", "testthis_tokenizer")))
+  expect_identical(testthis_tokenizer(tdat[[1]]), c("@testing", "detect_testthis_comments"))
+  expect_identical(testthis_tokenizer(tdat[[2]]), c("@testing", "extract_testthis_comments"))
+  expect_identical(testthis_tokenizer(tdat[[3]]), c("@testing", "testthis_tokenizer"))
 })
 
 
@@ -38,4 +38,10 @@ test_that("test_parse_testthis_comments works as expected", {
          c("@testing", "testthis_tokenizer"))
   )
 })
+
+test_that("extracting testthis tags works as expected"){
+  #* @testing extract_testthis_tags
+
+  x <- extract_testthis_tags(tfile)
+}
 
