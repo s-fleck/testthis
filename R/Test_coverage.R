@@ -6,22 +6,28 @@ test_coverage <- function(dat){
 
 print.Test_coverage <- function(dat){
 
-  cat('Package', attr(dat, 'package'), '\n\n')
+  tp  <- sum(dat$tested)/ nrow(dat) * 100
+  msg <- sprintf('Package %s, Test Coverage: %.1f%%\n', attr(dat, 'package'), tp)
 
-  print.data.frame(dat, row.names = FALSE, right = FALSE)
+  dd  <- dat
+  dd$tested <- ifelse(dat$tested, '+', ' ')
+  names(dd) <- c('', '')
 
-  tp <- sum(dat$tested)/ nrow(dat)
+  cat(msg)
+  print.data.frame(dd, row.names = FALSE, right = FALSE)
+  cat('\n')
 
-  cat(sprintf('\nTest Coverage: %.1f%%', tp))
+  invisible(dat)
 }
+
 
 get_test_coverage <- function(pkg = '.'){
   x <- get_tested_functions(pkg = pkg)
   y <- get_package_functions(pkg = pkg)
 
   res <- data.frame(
-    fun    = y,
-    tested = y %in% x
+    tested = y %in% x,
+    fun    = y
   )
 
   attr(res, 'package') <- devtools::as.package(pkg)$package
