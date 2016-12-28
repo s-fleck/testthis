@@ -25,8 +25,5 @@ get_tested_functions <- function(pkg = '.'){
     }
   }
 
-  ttfuns <- unlist(lapply(ttfuns, gtested))
-
-
-
+  ttfuns <- unique(unlist(lapply(ttfuns, gtested)))
 }
