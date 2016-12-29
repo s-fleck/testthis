@@ -4,6 +4,7 @@ test_coverage <- function(dat){
 }
 
 
+#' @export
 print.Test_coverage <- function(dat){
 
   tp  <- sum(dat$tested)/ nrow(dat) * 100
@@ -21,13 +22,14 @@ print.Test_coverage <- function(dat){
 }
 
 
-get_test_coverage <- function(pkg = '.'){
-  x <- get_tested_functions(pkg = pkg)
-  y <- get_package_functions(pkg = pkg)
+#' @export
+get_test_coverage <- function(pkg = '.', ...){
+  all  <- get_package_functions(pkg = pkg)
+  tst  <- get_tested_functions(pkg = pkg, ...)
 
   res <- data.frame(
-    tested = y %in% x,
-    fun    = y
+    tested = all %in% tst,
+    fun    = all
   )
 
   attr(res, 'package') <- devtools::as.package(pkg)$package
