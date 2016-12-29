@@ -6,24 +6,26 @@ get_tested_functions <- function(pkg, from_tags = TRUE, from_desc = TRUE){
   }
 
   if(from_desc){
-    res <- c(get_tested_functions_from_desc(pkg))
+    res <- c(res, get_tested_functions_from_desc(pkg))
   }
 
   return(res)
 }
 
+
+# devtools::load_all('/home/hoelk/Dropbox/workspace/r/testthis/testthis')
 #' Get functions defined in package
 #'
 #' @param pkg
 #'
 #' @return
-#' @export
 #'
 #' @examples
 get_tested_functions_from_tags <- function(pkg){
-  pkg       <- devtools::as.package(pkg)
+  pkg     <- devtools::as.package(pkg)
+  tpath   <- system.file('tests', 'testthat', package = pkg$package, mustWork = TRUE)
 
-  ttfiles <- list.files(testthat::test_path(), full.names = TRUE)
+  ttfiles <- list.files(tpath, full.names = TRUE)
   ttfuns  <- lapply(ttfiles, extract_testthis_tags)
   ttfuns  <- unlist(ttfuns, recursive = FALSE)
 
