@@ -46,10 +46,7 @@ get_tested_functions_from_desc <- function(pkg){
   pkg_dir   <- base::system.file(package = pkg$package)
 
   ttfiles <- list.files(testthat::test_path(), full.names = TRUE)
-
-  exps  <- unlist(lapply(ttfiles, parse))
-  exps  <- exps[grep('test_that', as.list(exps))]
-  descs <- extract_test_that_desc(exps)
+  descs   <- extract_test_that_desc(ttfiles)
 
   pkgfuns <- get_package_functions(pkg)
   res <- rep(NA, length(pkgfuns))
@@ -70,10 +67,18 @@ get_tested_functions_from_desc <- function(pkg){
 }
 
 
-extract_test_that_desc <- function(dl){
+#' Extract 'desc' arguments from all test_that functions from .R script files
+#'
+#' @param infile character. Patht to an .R script file, or a list of such paths;
+#' usually created with list.files("/path/to/directory")
+#' @return content of the 'desc' arguments of test_that functions
+extract_test_that_desc <- function(infile){
+  exps  <- unlist(lapply(infile, parse))
+  exps  <- exps[grep('test_that', as.list(exps))]
+
+  # fun tries to account for all possibilities where desc is not the second
+  # argument of testthat
   fun <- function(x) {
-    # Tries to account for cases where test_that function arguments are
-    # not in the right order
     .x <- as.list(x)
     if('desc' %in% names(.x)){
       return(.x$desc)
@@ -87,5 +92,5 @@ extract_test_that_desc <- function(dl){
     }
   }
 
-  lapply(dl, fun)
+  lapply(exps, fun)
 }
