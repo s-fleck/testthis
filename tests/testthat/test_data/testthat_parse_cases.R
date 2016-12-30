@@ -16,4 +16,4 @@ test_that(
 
 test_that(
   code = expect_true(FALSE),
-  "barfun is ok")
+  "%barfun% is ok")

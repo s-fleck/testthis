@@ -6,7 +6,7 @@ test_that("get_tested_functions_from_tags works as expected", {
 })
 
 test_that('get_tested_functions_from_desc works', {
-  tfuns <- c('fizzfun', 'buzzfun', 'foofun', 'barfun', 'bafoon')
+  tfuns <- c('fizzfun', 'buzzfun', 'foofun', '%barfun%', 'bafoon')
 
   tres <- with_mock(
     get_package_functions = function(...) tfuns,
