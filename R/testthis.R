@@ -1,9 +1,10 @@
 #' Testthis-package
 #'
-#' @return
-#' @export
+#' @name testthis
 #' @import assertthat devtools
 #' @docType package
 #'
 #' @examples
 NULL
+
+
