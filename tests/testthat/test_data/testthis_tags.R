@@ -2,6 +2,9 @@ context("test_parse_testthis_comments")
 
 tfile <-  system.file('tests', 'testthat', 'test_parse_testthis_comments.R', package = 'testthis')
 
+#* @testfile testthis_tags
+#* @testfile testthis_tags2
+
 test_that("test_parse_testthis_comments works as expected", {
   #* @testing detect_testthis_comments ------
   t1 <- '#* @testing  testthis_tokenize'
@@ -22,8 +25,7 @@ test_that("test_parse_testthis_comments works as expected", {
 })
 
 test_that("extracting testthis tags works as expected", {
-  #* @testing extract_testthis_tags
+  #* @testing get_taglist
   #* @testing %foofun%
-
 })
 

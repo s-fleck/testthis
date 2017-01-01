@@ -32,13 +32,9 @@ test_that("test_Test_coverage works as expected", {
     tested = c(TRUE, FALSE)
   )
 
-
-
-  print.Test_coverage(tdat1)
-  print.Test_coverage(tdat2)
-  print.Test_coverage(tdat3)
-
-
+  # print.Test_coverage(tdat1)
+  # print.Test_coverage(tdat2)
+  # print.Test_coverage(tdat3)
 })
 
 
