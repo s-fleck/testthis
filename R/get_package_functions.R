@@ -4,8 +4,7 @@
 #'
 #' @return a character vector
 #' @import devtools
-#' @export
-get_package_functions <- function(pkg = '.'){
+get_all_functions <- function(pkg = '.'){
   pkg  <- devtools::as.package(pkg)
   res  <- as.character(unclass(lsf.str(envir = asNamespace(pkg$package), all = TRUE)))
   return(res)
@@ -18,7 +17,6 @@ get_package_functions <- function(pkg = '.'){
 #'
 #' @return a character vector
 #' @import devtools
-#' @export
 get_exported_functions <- function(pkg = '.'){
   pkg <- devtools::as.package(pkg)
 

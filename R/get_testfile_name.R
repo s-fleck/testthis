@@ -1,3 +1,5 @@
+#* @testfile get_testfile_name
+
 get_testfile_name <- function(){
 
   fname <- rstudioapi::getActiveDocumentContext()$path
@@ -7,7 +9,7 @@ get_testfile_name <- function(){
   }
 
   scriptfile <- readLines(fname)
-  opts       <- parse_options(fname)
+  opts       <- get_tag(get_taglist(fname), 'testfile')
 
   if(identical(length(opts), 0L)){
     bn <- basename(fname)
@@ -18,21 +20,13 @@ get_testfile_name <- function(){
       res <- file.path(testthat::test_path(), paste0('test_', bn))
     }
   } else {
-    bn  <- paste0(opts, '.R')
+    if(length(opts) > 1) {
+      warning('More than one @testfile tag present. Using first.')
+    }
+    bn  <- paste0(opts[[1]], '.R')
     res <- file.path(testthat::test_path(), bn)
   }
-
 }
 
-
-parse_options <- function(fname){
-  dat <- readLines(fname)
-
-  res <- dat[grep('^# testthis ', dat)] %>%
-    stringi::stri_sub(12) %>%
-    trimws()
-
-  return(res)
-}
 
 

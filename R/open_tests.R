@@ -12,5 +12,4 @@ open_tests <- function(){
   } else {
     test_skeleton(fname, open = TRUE)
   }
-
 }

@@ -26,7 +26,7 @@ get_tested_functions_from_tags <- function(pkg){
   tpath   <- system.file('tests', 'testthat', package = pkg$package, mustWork = TRUE)
 
   ttfiles <- list.files(tpath, full.names = TRUE)
-  ttfuns  <- lapply(ttfiles, extract_testthis_tags)
+  ttfuns  <- lapply(ttfiles, get_taglist)
   ttfuns  <- unlist(ttfuns, recursive = FALSE)
 
   gtested <- function(x){
@@ -48,7 +48,7 @@ get_tested_functions_from_desc <- function(pkg){
   ttfiles <- list.files(testthat::test_path(), full.names = TRUE)
   descs   <- extract_test_that_desc(ttfiles)
 
-  pkgfuns <- get_package_functions(pkg)
+  pkgfuns <- get_all_functions(pkg)
   res <- rep(NA, length(pkgfuns))
 
   for(i in seq_along(pkgfuns)){
