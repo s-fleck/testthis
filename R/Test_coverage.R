@@ -1,6 +1,24 @@
 test_coverage <- function(dat){
   class(dat) <- c('Test_coverage', 'data.frame')
+
+  assert_that(is_valid(dat))
   return(dat)
+}
+
+
+is_valid.Test_coverage <- function(dat){
+  res <- list()
+
+  res$names <- assert_that(identical(
+    c('fun', 'exp', 'tested'),
+    names(dat))
+  )
+  res$types <- assert_that(identical(
+    unname(unlist(lapply(dat, class))),
+    c('character', 'logical', 'logical'))
+  )
+
+  all(unlist(res))
 }
 
 
@@ -46,17 +64,16 @@ print.Test_coverage <- function(dat){
 
 #' @export
 get_test_coverage <- function(pkg = '.', ...){
-  all  <- get_package_functions(pkg = pkg)
+  all  <- get_all_functions(pkg = pkg)
   tst  <- get_tested_functions(pkg = pkg, ...)
   exp  <- get_exported_functions(pkg = pkg)
 
   res <- data.frame(
     fun    = all,
     exp    = all %in% exp,
-    tested = all %in% tst
+    tested = all %in% tst,
+    stringsAsFactors = FALSE
   )
-
-  res <- res[order(res$fun), ]
 
   attr(res, 'package') <- devtools::as.package(pkg)$package
   test_coverage(res)
