@@ -2,6 +2,10 @@
 
 get_testfile_name <- function(){
 
+  if(!requireNamespace("rstudioapi")){
+    stop('This functions are designed to be used with Rstudio')
+  }
+
   fname <- rstudioapi::getActiveDocumentContext()$path
 
   if(identical(fname, '')){
