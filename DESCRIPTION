@@ -10,8 +10,14 @@ Description: This package automates menial tasks associated with creating and
   assigned. Everything in this package assumes that tests for "R/myfun.R" go into
   "tests/testthat/test_myfun.R"
 License: GPL-3
-Imports: testthat, devtools, stringi, assertthat
-Suggests: rstudioapi
+Imports: 
+  testthat,
+  devtools, 
+  stringi, 
+  assertthat
+Suggests:
+  knitr,
+  rmarkdown
 Encoding: UTF-8
 RoxygenNote: 5.0.1
-Suggests: testthat
+VignetteBuilder: knitr
