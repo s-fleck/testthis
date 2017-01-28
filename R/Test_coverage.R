@@ -24,8 +24,7 @@ is_valid.Test_coverage <- function(dat){
 
 #' @export
 print.Test_coverage <- function(dat){
-
-  tp    <- sum(dat$tested)/ nrow(dat) * 100
+  tp    <- sum(dat$tested) / nrow(dat) * 100
   pname <- attr(dat, 'package')
   if(is.null(pname)) pname <- ''
 
@@ -57,7 +56,6 @@ print.Test_coverage <- function(dat){
     print.data.frame(dint, row.names = FALSE, right = FALSE)
   }
 
-  # cat(fline, '\n')
   invisible(dat)
 }
 
@@ -80,11 +78,17 @@ print.Test_coverage <- function(dat){
 #' will be marked as tested.
 #'
 #' @export
-get_test_coverage <- function(pkg = '.', from_tags = TRUE, from_desc = TRUE){
+get_test_coverage <- function(
+  pkg = '.',
+  from_tags = TRUE,
+  from_desc = TRUE
+){
   all  <- get_all_functions(pkg = pkg)
-  tst  <- get_tested_functions(pkg = pkg,
-                               from_tags = from_tags,
-                               from_desc = from_desc)
+  tst  <- get_tested_functions(
+    pkg = pkg,
+    from_tags = from_tags,
+    from_desc = from_desc
+  )
   exp  <- get_exported_functions(pkg = pkg)
 
   res <- data.frame(
@@ -108,12 +112,16 @@ get_test_coverage <- function(pkg = '.', from_tags = TRUE, from_desc = TRUE){
 #'
 #' @return a character vector
 #' @import devtools
-#' @export
 get_all_functions <- function(pkg = '.'){
   pkg  <- devtools::as.package(pkg)
-  res  <- as.character(unclass(lsf.str(envir = asNamespace(pkg$package), all = TRUE)))
+  res  <- as.character(unclass(
+    lsf.str(envir = asNamespace(pkg$package),
+            all = TRUE)
+    )
+  )
   return(res)
 }
+
 
 
 #' Get exported functions of a package
@@ -123,7 +131,6 @@ get_all_functions <- function(pkg = '.'){
 #' @inheritParams get_test_coverage
 #'
 #' @return a character vector
-#' @export
 get_exported_functions <- function(pkg = '.'){
   pkg <- devtools::as.package(pkg)
 
@@ -142,8 +149,6 @@ get_exported_functions <- function(pkg = '.'){
 #'
 #' @inheritParams get_test_coverage
 #' @return a character vector
-#'
-#' @export
 get_tested_functions <- function(pkg, from_tags, from_desc){
   res <- c()
 
@@ -161,7 +166,7 @@ get_tested_functions <- function(pkg, from_tags, from_desc){
 
 get_tested_functions_from_tags <- function(pkg){
   pkg     <- devtools::as.package(pkg)
-  tpath   <- system.file('tests', 'testthat', package = pkg$package, mustWork = TRUE)
+  tpath   <- file.path(pkg$path, 'tests', 'testthat')
 
   ttfiles <- list.files(tpath, full.names = TRUE)
   ttfuns  <- lapply(ttfiles, get_taglist)
@@ -180,10 +185,10 @@ get_tested_functions_from_tags <- function(pkg){
 
 
 get_tested_functions_from_desc <- function(pkg){
-  pkg       <- devtools::as.package(pkg)
-  pkg_dir   <- base::system.file(package = pkg$package)
+  pkg     <- devtools::as.package(pkg)
+  tpath   <- file.path(pkg$path, 'tests', 'testthat')
 
-  ttfiles <- list.files(testthat::test_path(), full.names = TRUE)
+  ttfiles <- list.files(tpath, full.names = TRUE)
   descs   <- extract_test_that_desc(ttfiles)
 
   pkgfuns <- get_all_functions(pkg)
@@ -232,4 +237,3 @@ extract_test_that_desc <- function(infile){
 
   lapply(exps, fun)
 }
-
