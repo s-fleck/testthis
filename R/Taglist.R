@@ -8,11 +8,6 @@
 #'
 #'    testing *function_name* ... put this in a testfile to mark the current file includes
 #'    tests for a functiuon
-#'
-#' @return
-#' @export
-#'
-#' @examples
 taglist <- function(dat){
   class(dat) <- c('Taglist', 'list')
   return(dat)
@@ -52,9 +47,6 @@ detect_testthis_comments <- function(x){
 #' @param x
 #'
 #' @import stringi
-#' @return
-#'
-#' @examples
 testthis_tokenizer <- function(x){
   assert_that(is.scalar(x))
   assert_that(detect_testthis_comments(x))

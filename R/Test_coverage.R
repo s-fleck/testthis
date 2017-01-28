@@ -63,9 +63,21 @@ print.Test_coverage <- function(dat){
 
 #' Get Test Coverage of Package
 #'
-#' @param pkg path to package
+#' This extracts the test coverage of the target package (usually the package
+#' you are working on). Bear in mind that testthis uses a checklist-approach
+#' for this, and depends that you either put the function name in your
+#' \code{test_that} calls, or used test_this tags. If you want automatic
+#' analysis of test coverage, you must look in other packages such as
+#' \code{covr}.
 #'
-#' @param ...
+#' @param pkg path to package
+#' @param from_tags Checks the files if your test directory for testthis tags.
+#' Speicifically, if you have the comment \code{#* @testing myfunction} in any
+#' of your test files, myfunction will be marked as tested.
+#' @param from_desc Checks the \code{desc} argument \code{test_that(...)} of
+#' the tests in your test directory for functions names. E.g. if you have a
+#' testfile that contains \code{test_that("myfunction works"), ...}, myfunction
+#' will be marked as tested.
 #'
 #' @export
 get_test_coverage <- function(pkg = '.', from_tags = TRUE, from_desc = TRUE){
@@ -87,14 +99,16 @@ get_test_coverage <- function(pkg = '.', from_tags = TRUE, from_desc = TRUE){
 }
 
 
-# Package functions -------------------------------------------------------
 
-#' Get all functions defined in  a package
+# List functions of a package ---------------------------------------------
+
+#' Get all functions of a package
 #'
 #' @param pgk path to the package
 #'
 #' @return a character vector
 #' @import devtools
+#' @export
 get_all_functions <- function(pkg = '.'){
   pkg  <- devtools::as.package(pkg)
   res  <- as.character(unclass(lsf.str(envir = asNamespace(pkg$package), all = TRUE)))
@@ -104,10 +118,12 @@ get_all_functions <- function(pkg = '.'){
 
 #' Get exported functions of a package
 #'
-#' @param pgk path to the package
+#' Lists the functions exported by a package (according to the NAMESPACE file)
+#'
+#' @inheritParams get_test_coverage
 #'
 #' @return a character vector
-#' @import devtools
+#' @export
 get_exported_functions <- function(pkg = '.'){
   pkg <- devtools::as.package(pkg)
 
@@ -119,8 +135,15 @@ get_exported_functions <- function(pkg = '.'){
 }
 
 
-# tested functions --------------------------------------------------------
 
+# Helpers -----------------------------------------------------------------
+
+#' Get tested functions of a package
+#'
+#' @inheritParams get_test_coverage
+#' @return a character vector
+#'
+#' @export
 get_tested_functions <- function(pkg, from_tags, from_desc){
   res <- c()
 
@@ -136,14 +159,6 @@ get_tested_functions <- function(pkg, from_tags, from_desc){
 }
 
 
-# devtools::load_all('/home/hoelk/Dropbox/workspace/r/testthis/testthis')
-#' Get functions defined in package
-#'
-#' @param pkg
-#'
-#' @return
-#'
-#' @examples
 get_tested_functions_from_tags <- function(pkg){
   pkg     <- devtools::as.package(pkg)
   tpath   <- system.file('tests', 'testthat', package = pkg$package, mustWork = TRUE)
