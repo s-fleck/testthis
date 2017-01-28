@@ -18,12 +18,11 @@ assign hotkeys to them (which was my main motivation behind creating this
 package)
 
 
-## Coverage:
+## Test Coverage:
 
-Testhis now provides a checklist like test coverage analyser. 
+Testthis now provides a checklist like test coverage analyser. This is non-automatic and requires you to manually mark functions as tested in your code. If you look for automatic test coverage analysis, you might want to check out the `covr` package.
 
 `get_test_coverage()`
-
 
     Package testthis, Test Coverage: 31.8%
      
