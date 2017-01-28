@@ -1,0 +1,36 @@
+---
+title: "testthis"
+author: "Stefan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{testthis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(testthis)
+```
+
+
+Testthis provides several tools to make unit testing in R slightly more 
+confortable. It is designed to be used in conjunction with testthat package. 
+At the moment it provides two sets of features: 
+
+  * Rstudio addins that enable to assign hotkeys to menial tasks
+  * A checklist-like test coverage feature, that automatically discovers
+    all functions in your package, but requires you to manually mark them
+    as "tested"
+
+## Rstudio addins (requires Rstudio)
+
+## Test coverage checklist
+
+```{r}
+get_test_coverage(pkg = '~/Dropbox/workspace/r/testthis')
+```
+
+
+
+
