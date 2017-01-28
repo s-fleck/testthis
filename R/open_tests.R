@@ -36,7 +36,7 @@ test_skeleton <- function(fname, open = TRUE){
     message(sprintf('* File alread exists: %s', fname))
   } else {
     message(sprintf('* Creating `%s`', fname))
-    title_name <- tools::file_path_sans_ext(basename(fname))
+    title_name <- stringi::stri_sub(tools::file_path_sans_ext(basename(fname)), 6)
 
     lines <- paste0(
       sprintf('context("%s")', title_name),
