@@ -24,7 +24,7 @@
 #'
 #' \describe{
 #'   \item{test_this}{Tests the currently open file}
-#'   \item{lest_this}{(("Load and test") devtools::load_all and test the currently open files}
+#'   \item{lest_this}{(("Load and test") devtools::load_all and test the currently open file}
 #'   \item{open_tests}{If the current filename is \code{currentfile.R}, this
 #'                     this opens \code{/tests/testthat/test_currentfile.R} in
 #'                     the editor. If the file does not exists, it is created
