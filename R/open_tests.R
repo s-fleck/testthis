@@ -24,8 +24,6 @@ open_tests <- function(){
 #' @param open Should the test file be opend after it is created?
 #'
 #' @rdname create_tests
-#' @export
-#' @import rstudioapi testthat
 test_skeleton <- function(fname, open = TRUE){
   if(missing(fname)){
     fname <- get_testfile_name()
