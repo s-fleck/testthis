@@ -1,6 +1,5 @@
 ---
-title: "testthis"
-author: "Stefan"
+title: "testthis - package vignette"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,28 +8,69 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Overview
+
 ```{r}
 library(testthis)
 ```
-
-
 Testthis provides several tools to make unit testing in R slightly more 
-confortable. It is designed to be used in conjunction with testthat package. 
-At the moment it provides two sets of features: 
-
-  * Rstudio addins that enable to assign hotkeys to menial tasks
-  * A checklist-like test coverage feature, that automatically discovers
-    all functions in your package, but requires you to manually mark them
-    as "tested"
+confortable. It is designed to be used in conjunction with `testthat` and 
+`devtools` packages. 
 
 ## Rstudio addins (requires Rstudio)
 
+Provides Rstudio addins that enable to assign hotkeys to menial tasks. I 
+recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp`.
+
+* *test_this*: Tests the currently open file.
+* *lest_this*: "Load and test"; first calls `devtools::load_all`, and then test 
+                the currently open file
+* *open_tests*: Opens the associated testfile in an editor window. If the file 
+                does not exists, it is created with a minimal testing 
+                infrastructure skeleton.
+                
+All those functions assume that if the current filename is `currentfile.R`,
+the associated test file is `/tests/testthat/test_currentfile.R`. If you want
+to modify this behaviour you can put the tag `#* testfile anotherfile` anywhere
+in your code, usually the top or bottom of your .R file.
+
+The following example will associate the file `/tests/testthat/other_test_file.R`
+instead of `/tests/testthat/test_open_tests.R` with `R/open_tests`:
+```{r}
+# file R/open_tests.R
+#* @testfile other_testfile
+
+open_tests <- function(){
+  fname <- get_testfile_name()
+
+  if(file.exists(fname)){
+    rstudioapi::navigateToFile(fname)
+  } else {
+    test_skeleton(fname, open = TRUE)
+  }
+}
+```
+
 ## Test coverage checklist
+
+For testthis to recognize wheter a unit test exists for a function, the function
+name must either be mention in a `testthat()` `desc` argument, or marked via
+special comment tag: `#* @testing functionname`. The following example will mark
+the functions `parse_testthis_comments` and `detect_testthis_comments` as 
+tested:
+
+```{r, eval = FALSE}
+# file /tests/testhis/parse_testthis_comments.R
+
+test_that("parse_testthis_comments works as expected", {
+  #* @testing detect_testthis_comments
+  ...
+}
+```
+
+The test_coverage summary for a package may look like this (+ marks function for
+which tests exist):
 
 ```{r}
 get_test_coverage(pkg = '~/Dropbox/workspace/r/testthis')
 ```
-
-
-
-
