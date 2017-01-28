@@ -2,7 +2,7 @@
 
 Testthis provides several tools to make unit testing in R slightly more 
 confortable. It is designed to be used in conjunction with `testthat` and 
-`devtools` packages. 
+`devtools` packages. This readme just contains a few very quick examples, if you are interested please refer to the package vignette `vignette("testthis", package = "testthis")`.
 
 ## Rstudio Addins:
 
@@ -51,9 +51,4 @@ Testhis now provides a checklist like test coverage analyser.
        taglist                       
        test_coverage                 
        test_skeleton                 
-     + testthis_tokenizer        
-
-
-# More information:
-A more detailed description can be found in the package vignette, 
-vignette("testthis", package = "testthis")
+     + testthis_tokenizer
