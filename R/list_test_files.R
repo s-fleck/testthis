@@ -12,8 +12,10 @@ list_test_files <- function(pkg, full_names = TRUE, skip = FALSE){
   }
 
   if(identical(full_names, FALSE)){
-    basename(res)
+    res <- basename(res)
   }
+
+  return(res)
 }
 
 
