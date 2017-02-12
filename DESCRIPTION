@@ -11,13 +11,14 @@ Description: This package automates menial tasks associated with creating and
   "tests/testthat/test_myfun.R"
 License: GPL-3
 Imports: 
-  testthat,
   devtools, 
   stringi, 
   assertthat
 Suggests:
   knitr,
   rmarkdown
+Depends:
+  testthat
 Encoding: UTF-8
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
