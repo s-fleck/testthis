@@ -19,8 +19,16 @@ get_tag <- function(dat, tag){
 
   select_ats <-  function(x) x[[1]] == paste0('@', tag)
   dd <- dat[unlist(lapply(dat, select_ats))]
-  extract_second <- function(x) x[[2]]
-  unlist(lapply(dd, extract_second))
+
+  if(length(dd) > 1){
+    return(
+      unlist(lapply(dd, `[[`, 2))
+    )
+  } else if (identical(length(dd), 1L)) {
+    return(TRUE)
+  } else {
+    return(NULL)
+  }
 }
 
 
