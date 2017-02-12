@@ -42,7 +42,7 @@ test_that('get_tested_functions_from_desc works', {
   tfuns <- c('fizzfun', 'buzzfun', 'foofun', '%barfun%', 'bafoon')
 
   tres <- with_mock(
-    get_all_functions = function(...) tfuns,
+    get_all_functions     = function(...) tfuns,
     list.files            = function(...) {
       system.file('tests', 'testthat', 'test_data', 'testthat_parse_cases.R',
                   package = 'testthis')

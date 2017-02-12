@@ -12,7 +12,6 @@ get_testfile_name <- function(){
     fname <-  rstudioapi::getSourceEditorContext()$path
   }
 
-  scriptfile <- readLines(fname)
   opts       <- get_tag(get_taglist(fname), 'testfile')
 
   if(identical(length(opts), 0L)){
@@ -30,7 +29,6 @@ get_testfile_name <- function(){
     bn  <- paste0(opts[[1]], '.R')
     res <- file.path(testthat::test_path(), bn)
   }
+
+  return(res)
 }
-
-
-

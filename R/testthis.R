@@ -53,10 +53,6 @@
 #'   \item{get_exported_functions}{List all tested functions a package}
 #' }
 #'
-
-
 #'
 #' @docType package
 NULL
-
-
