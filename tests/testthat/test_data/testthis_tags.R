@@ -1,4 +1,5 @@
 context("test_parse_testthis_comments")
+#* @skip
 
 tfile <-  system.file('tests', 'testthat', 'test_parse_testthis_comments.R', package = 'testthis')
 
