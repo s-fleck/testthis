@@ -1,4 +1,6 @@
 context("test_Taglist")
+#* @skip
+
 
 tfile <-  system.file('tests', 'testthat', 'test_data', 'testthis_tags.R',
                       package = 'testthis')
@@ -68,6 +70,5 @@ test_that("get_tag works as expected", {
   expect_identical(get_tag(tlist, 'testing'),
                    c("detect_testthis_comments", "extract_testthis_comments",
                      "testthis_tokenizer", "get_taglist", "%foofun%"))
-
 })
 
