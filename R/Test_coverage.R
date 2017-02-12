@@ -150,7 +150,7 @@ get_exported_functions <- function(pkg = '.'){
 #' @inheritParams get_test_coverage
 #' @return a character vector
 get_tested_functions <- function(pkg, from_tags, from_desc){
-  res <- c()
+  res <- vector()
 
   if(from_tags){
     res <- c(res, get_tested_functions_from_tags(pkg))
