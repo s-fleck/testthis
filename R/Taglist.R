@@ -25,6 +25,9 @@ get_tag <- function(dat, tag){
 
 
 get_taglist <- function(infile){
+  assert_that(is.character(infile))
+  assert_that(identical(length(infile), 1L))
+
   dl <- extract_testthis_comments(infile)
   tokenz <- lapply(dl, testthis_tokenizer)
   taglist(tokenz)
@@ -38,7 +41,7 @@ extract_testthis_comments <- function(infile){
 
 
 detect_testthis_comments <- function(x){
-  grepl('^\\s*#\\*\\s*@.*\\s\\S*.*', x, ignore.case = TRUE)
+  grepl('^\\s*#\\*\\s*@.*', x, ignore.case = TRUE)
 }
 
 
