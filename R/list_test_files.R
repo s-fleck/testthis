@@ -3,7 +3,8 @@ list_test_files <- function(pkg, full_names = TRUE, skip = FALSE){
   tpath   <- file.path(pkg$path, 'tests', 'testthat')
   res     <- list.files(
     tpath,
-    full.names = TRUE)
+    full.names = TRUE
+  )
 
   res <- res[grepl('.*\\.R$', res, ignore.case = TRUE)]
 
