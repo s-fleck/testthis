@@ -165,10 +165,7 @@ get_tested_functions <- function(pkg, from_tags, from_desc){
 
 
 get_tested_functions_from_tags <- function(pkg){
-  pkg     <- devtools::as.package(pkg)
-  tpath   <- file.path(pkg$path, 'tests', 'testthat')
-
-  ttfiles <- list.files(tpath, full.names = TRUE)
+  ttfiles <- list_test_files(pkg, full_names = TRUE)
   ttfuns  <- lapply(ttfiles, get_taglist)
   ttfuns  <- unlist(ttfuns, recursive = FALSE)
 
@@ -185,10 +182,7 @@ get_tested_functions_from_tags <- function(pkg){
 
 
 get_tested_functions_from_desc <- function(pkg){
-  pkg     <- devtools::as.package(pkg)
-  tpath   <- file.path(pkg$path, 'tests', 'testthat')
-
-  ttfiles <- list.files(tpath, full.names = TRUE)
+  ttfiles <- list_test_files(pkg, full_names = TRUE)
   descs   <- extract_test_that_desc(ttfiles)
 
   pkgfuns <- get_all_functions(pkg)
