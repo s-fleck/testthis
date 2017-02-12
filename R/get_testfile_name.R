@@ -1,4 +1,4 @@
-#* @testfile get_testfile_name
+#* @testfile test_get_testfile_name
 
 get_testfile_name <- function(){
 
