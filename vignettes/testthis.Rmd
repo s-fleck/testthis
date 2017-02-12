@@ -22,10 +22,10 @@ confortable. It is designed to be used in conjunction with `testthat` and
 Provides Rstudio addins that enable to assign hotkeys to menial tasks. I 
 recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp`.
 
-* *test_this*: Tests the currently open file.
-* *lest_this*: "Load and test"; first calls `devtools::load_all`, and then test 
+* `test_this`: Tests the currently open file.
+* `lest_this`: "Load and test"; first calls `devtools::load_all()`, and then test 
                 the currently open file
-* *open_tests*: Opens the associated testfile in an editor window. If the file 
+* `open_tests`: Opens the associated testfile in an editor window. If the file 
                 does not exists, it is created with a minimal testing 
                 infrastructure skeleton.
                 
@@ -74,3 +74,26 @@ which tests exist):
 ```{r}
 get_test_coverage(pkg = '~/Dropbox/workspace/r/testthis')
 ```
+
+## Test This Tags
+
+Test_this tags are special comments that modify the behavious of the functions
+supplied by this package. They are of the Form `#* @tag <value>`. Please not 
+that only some test_this tags really require a `<value>`. The tag system should
+be considered to be in an alpha-state.
+
+### `pkg/R/*.R`
+
+* `@testfile <filename>`: manually specifiy associated test file. Should 
+  usually start with `test_`. This is used by `test_this()`, `lest_this()` and
+  `open_tests()`.
+
+### `pkg/tests/testhat/test_*.R`
+
+* `@testing <functionname>`:  mark `functionname` as tested.
+  Should usually go next the associated `test_that()` call. This is used by
+  `get_test_coverage()`.
+* `@skip`: skip test when running `test_this::test()`. Best placed directly
+  below the `context()` call.
+
+also look at `/test/testthat/test_Taglist.R` for examples.
