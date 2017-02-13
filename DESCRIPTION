@@ -1,7 +1,7 @@
 Package: testthis
 Type: Package
 Title: Rstudio addins and utils for testthat
-Version: 0.0.2
+Version: 0.0.3
 Author: Stefan Fleck
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: This package automates menial tasks associated with creating and
@@ -10,7 +10,15 @@ Description: This package automates menial tasks associated with creating and
   assigned. Everything in this package assumes that tests for "R/myfun.R" go into
   "tests/testthat/test_myfun.R"
 License: GPL-3
-Imports: testthat, devtools, rstudioapi
+Imports: 
+  devtools, 
+  stringi, 
+  assertthat
+Suggests:
+  knitr,
+  rmarkdown
+Depends:
+  testthat
 Encoding: UTF-8
 RoxygenNote: 5.0.1
-Suggests: testthat
+VignetteBuilder: knitr

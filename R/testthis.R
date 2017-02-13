@@ -1,33 +1,58 @@
-#' Test this file
+#' Testthis-package
 #'
-#' This is a convenice function to run testthat tests in a single .R file.
-#' If the file currently open in the Rstudio editor is called \code{my_function.R},
-#' \code{test_this()} calls \code{testthat::test_file()} on "tests/testhat/test_my_function.R".
-#' If the filename of the currently open file with starts with \code{test_} it
-#' will call \code{testthat::test_file()} on the current file.
+#' @name testthis
+#' @import assertthat devtools stringi rstudioapi
 #'
-#' This is usefull in cases where you don't want to run all tests in a package
-#' via \code{devtools::test()} (CTRL+SHIFT+T).
+#' @section Introduction:
 #'
-#' @export
-#' @import rstudioapi testthat
-#' @rdname test_this.R
-test_this <- function(){
-  fname <- get_testfile_name()
-
-  if(file.exists(fname)){
-    message('Running tests in ', fname)
-    testthat::test_file(fname)
-  } else {
-    message(fname, ' does not exist.')
-  }
-}
-
-
-#' \code{lest_this()} does the same, but calls \code{devtools::load_all()} first.
-#' @export
-#' @rdname test_this.R
-lest_this <- function(){
-  devtools::load_all()
-  test_this()
-}
+#' Testthis provides several tools to make unit testing in R slightly more
+#' confortable. It is designed to be used in conjunction with \code{testthat}
+#' package. I modelled this package after my own workflow so many of the
+#' functions it provides expect that you organize your tests in a certain way.
+#'
+#' @section Rstudio addins (requires Rstudio):
+#'
+#' This package contains several simple Rstudio addins. The motiviation
+#' behind defining those function as Rstudio addins is that you can easily
+#' assign hotkeys to them in Rstudio (\code{Tools/Modify Keyboard Shortcuts})
+#'
+#' Testthis assumes that for each \code{anyfile.R} file in your package`s
+#' \code{R/} folder you have a testfile \code{/test_anyfile.R} in your test dir
+#' (usually \code{/tests/testthat/}). If you want your testfile to be named
+#' differently, you can add the comment \code{#* @testfile someotherfile}
+#' anywhere in \code{anyfile.R}
+#'
+#' \describe{
+#'   \item{test_this}{Tests the currently open file}
+#'   \item{lest_this}{(("Load and test") devtools::load_all and test the currently open file}
+#'   \item{open_tests}{If the current filename is \code{currentfile.R}, this
+#'                     this opens \code{/tests/testthat/test_currentfile.R} in
+#'                     the editor. If the file does not exists, it is created
+#'                     with a minimal testing infrastructure skeleton.}
+#' }
+#'
+#' @section Test coverage checklist:
+#'
+#' This package provides a checklist-like approach to extracting test-coverage
+#' of a package. If you want automatic analsys of test coverage, you have
+#' to look somewhere else.
+#'
+#' To mark \code{anyfunction} as tested, you have to put the comment
+#' \code{#* @testing anyfunction} in any of the files containing your unit
+#' tests (usually you will put the comment right above the actual tests).
+#'
+#' Alternatively, you can name the function in \code{desc} argument of your
+#' \code{test_that(...)} call (e.g. \code{test_that("anyfunction works", ...}).
+#' This behaviour can yield false positives if you are not careful, and can be
+#' switched of.
+#'
+#' \describe{
+#'   \item{get_test_coverage}{Get the test coverage of a package}
+#'   \item{get_all_functions}{List all functions of a package}
+#'   \item{get_exported_functions}{List all exported functions a package}
+#'   \item{get_exported_functions}{List all tested functions a package}
+#' }
+#'
+#'
+#' @docType package
+NULL
