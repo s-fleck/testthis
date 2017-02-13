@@ -17,6 +17,8 @@ test_with_skip <- function(pkg = '.', ...){
   )
   fltr <- gsub("^test-?", "", fltr)
   fltr <- gsub("\\.[rR]", "", fltr)
+  fltr <- paste(fltr, collapse = '|')
+  assert_that(is.scalar(fltr) && is.character(fltr))
 
   devtools::test(filter = fltr, ...)
 }
