@@ -12,3 +12,8 @@ Name: Open tests
 Description: Opens "tests/test_that/test_CURRENT_FILE_NAME.R" in the editor
 Binding: open_tests
 Interactive: false
+
+Name: Test Package (with skip)
+Description: same as devtools::test(), but skips files that contain "#* @skip"
+Binding: test_with_skip
+Interactive: false
