@@ -16,4 +16,3 @@ content of the 'desc' arguments of test_that functions
 \description{
 Extract 'desc' arguments from all test_that functions from .R script files
 }
-

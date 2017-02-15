@@ -24,4 +24,3 @@ a character vector
 \description{
 Get tested functions of a package
 }
-

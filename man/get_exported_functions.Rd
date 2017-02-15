@@ -15,4 +15,3 @@ a character vector
 \description{
 Lists the functions exported by a package (according to the NAMESPACE file)
 }
-

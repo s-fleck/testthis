@@ -20,4 +20,3 @@ files that contain the testthis tag "\code{#' @skip}".
 See the devtools documentation for further info or
 \code{vignette("testthis")} for infos on testthis tags.
 }
-

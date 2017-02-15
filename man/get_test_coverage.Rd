@@ -26,4 +26,3 @@ for this, and depends that you either put the function name in your
 analysis of test coverage, you must look in other packages such as
 \code{covr}.
 }
-

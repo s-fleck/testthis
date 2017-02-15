@@ -10,4 +10,3 @@ open_tests()
 If the currently open file in the Rstudio editor is called \code{myfun.R} this
 opens /code{tests/testthat/test_myfun.R} in a new tab.
 }
-

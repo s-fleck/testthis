@@ -15,4 +15,3 @@ a character vector
 \description{
 Get all functions of a package
 }
-
