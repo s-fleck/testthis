@@ -165,19 +165,11 @@ get_tested_functions <- function(pkg, from_tags, from_desc){
 
 
 get_tested_functions_from_tags <- function(pkg){
-  ttfiles <- list_test_files(pkg, full_names = TRUE)
-  ttfuns  <- lapply(ttfiles, get_taglist)
-  ttfuns  <- unlist(ttfuns, recursive = FALSE)
+  ttfiles  <- list_test_files(pkg, full_names = TRUE)
+  taglists <- lapply(ttfiles, get_taglist)
+  res      <- sort(unlist(unique(lapply(taglists, get_tag, 'testing'))))
 
-  gtested <- function(x){
-    if (identical(x[[1]], '@testing')){
-      return(x[[2]])
-    } else {
-      return(NULL)
-    }
-  }
-
-  ttfuns <- unique(unlist(lapply(ttfuns, gtested)))
+  return(res)
 }
 
 

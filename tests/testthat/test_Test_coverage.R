@@ -7,6 +7,7 @@ test_that("test_Test_coverage works as expected", {
 
 
 test_that("test_Test_coverage works as expected", {
+  #* @testing print.test_coverage
 
   tdat1 <- data.frame(
     fun = c('fizz', 'buzz'),
@@ -52,5 +53,3 @@ test_that('get_tested_functions_from_desc works', {
 
   expect_identical(tres, tfuns[1:4])
 })
-
-
