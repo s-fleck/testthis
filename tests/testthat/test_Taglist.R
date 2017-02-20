@@ -38,41 +38,36 @@ test_that("test_parse_testthis_comments works as expected", {
 })
 
 
-test_that("test_parse_testthis_comments works as expected", {
-  expect_identical(
-    get_taglist(tfile)[4:6],
-    list(c("@testing", "detect_testthis_comments"),
-         c("@testing", "extract_testthis_comments"),
-         c("@testing", "testthis_tokenizer"))
-  )
-})
-
 test_that("extracting testthis tags works as expected", {
-  #* @testing get_taglist
+  tdat <- get_taglist(tfile)
 
-  eres <-
-    list(
-      c("@testing", "detect_testthis_comments"),
-      c("@testing",
-        "extract_testthis_comments"),
-      c("@testing", "testthis_tokenizer"),
-      c("@testing", "get_taglist"),
-      c("@testing", "%foofun%")
-    )
+  expect_s3_class(tdat, 'Taglist')
 
-  expect_identical(get_taglist(tfile)[4:8], eres)
+  expect_identical(
+    names(tdat),
+    c("skip", "testfile", "testing")
+  )
+
+  expect_identical(tdat$skip, TRUE)
+  expect_identical(tdat$testfile, c("testthis_tags", "testthis_tags2"))
+  expect_identical(
+    tdat$testing,
+    c("%foofun%", "detect_testthis_comments", "extract_testthis_comments",
+      "get_taglist", "testthis_tokenizer")
+  )
 })
 
 
 test_that("get_tag works as expected", {
-
   tlist <- get_taglist(tfile)
 
   expect_identical(get_tag(tlist, 'testfile'),
                    c('testthis_tags', 'testthis_tags2'))
 
-  expect_identical(get_tag(tlist, 'testing'),
-                   c("detect_testthis_comments", "extract_testthis_comments",
-                     "testthis_tokenizer", "get_taglist", "%foofun%"))
+  expect_identical(
+    get_tag(tlist, 'testing'),
+    c("%foofun%", "detect_testthis_comments", "extract_testthis_comments",
+      "get_taglist", "testthis_tokenizer")
+  )
 })
 

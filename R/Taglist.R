@@ -1,46 +1,67 @@
+#* @testfile test_blah_blubb
+
 #' Testthis Taglist
+#'
+#' This is a simple s3 constructor that does not yet perform any checks. It's
+#' only used by get_taglist
+#'
+#' Possible tags:
+#'
+#' testfile *path_to_file* ... Put this in a file to manually set
+#' the name of an associated test file (relevant for \code{test_this},
+#' \code{open_tests}, etc...)
+#'
+#' testing *function_name* ... put this in a testfile to mark the current file
+#' includes tests for a function
 #'
 #' @param dat
 #'
-#' Possible tags:
-#'    testfile *path_to_file* ... Put this in a file to manually set the name of an associated
-#'    test file (relevant for \code{test_this}, \code{open_tests}, etc...)
-#'
-#'    testing *function_name* ... put this in a testfile to mark the current file includes
-#'    tests for a functiuon
 taglist <- function(dat){
   class(dat) <- c('Taglist', 'list')
   return(dat)
 }
 
 
-get_tag <- function(dat, tag){
-  assert_that('Taglist' %in% class(dat))
-
-  select_ats <-  function(x) x[[1]] == paste0('@', tag)
-  dd <- dat[unlist(lapply(dat, select_ats))]
-
-  if(length(dd) > 1){
-    return(
-      unlist(lapply(dd, `[[`, 2))
-    )
-  } else if (identical(length(dd), 1L)) {
-    return(TRUE)
-  } else {
-    return(NULL)
-  }
-}
-
-
 get_taglist <- function(infile){
   assert_that(is.character(infile))
-  assert_that(identical(length(infile), 1L))
+  assert_that(is.scalar(infile))
+  assert_that(is.readable(infile))
 
   dl <- extract_testthis_comments(infile)
-  tokenz <- lapply(dl, testthis_tokenizer)
-  taglist(tokenz)
+  tokens <- lapply(dl, testthis_tokenizer)
+
+  res <- list()
+  for(el in tokens){
+    tag   <- el[[1]]
+    assert_that(stringi::stri_detect_regex(tag, '^@\\w*$'))
+    tag <- stringi::stri_replace_all_fixed(tag, "@", "")
+
+    if(length(el) > 1){
+      value <- el[2:length(el)]
+    } else {
+      value <- TRUE
+    }
+
+    res[[tag]] <- sort(union(res[[tag]], value))
+  }
+
+  if(length(res) > 1){
+    res <- res[order(names(res))]
+  }
+
+  taglist(res)
 }
 
+
+
+get_tag <- function(dat, tag){
+  assert_that('Taglist' %in% class(dat))
+  dat[[tag]]
+}
+
+
+
+# utils -------------------------------------------------------------------
 
 extract_testthis_comments <- function(infile){
   dat <- readLines(infile)
