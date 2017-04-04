@@ -12,6 +12,7 @@ vignette: >
 
 ```{r}
 library(testthis)
+library(rstudioapi)
 ```
 Testthis provides several tools to make unit testing in R slightly more 
 confortable. It is designed to be used in conjunction with `testthat` and 
@@ -36,7 +37,7 @@ in your code, usually the top or bottom of your .R file.
 
 The following example will associate the file `/tests/testthat/other_test_file.R`
 instead of `/tests/testthat/test_open_tests.R` with `R/open_tests`:
-```{r}
+```{r eval = FALSE}
 # file R/open_tests.R
 #* @testfile other_testfile
 

@@ -14,7 +14,7 @@
 #' testing *function_name* ... put this in a testfile to mark the current file
 #' includes tests for a function
 #'
-#' @param dat
+#' @param dat a list
 #'
 taglist <- function(dat){
   class(dat) <- c('Taglist', 'list')
@@ -76,9 +76,8 @@ detect_testthis_comments <- function(x){
 
 #' testthis tokenizer
 #'
-#' @param x
+#' @param x a scalar character containing testthis tags
 #'
-#' @import stringi
 testthis_tokenizer <- function(x){
   assert_that(is.scalar(x))
   assert_that(detect_testthis_comments(x))

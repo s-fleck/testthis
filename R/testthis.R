@@ -1,7 +1,7 @@
 #' Testthis-package
 #'
 #' @name testthis
-#' @import assertthat devtools stringi rstudioapi
+#' @import assertthat devtools stringi testthat
 #'
 #' @section Introduction:
 #'
@@ -55,4 +55,4 @@
 #'
 #'
 #' @docType package
-NULL
+"_PACKAGE"

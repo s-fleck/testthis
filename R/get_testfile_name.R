@@ -1,9 +1,8 @@
 #* @testfile test_get_testfile_name
 
 get_testfile_name <- function(){
-
   if(!requireNamespace("rstudioapi")){
-    stop('This functions are designed to be used with Rstudio')
+    stop('This function is designed to be used from within Rstudio')
   }
 
   fname <- rstudioapi::getActiveDocumentContext()$path

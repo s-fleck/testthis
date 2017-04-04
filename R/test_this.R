@@ -10,7 +10,6 @@
 #' via \code{devtools::test()} (CTRL+SHIFT+T).
 #'
 #' @export
-#' @import rstudioapi testthat
 #' @rdname test_this.R
 test_this <- function(){
   fname <- get_testfile_name()

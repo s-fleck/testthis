@@ -23,15 +23,15 @@ is_valid.Test_coverage <- function(dat){
 
 
 #' @export
-print.Test_coverage <- function(dat){
-  tp    <- sum(dat$tested) / nrow(dat) * 100
-  pname <- attr(dat, 'package')
+print.Test_coverage <- function(x, ...){
+  tp    <- sum(x$tested) / nrow(x) * 100
+  pname <- attr(x, 'package')
   if(is.null(pname)) pname <- ''
 
   msg   <- sprintf('Package %s, Test Coverage: %.1f%%\n', pname, tp)
 
-  dd  <- dat
-  dd$tested <- ifelse(dat$tested, '+', '')
+  dd  <- x
+  dd$tested <- ifelse(x$tested, '+', '')
 
   dexp <- dd[dd$exp == TRUE, ]
   dexp <- dexp[order(dexp$fun), c('tested', 'fun')]
@@ -56,7 +56,7 @@ print.Test_coverage <- function(dat){
     print.data.frame(dint, row.names = FALSE, right = FALSE)
   }
 
-  invisible(dat)
+  invisible(x)
 }
 
 #' Get Test Coverage of Package
@@ -106,17 +106,18 @@ get_test_coverage <- function(
 
 # List functions of a package ---------------------------------------------
 
-#' Get all functions of a package
+#' Get all functions defined in target package
 #'
-#' @param pgk path to the package
+#' @param pkg path to the package
 #'
 #' @return a character vector
 #' @import devtools
 get_all_functions <- function(pkg = '.'){
   pkg  <- devtools::as.package(pkg)
   res  <- as.character(unclass(
-    lsf.str(envir = asNamespace(pkg$package),
-            all = TRUE)
+    utils::lsf.str(
+      envir = asNamespace(pkg$package),
+      all = TRUE)
     )
   )
   return(res)
@@ -138,7 +139,7 @@ get_exported_functions <- function(pkg = '.'){
   exp <- stringi::stri_extract(ns,
                                regex = "(?<=export\\().*(?=\\))",
                                simplify = TRUE)
-  exp <- as.character(na.omit(exp))
+  exp <- as.character(stats::na.omit(exp))
 }
 
 

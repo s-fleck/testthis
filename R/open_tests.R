@@ -5,6 +5,11 @@
 #'
 #' @export
 open_tests <- function(){
+
+  if(!requireNamespace("rstudioapi")){
+    stop('This function is designed to be used from within Rstudio')
+  }
+
   fname <- get_testfile_name()
 
   if(file.exists(fname)){
@@ -21,14 +26,19 @@ open_tests <- function(){
 #' this creates the file \code{/tests/testthat/test_my_function.R} and fills it
 #' with a basic test skeleton.
 #'
+#' @param fname optional: Targt R script file to open. If empty the file
+#'   currently open in the editor will be used.
 #' @param open Should the test file be opend after it is created?
 #'
 #' @rdname create_tests
 test_skeleton <- function(fname, open = TRUE){
+  if(!requireNamespace("rstudioapi")){
+    stop('This function is designed to be used from within Rstudio')
+  }
+
   if(missing(fname)){
     fname <- get_testfile_name()
   }
-
 
   if(file.exists(fname)){
     message(sprintf('* File alread exists: %s', fname))
