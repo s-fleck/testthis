@@ -6,6 +6,8 @@ test_coverage <- function(dat){
 }
 
 
+
+
 is_valid.Test_coverage <- function(dat){
   res <- list()
 
@@ -20,6 +22,8 @@ is_valid.Test_coverage <- function(dat){
 
   all(unlist(res))
 }
+
+
 
 
 #' @export
@@ -58,6 +62,9 @@ print.Test_coverage <- function(x, ...){
 
   invisible(x)
 }
+
+
+
 
 #' Get Test Coverage of Package
 #'
@@ -104,6 +111,7 @@ get_test_coverage <- function(
 
 
 
+
 # List functions of a package ---------------------------------------------
 
 #' Get all functions defined in target package
@@ -122,6 +130,7 @@ get_all_functions <- function(pkg = '.'){
   )
   return(res)
 }
+
 
 
 
@@ -144,7 +153,8 @@ get_exported_functions <- function(pkg = '.'){
 
 
 
-# Helpers -----------------------------------------------------------------
+
+# Utils -------------------------------------------------------------------
 
 #' Get tested functions of a package
 #'
@@ -165,6 +175,8 @@ get_tested_functions <- function(pkg, from_tags, from_desc){
 }
 
 
+
+
 get_tested_functions_from_tags <- function(pkg){
   ttfiles  <- list_test_files(pkg, full_names = TRUE)
   taglists <- lapply(ttfiles, get_taglist)
@@ -172,6 +184,8 @@ get_tested_functions_from_tags <- function(pkg){
 
   return(res)
 }
+
+
 
 
 get_tested_functions_from_desc <- function(pkg){
@@ -195,6 +209,8 @@ get_tested_functions_from_desc <- function(pkg){
 
   return(pkgfuns[res])
 }
+
+
 
 
 #' Extract 'desc' arguments from all test_that functions from .R script files

@@ -2,8 +2,8 @@ context("test_Taglist")
 #* @skip
 
 
-tfile <-  system.file('tests', 'testthat', 'test_data', 'testthis_tags.R',
-                      package = 'testthis')
+tfile <-  file.path(
+  testthat::test_path(), 'test_data', 'testthis_tags.R')
 
 test_that("test_parse_testthis_comments works as expected", {
   #* @testing detect_testthis_comments ------

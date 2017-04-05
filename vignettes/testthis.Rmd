@@ -10,7 +10,7 @@ vignette: >
 
 ## Overview
 
-```{r}
+```{r include = FALSE}
 library(testthis)
 library(rstudioapi)
 ```
