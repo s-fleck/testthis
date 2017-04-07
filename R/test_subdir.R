@@ -4,9 +4,24 @@
 #' the tests in `inst/tests/` or `tests/testthat`, it runs the tests in a
 #' specified subdirectory of that folder.
 #'
-#' `test_integration()` and `test_acceptance()` are exemplrary presets for
-#' integration and acceptance tests in subdirs names `integration` or
-#' `acceptance`.
+#' Three preset test subdirs are defined at the moment:
+#'
+#' \tabular{lp}{
+#'   `test_integration()` \tab Integration tests, also called component tests.
+#'     Put tests here that test if several functions / parts of your programm
+#'     work together as expected \cr
+#'   `test_acceptance()` \tab Acceptance tests. This is the highest levels of
+#'     tests. Put tests here that verifies if your package fulfills the
+#'     goals/requirements you set out to achieve with your package were met. \cr
+#'   `test_manual()` \tab Manual tests. Put tests here that produce output
+#'     that has to be manually verified, such as: console output, pdf files,
+#'     plots. It is recommended you collect the output files of such tests in
+#'     'tests/testhat/test_out'. \cr
+#' }
+#'
+#' The above functions assume the respective test files are in
+#' `testthat/integration_tests`, `testthat/acceptance_tests` or
+#' `testthat/manual_tests`
 #'
 #' @inheritParams devtools::test
 #' @param subdir subdir of `inst/tests/` or `tests/testthat` that containts the
@@ -41,7 +56,7 @@ test_subdir <- function(subdir, pkg = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_integration <- function(pkg = '.', ...){
-  test_subdir(subdir = 'integration', pkg = pkg, ...)
+  test_subdir(subdir = 'integration_tests', pkg = pkg, ...)
 }
 
 
@@ -50,6 +65,16 @@ test_integration <- function(pkg = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_acceptance <- function(pkg = '.', ...){
-  test_subdir(subdir = 'acceptance', pkg = pkg, ...)
+  test_subdir(subdir = 'acceptance_tests', pkg = pkg, ...)
 }
+
+
+
+
+#' @rdname test_subdir
+#' @export
+test_manual <- function(pkg = '.', ...){
+  test_subdir(subdir = 'manual_tests', pkg = pkg, ...)
+}
+
 
