@@ -1,12 +1,13 @@
-#' Execute all \pkg{test_that} tests in a package.
+#' Execute all test_that tests in a package, except some.
 #'
-#' This is a wrapper for \code{\link[devtools]{test}} that skips \code{test_*.R}
-#' files that contain the testthis tag "\code{#' @skip}".
+#' This is a wrapper for [devtools::test()] that skips `test_*.R`
+#' files that contain the testthis tag `#' @skip`.
 #'
 #' See the devtools documentation for further info or
-#' \code{vignette("testthis")} for infos on testthis tags.
+#' `vignette("testthis")` for infos on testthis tags.
 #'
 #' @inheritParams devtools::test
+#' @md
 #'
 #' @export
 test_with_skip <- function(pkg = '.', ...){
