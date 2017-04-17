@@ -1,0 +1,9 @@
+get_test_coverage
+lest_this
+open_tests
+test_acceptance
+test_integration
+test_manual
+test_subdir
+test_this
+test_with_skip

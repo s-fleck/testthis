@@ -12,12 +12,12 @@ is_valid.Test_coverage <- function(dat){
   res <- list()
 
   res$names <- assert_that(identical(
-    c('fun', 'exp', 's3', 'tested'),
+    c('fun', 'exp', 's3', 'tested', 'ignore'),
     names(dat))
   )
   res$types <- assert_that(identical(
     unname(unlist(lapply(dat, class))),
-    c('character', 'logical', 'logical', 'logical'))
+    c('character', 'logical', 'logical', 'logical', 'logical'))
   )
 
   all(unlist(res))
@@ -38,8 +38,9 @@ print.Test_coverage <- function(x, ...){
 
   # Functions
     dd  <- as.data.frame(x)
-    dd$tested <- ifelse(x$tested, '+', '')
-
+    dd$tested <- ""
+    dd$tested[x$ignore] <- '-'
+    dd$tested[x$tested] <- '+'
 
     funs <- list()
 
@@ -126,12 +127,15 @@ get_test_coverage <- function(
     from_tags = from_tags,
     from_desc = from_desc
   )
+  ign <- get_pkg_testignore(pkg = pkg)
+
 
   res <- data.frame(
     fun    = all,
     exp    = all %in% get_pkg_exports(pkg = pkg),
     s3     = all %in% get_pkg_S3methods(pkg = pkg),
     tested = all %in% tst,
+    ignore = all %in% ign,
     stringsAsFactors = FALSE
   )
 

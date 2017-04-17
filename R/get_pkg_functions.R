@@ -84,18 +84,15 @@ get_pkg_tested_functions <- function(pkg, from_tags, from_desc){
 #'
 #' @inheritParams get_test_coverage
 #' @return a character vector
-get_pkg_testignore <- function(pkg, from_tags, from_desc){
-  res <- vector()
+get_pkg_testignore <- function(pkg){
+  pkg <- devtools::as.package(pkg)
+  tfile <- file.path(pkg$path, 'tests', 'testthat', '.testthisignore')
 
-  if(from_tags){
-    res <- c(res, get_pkg_tested_functions_from_tags(pkg))
+  if (file.exists(tfile)){
+    return(readLines(tfile))
+  } else {
+    return(NULL)
   }
-
-  if(from_desc){
-    res <- c(res, get_pkg_tested_functions_from_desc(pkg))
-  }
-
-  return(res)
 }
 
 
