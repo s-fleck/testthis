@@ -1,7 +1,8 @@
 #' Testthis-package
 #'
 #' @name testthis
-#' @import assertthat devtools stringi testthat magrittr
+#' @import assertthat
+#' @importFrom magrittr %>%
 #'
 #' @section Introduction:
 #'
