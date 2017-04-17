@@ -36,13 +36,13 @@ Testthis now provides a checklist like test coverage analyser. This is non-autom
      + detect_testthis_comments      
        extract_test_that_desc        
      + extract_testthis_comments     
-       get_all_functions             
-       get_exported_functions        
+       get_pkg_functions             
+       get_pkg_exports        
      + get_tag                       
      + get_taglist                   
-     + get_tested_functions          
-     + get_tested_functions_from_desc
-       get_tested_functions_from_tags
+     + get_pkg_tested_functions          
+     + get_pkg_tested_functions_from_desc
+       get_pkg_tested_functions_from_tags
        get_testfile_name             
        is_valid                      
        is_valid.Test_coverage        

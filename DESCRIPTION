@@ -1,7 +1,7 @@
 Package: testthis
 Type: Package
 Title: Rstudio addins and utils for testthat
-Version: 0.0.5
+Version: 0.0.6
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: This package automates menial tasks associated with creating and
@@ -16,7 +16,8 @@ Imports:
   assertthat,
   utils,
   stats,
-  testthat
+  testthat,
+  magrittr
 Suggests:
   knitr,
   rmarkdown,

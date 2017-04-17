@@ -1,4 +1,4 @@
-context("test_get_tested_functions")
+context("test_get_pkg_tested_functions")
 
 test_that("fizzfun works as expected", {
 

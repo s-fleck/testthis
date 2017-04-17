@@ -1,7 +1,7 @@
 #' Testthis-package
 #'
 #' @name testthis
-#' @import assertthat devtools stringi testthat
+#' @import assertthat devtools stringi testthat magrittr
 #'
 #' @section Introduction:
 #'
@@ -48,9 +48,9 @@
 #'
 #' \describe{
 #'   \item{get_test_coverage}{Get the test coverage of a package}
-#'   \item{get_all_functions}{List all functions of a package}
-#'   \item{get_exported_functions}{List all exported functions a package}
-#'   \item{get_exported_functions}{List all tested functions a package}
+#'   \item{get_pkg_functions}{List all functions of a package}
+#'   \item{get_pkg_exports}{List all exported functions a package}
+#'   \item{get_pkg_exports}{List all tested functions a package}
 #' }
 #'
 #'

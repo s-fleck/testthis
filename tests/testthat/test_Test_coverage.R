@@ -39,20 +39,3 @@ test_that("test_Test_coverage works as expected", {
 })
 
 
-test_that('get_tested_functions_from_desc works', {
-  #* @testing get_tested_functions_from_desc
-
-  skip('cannot get the test to work with R CMD Check')
-
-  tfuns <- c('fizzfun', 'buzzfun', 'foofun', '%barfun%', 'bafoon')
-
-  tres <- with_mock(
-    `testthis::get_all_functions` = function(...) tfuns,
-    list.files                    = function(...) {
-      file.path(testthat::test_path(), 'test_data', 'testthat_parse_cases.R')
-    },
-    get_tested_functions_from_desc(pkg = '.')
-  )
-
-  expect_identical(tres, tfuns[1:4])
-})
