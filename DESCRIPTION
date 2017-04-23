@@ -17,7 +17,8 @@ Imports:
   utils,
   stats,
   testthat,
-  magrittr
+  magrittr,
+  tools
 Suggests:
   knitr,
   rmarkdown,

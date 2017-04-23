@@ -29,4 +29,3 @@ test_that("extracting testthis tags works as expected", {
   #* @testing get_taglist
   #* @testing %foofun%
 })
-
