@@ -6,7 +6,7 @@
 #'
 #' Three preset test subdirs are defined at the moment:
 #'
-#' \tabular{lp}{
+#' \tabular{ll}{
 #'   `test_integration()` \tab Integration tests, also called component tests.
 #'     Put tests here that test if several functions / parts of your programm
 #'     work together as expected \cr

@@ -51,7 +51,7 @@ get_pkg_S3methods <- function(pkg = '.'){
     devtools::parse_ns_file() %>%
     magrittr::extract2('S3methods')
 
-  apply(dd, 1, function(x) paste(na.omit(x), collapse = '.'))
+  apply(dd, 1, function(x) paste(stats::na.omit(x), collapse = '.'))
 }
 
 

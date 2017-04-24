@@ -1,15 +1,13 @@
 #' Load/Save object to test_data directory
 #'
-#' @param ... R objects to save to / read from test data dir, usually \file{/tests/testthat/test_data/<subdir>}.
-#'   Saving supports multiple files at once, read only works for single
-#'   files.
+#' @param ... R objects to save to test data dir, usually \file{/tests/testthat/test_data/<subdir>}.
 #' @param pkg Package where to store data. Defaults to package in working directory.
 #' @param subdir subdirectory of \file{test_data} to save to / read from.
+#' @param overwrite logical. overwrite existing file?
 #'
 #' @section Side effects:
 #'   Saves/reads an R object to a \file{test_data} dir in the current package
 #'
-#' @seealso \code{\link{load_cache}}.
 #' @export
 save_test <- function(..., pkg = '.', subdir = NULL, overwrite = FALSE){
   # Preconditions
@@ -61,10 +59,12 @@ save_test <- function(..., pkg = '.', subdir = NULL, overwrite = FALSE){
 
 
 
+#' @param infile rds file to read (must end in .rds, otherwise .rds ending is
+#'   automatically added)
 #' @rdname save_test
 #' @export
-read_test <- function(..., pkg = '.', subdir = NULL){
-  # Find test_data dir
+read_test <- function(infile, pkg = '.', subdir = NULL){
+  # Preconditions
     assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
     assert_that(is.scalar(pkg) && is.character(pkg))
 
@@ -78,13 +78,11 @@ read_test <- function(..., pkg = '.', subdir = NULL){
       cache_dir <- file.path(cache_dir, subdir)
     }
 
-    assert_that(file.exists(pkg_dir))
+    assert_that(file.exists(cache_dir))
 
 
   # Read file
-    to_load     <- eval(substitute(alist(...)))
-    obj         <- vapply(to_load, as.character, character(1))
-    path        <- file.path(cache_dir, obj)
+    path        <- file.path(cache_dir, infile)
     if(!grepl('.*\\.rds$', path)){
       path <- paste0(path, '.rds')
     }

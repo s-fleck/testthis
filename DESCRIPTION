@@ -18,7 +18,8 @@ Imports:
   stats,
   testthat,
   magrittr,
-  tools
+  tools,
+  stats
 Suggests:
   knitr,
   rmarkdown,
