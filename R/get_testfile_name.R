@@ -16,10 +16,12 @@ get_testfile_name <- function(){
   if(identical(length(opts), 0L)){
     bn <- basename(fname)
 
-    if(grepl('^test_', bn)){
+    if(grepl('^test[_-]', bn)){
       res <- fname
-    } else {
+    } else if (file.exists(file.path(testthat::test_path(), paste0('test_', bn)))){
       res <- file.path(testthat::test_path(), paste0('test_', bn))
+    } else{
+      res <- file.path(testthat::test_path(), paste0('test-', bn))
     }
   } else {
     if(length(opts) > 1) {
