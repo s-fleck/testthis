@@ -1,5 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 Overview
 --------
 
@@ -14,7 +13,7 @@ Provides Rstudio addins that enable to assign hotkeys to menial tasks. I recomme
 -   `lest_this`: "Load and test"; first calls `devtools::load_all()`, and then test the currently open file
 -   `open_tests`: Opens the associated testfile in an editor window.
 
-All those functions assume that if the current filename is `currentfile.R`, the associated test file is `/tests/testthat/test_currentfile.R`. If you want to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere in your code, usually the top or bottom of your .R file.
+The function above assume that if the current filename is `currentfile.R`, the associated test file is `/tests/testthat/test_currentfile.R`. If you want to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere in your code, usually the top or bottom of your .R file.
 
 The following example will associate the file `/tests/testthat/other_test_file.R` instead of `/tests/testthat/test_open_tests.R` with `R/open_tests`:
 
@@ -115,6 +114,6 @@ also look at `/test/testthat/test_Taglist.R` for examples.
 Package options
 ---------------
 
-You can set the following package options:
+You can set the following global options using `options()`:
 
 -   `testthis.sep`: Default seperator to use when creating test files with `test_skeleton()`. Defaults to `_`, must be either `_` or `-`. I.e whether you want your files to be named `test_foofunction.R` or `test-foofunction.R`

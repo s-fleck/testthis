@@ -1,11 +1,10 @@
 #' Open associated test_file
 #'
 #' If the currently open file in the Rstudio editor is called \code{myfun.R} this
-#' opens /code{tests/testthat/test_myfun.R} in a new tab.
+#' opens \file{tests/testthat/test_myfun.R} in a new tab.
 #'
 #' @export
 open_tests <- function(){
-
   if(!requireNamespace("rstudioapi")){
     stop('This function is designed to be used from within Rstudio')
   }
@@ -15,7 +14,7 @@ open_tests <- function(){
   if(file.exists(fname)){
     rstudioapi::navigateToFile(fname)
   } else {
-    test_skeleton(fname, open = TRUE)
+    message('No associated testfile exists. You can create one with test_skeleton()')
   }
 }
 
@@ -23,21 +22,29 @@ open_tests <- function(){
 #' Create a test skeleton file  for the currently open .R file
 #'
 #' If the file currently open in the Rstudio editor is called \code{my_function.R},
-#' this creates the file \code{/tests/testthat/test_my_function.R} and fills it
+#' this creates the file \file{/tests/testthat/test_my_function.R} and fills it
 #' with a basic test skeleton.
+#'
+#' @section Side effects:
+#'   Creates a file.
 #'
 #' @param fname optional: Targt R script file to open. If empty the file
 #'   currently open in the editor will be used.
 #' @param open Should the test file be opend after it is created?
 #'
-#' @rdname create_tests
-test_skeleton <- function(fname, open = TRUE){
+#' @export
+#'
+test_skeleton <- function(
+  fname,
+  open = TRUE,
+  sep = options('testthis.sep')
+){
   if(!requireNamespace("rstudioapi")){
     stop('This function is designed to be used from within Rstudio')
   }
 
   if(missing(fname)){
-    fname <- get_testfile_name()
+    fname <- get_testfile_name(sep = sep)
   }
 
   if(file.exists(fname)){

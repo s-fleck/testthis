@@ -1,6 +1,7 @@
-#* @testfile test_get_testfile_name
+get_testfile_name <- function(sep = options('testthis.sep')){
+  sep <- as.character(sep)
+  assert_that(identical(sep, '-') || identical(sep, "_"))
 
-get_testfile_name <- function(){
   if (!requireNamespace("rstudioapi")){
     stop('This function is designed to be used from within Rstudio')
   }
@@ -13,16 +14,26 @@ get_testfile_name <- function(){
 
   opts       <- get_tag(get_taglist(fname), 'testfile')
 
+
   if (identical(length(opts), 0L)){
     bn <- basename(fname)
+    test_pattern <- sprintf('^test[_\\-]')
+    test_bn_pattern <- paste0(test_pattern, bn)
 
-    if(grepl('^test[_-]', bn)){
-      res <- fname
-    } else if (file.exists(file.path(testthat::test_path(), paste0('test-', bn)))){
-      res <- file.path(testthat::test_path(), paste0('test-', bn))
-    } else {
-      res <- file.path(testthat::test_path(), paste0('test_', bn))
+    res <- testthat::test_path() %>%
+      list.files() %>%
+      stringi::stri_subset_regex(test_bn_pattern) %>%
+      file.path(testthat::test_path(), .)
+
+    if (identical(length(res), 1L)){
+      # do nothing
+    } else  if (identical(length(res), 0L)){
+      res <- file.path(testthat::test_path(), paste0('test', sep, bn))
+    } else if (length(res) > 1L){
+      warning('Multiple possible test files found. Using ', res[[1]])
+      res <- res[[1]]
     }
+
   } else {
     if (length(opts) > 1) {
       warning('More than one @testfile tag present. Using first.')
