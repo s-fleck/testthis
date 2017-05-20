@@ -11,6 +11,12 @@ is_testfiles <- function(x){
 
 
 
+is_in_rdir <- function(x) {
+  grepl('/R/', x, fixed = TRUE)
+}
+
+
+
 get_current_file <- function(){
   if (!requireNamespace("rstudioapi")){
     stop('This function is designed to be used from within Rstudio')

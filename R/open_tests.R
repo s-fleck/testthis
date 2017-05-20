@@ -9,9 +9,10 @@ open_tests <- function(){
     stop('This function is designed to be used from within Rstudio')
   }
 
+
   cfile <- get_current_file()
 
-  if(!is_testfile(cfile)){
+  if(!is_testfile(cfile) || is_in_rdir(cfile)){
     fname <- get_testfile_name()
 
     if(file.exists(fname)){
