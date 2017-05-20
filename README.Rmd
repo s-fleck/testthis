@@ -9,6 +9,7 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 
+devtools::load_all('.')
 library(testthis)
 library(rstudioapi)
 ```
