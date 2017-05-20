@@ -9,62 +9,54 @@ open_tests <- function(){
     stop('This function is designed to be used from within Rstudio')
   }
 
-  fname <- get_testfile_name()
+  cfile <- get_current_file()
 
-  if(file.exists(fname)){
-    rstudioapi::navigateToFile(fname)
+  if(!is_testfile(cfile)){
+    fname <- get_testfile_name()
+
+    if(file.exists(fname)){
+      rstudioapi::navigateToFile(fname)
+    } else {
+      message(
+        sprintf('Testfile %s does not exists. ', fname),
+        'You can create it with test_skeleton().'
+      )
+    }
+
+
   } else {
-    message('No associated testfile exists. You can create one with test_skeleton()')
+    open_associated_rfile(cfile)
   }
 }
 
 
-#' Create a test skeleton file  for the currently open .R file
-#'
-#' If the file currently open in the Rstudio editor is called \code{my_function.R},
-#' this creates the file \file{/tests/testthat/test_my_function.R} and fills it
-#' with a basic test skeleton.
-#'
-#' @section Side effects:
-#'   Creates a file.
-#'
-#' @param fname optional: Targt R script file to open. If empty the file
-#'   currently open in the editor will be used.
-#' @param open Should the test file be opend after it is created?
-#'
-#' @export
-#'
-test_skeleton <- function(
-  fname,
-  open = TRUE,
-  sep = options('testthis.sep')
-){
-  if(!requireNamespace("rstudioapi")){
-    stop('This function is designed to be used from within Rstudio')
-  }
 
-  if(missing(fname)){
-    fname <- get_testfile_name(sep = sep)
-  }
+open_associated_rfile <- function(x){
+  tag_paths <- get_pkg_testfile_names_from_tags()
+  bn <- basename(x)
 
-  if(file.exists(fname)){
-    message(sprintf('* File alread exists: %s', fname))
+  tp <- tag_paths[grep(bn, tag_paths$tfile, fixed = TRUE), ]
+
+  if (identical(nrow(tp), 0L)){
+    rfile <- bn %>%
+      gsub('^test[_\\-]', '', .) %>%
+      file.path(devtools::as.package('.')$path, 'R', .)
   } else {
-    message(sprintf('* Creating `%s`', fname))
-    title_name <- stringi::stri_sub(
-      tools::file_path_sans_ext(basename(fname)), 6
-    )
+    if(nrow(tp) > 1L) {
+      warning('More than one @testfile tag present. Using first.')
+    }
 
-    lines <- paste0(
-      sprintf('context("%s")', title_name),
-      "\n\n\n",
-      sprintf('test_that("%s works as expected", {\n\n\n})', title_name)
-    )
-
-    writeLines(lines, fname)
+    rfile <- tp$rfile[[1]]
   }
 
-  if(open){
-    rstudioapi::navigateToFile(fname)
+  assert_that(file.exists(rfile))
+
+  if(file.exists(rfile)){
+    rstudioapi::navigateToFile(rfile)
+  } else {
+    stop(
+      sprintf('Associated rfile %s does not found ', rfile),
+      'This is likely a bug in the testthis package. Please contact maintainer.'
+    )
   }
 }

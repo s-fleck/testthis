@@ -32,5 +32,13 @@ get_testfile_name <- function(sep = options('testthis.sep')){
     res <- file.path(testthat::test_path(), bn)
   }
 
+  if(!is_testfile(res)){
+    stop(
+      res,
+      ' is not a valid name for a test file. ',
+      'Test file names must start with either "test_" or "test-".'
+    )
+  }
+
   return(res)
 }

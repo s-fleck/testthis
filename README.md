@@ -11,7 +11,7 @@ Provides Rstudio addins that enable to assign hotkeys to menial tasks. I recomme
 
 -   `test_this`: Tests the currently open file.
 -   `lest_this`: "Load and test"; first calls `devtools::load_all()`, and then test the currently open file
--   `open_tests`: Opens the associated testfile in an editor window.
+-   `open_tests`: Opens the associated testfile in an editor window. If the currently open file already is a testfile, it opens the associated file in the `/R` directory.
 
 The function above assume that if the current filename is `currentfile.R`, the associated test file is `/tests/testthat/test_currentfile.R`. If you want to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere in your code, usually the top or bottom of your .R file.
 
@@ -52,47 +52,57 @@ The test\_coverage summary for a package may look like this (+ marks function fo
 
 ``` r
 get_test_coverage(pkg = system.file(package = 'testthis'))
-#> Package testthis, Test Coverage: 23.5%
+#> Warning in is.na(x): is.na() applied to non-(list or vector) of type 'NULL'
+#> Package testthis, Test Coverage: 0.0%
 #>  
-#>  exported functions ....................                    
-#>  - get_test_coverage
-#>  - lest_this        
-#>  - open_tests       
-#>    read_test        
-#>    save_test        
-#>  - test_acceptance  
-#>  - test_integration 
-#>  - test_manual      
-#>    test_skeleton    
-#>  - test_subdir      
-#>  - test_this        
-#>  - test_with_skip   
+#>  exported functions ....................                   
+#>   get_test_coverage
+#>   lest_this        
+#>   open_tests       
+#>   read_test        
+#>   save_test        
+#>   test_acceptance  
+#>   test_integration 
+#>   test_manual      
+#>   test_skeleton    
+#>   test_subdir      
+#>   test_this        
+#>   test_with_skip   
 #> 
 #>  S3 Methods ....................                     
 #>   print.Test_coverage
 #> 
-#>  internal functions ....................                                     
-#>    .onLoad                           
-#>  + detect_testthis_comments          
-#>    extract_test_that_desc            
-#>  + extract_testthis_comments         
-#>    get_pkg_exports                   
-#>    get_pkg_functions                 
-#>    get_pkg_S3methods                 
-#>  + get_pkg_tested_functions          
-#>  + get_pkg_tested_functions_from_desc
-#>    get_pkg_tested_functions_from_tags
-#>    get_pkg_testignore                
-#>  + get_tag                           
-#>    get_taglist                       
-#>    get_testfile_name                 
-#>    is_valid                          
-#>    is_valid.Test_coverage            
-#>  + list_test_files                   
-#>  + skip_test_files                   
-#>    taglist                           
-#>    test_coverage                     
-#>  + testthis_tokenizer
+#>  internal functions ....................                                    
+#>   .onLoad                           
+#>   detect_testthis_comments          
+#>   extract_test_that_desc            
+#>   extract_testthis_comments         
+#>   get_current_file                  
+#>   get_pkg_exports                   
+#>   get_pkg_functions                 
+#>   get_pkg_S3methods                 
+#>   get_pkg_tested_functions          
+#>   get_pkg_tested_functions_from_desc
+#>   get_pkg_tested_functions_from_tags
+#>   get_pkg_testfile_names_from_tags  
+#>   get_pkg_testignore                
+#>   get_rdir_taglist                  
+#>   get_tag                           
+#>   get_taglist                       
+#>   get_test_taglist                  
+#>   get_testfile_name                 
+#>   get_testfile_name_from_tag        
+#>   is_testfile                       
+#>   is_testfiles                      
+#>   is_valid                          
+#>   is_valid.Test_coverage            
+#>   list_rdir_files                   
+#>   list_test_files                   
+#>   open_associated_rfile             
+#>   skip_test_files                   
+#>   taglist                           
+#>   test_coverage                     
+#>   testthis_tokenizer
 ```
 
 Test This Tags

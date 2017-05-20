@@ -27,7 +27,9 @@ recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp`.
 * `test_this`: Tests the currently open file.
 * `lest_this`: "Load and test"; first calls `devtools::load_all()`, and then 
   test the currently open file
-* `open_tests`: Opens the associated testfile in an editor window. 
+* `open_tests`: Opens the associated testfile in an editor window. If the 
+  currently open file already is a testfile, it opens the associated file in
+  the `/R` directory.
 
 The function above assume that if the current filename is `currentfile.R`,
 the associated test file is `/tests/testthat/test_currentfile.R`. If you want
