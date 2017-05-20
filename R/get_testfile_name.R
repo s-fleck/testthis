@@ -12,7 +12,7 @@ get_testfile_name <- function(sep = options('testthis.sep')){
     fname <-  rstudioapi::getSourceEditorContext()$path
   }
 
-  opts       <- get_tag(get_taglist(fname), 'testfile')
+  opts <- get_testfile_name_from_tag(fname)$tfile
 
 
   if (identical(length(opts), 0L)){
@@ -38,7 +38,7 @@ get_testfile_name <- function(sep = options('testthis.sep')){
     if (length(opts) > 1) {
       warning('More than one @testfile tag present. Using first.')
     }
-    bn  <- paste0(opts[[1]], '.R')
+    bn  <- opts[[1]]
     res <- file.path(testthat::test_path(), bn)
   }
 

@@ -98,8 +98,7 @@ get_pkg_testignore <- function(pkg){
 
 
 get_pkg_tested_functions_from_tags <- function(pkg){
-  ttfiles  <- list_test_files(pkg, full_names = TRUE)
-  taglists <- lapply(ttfiles, get_taglist)
+  taglists <- get_test_taglist(pkg)
   res      <- sort(unlist(unique(lapply(taglists, get_tag, 'testing'))))
 
   return(res)

@@ -22,6 +22,23 @@ taglist <- function(dat){
 }
 
 
+
+
+get_rdir_taglist <- function(pkg = '.'){
+  ttfiles  <- list_rdir_files(pkg, full_names = TRUE)
+  lapply(ttfiles, get_taglist)
+}
+
+
+
+get_test_taglist <- function(pkg = '.'){
+  ttfiles  <- list_test_files(pkg, full_names = TRUE)
+  taglists <- lapply(ttfiles, get_taglist)
+}
+
+
+
+
 get_taglist <- function(infile){
   assert_that(is.character(infile))
   assert_that(is.scalar(infile))
