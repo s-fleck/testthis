@@ -2,18 +2,8 @@ get_testfile_name <- function(sep = options('testthis.sep')){
   sep <- as.character(sep)
   assert_that(identical(sep, '-') || identical(sep, "_"))
 
-  if (!requireNamespace("rstudioapi")){
-    stop('This function is designed to be used from within Rstudio')
-  }
-
-  fname <- rstudioapi::getActiveDocumentContext()$path
-
-  if (identical(fname, '')){
-    fname <-  rstudioapi::getSourceEditorContext()$path
-  }
-
-  opts <- get_testfile_name_from_tag(fname)$tfile
-
+  fname <- get_current_file()
+  opts  <- get_testfile_name_from_tag(fname)$tfile
 
   if (identical(length(opts), 0L)){
     bn <- basename(fname)
