@@ -1,13 +1,6 @@
 context("get_package_functions")
 
 
-test_that("get_package_functions works as expected", {
-
-
-})
-
-
-
 test_that('get_pkg_tested_functions_from_desc works', {
   #* @testing get_pkg_tested_functions_from_desc
 
