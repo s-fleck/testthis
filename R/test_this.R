@@ -23,6 +23,8 @@ test_this <- function(){
 }
 
 
+
+
 #' \code{lest_this()} does the same, but calls \code{devtools::load_all()} first.
 #' @export
 #' @rdname test_this.R

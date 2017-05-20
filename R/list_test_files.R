@@ -20,6 +20,20 @@ list_test_files <- function(pkg, full_names = TRUE, skip = FALSE){
 }
 
 
+
+
+list_rdir_files <- function(pkg, full_names = TRUE, skip = FALSE){
+  pkg     <- devtools::as.package(pkg)
+  tpath   <- file.path(pkg$path, 'R')
+  list.files(
+    tpath,
+    full.names = full_names
+  )
+}
+
+
+
+
 skip_test_files <- function(ttfiles){
   skip <- vector('logical', length(ttfiles))
   for(i in seq_along(ttfiles)){

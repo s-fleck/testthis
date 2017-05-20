@@ -1,11 +1,11 @@
-is_test_file <- function(x){
-  is.scalar(x) &&  is_test_files(x)
+is_testfile <- function(x){
+  is.scalar(x) &&  is_testfiles(x)
 }
 
 
 
 
-is_test_files <- function(x){
+is_testfiles <- function(x){
   grepl("^test[_\\-]", basename(x))
 }
 
@@ -23,4 +23,39 @@ get_current_file <- function(){
   }
 
   res
+}
+
+
+
+get_pkg_testfile_names_from_tags <- function(pkg = '.'){
+  infiles <- list_rdir_files(pkg)
+
+  res <- lapply(infiles, get_taglist) %>%
+    lapply(get_tag, 'testfile') %>%
+    setNames(infiles) %>%
+    unlist()
+
+  data.frame(
+    rfile = names(res),
+    tfile = paste0(as.character(res), '.R'),
+    stringsAsFactors = FALSE
+  )
+}
+
+
+
+get_testfile_name_from_tag <- function(infile){
+  assert_that(is.scalar(infile))
+
+  res <- infile %>%
+    get_taglist() %>%
+    get_tag('testfile')
+
+  if(is.null(res)) return(NULL)
+
+  data.frame(
+    rfile = infile,
+    tfile = paste0(res, '.R'),
+    stringsAsFactors = FALSE
+  )
 }
