@@ -101,8 +101,8 @@ be considered to be in an alpha-state.
 * `@testing <functionname>`:  mark `functionname` as tested.
   Should usually go next the associated `test_that()` call. This is used by
   `get_test_coverage()`.
-* `@skip`: skip test when running `test_this::test()`. Best placed directly
-  below the `context()` call.
+* `@skip`: skip test when running `testthis::test_with_skip()`. Best placed 
+  directly below the `context()` call.
 
 also look at `/test/testthat/test_Taglist.R` for examples.
 

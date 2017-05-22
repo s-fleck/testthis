@@ -52,7 +52,7 @@ The test\_coverage summary for a package may look like this (+ marks function fo
 
 ``` r
 get_test_coverage(pkg = system.file(package = 'testthis'))
-#> Package testthis, Test Coverage: 18.6%
+#> Package testthis, Test Coverage: 18.2%
 #>  
 #>  exported functions ....................                    
 #>  - get_test_coverage
@@ -91,6 +91,7 @@ get_test_coverage(pkg = system.file(package = 'testthis'))
 #>    get_test_taglist                  
 #>    get_testfile_name                 
 #>    get_testfile_name_from_tag        
+#>    is_in_rdir                        
 #>    is_testfile                       
 #>    is_testfiles                      
 #>    is_valid                          
@@ -116,7 +117,7 @@ Test\_this tags are special comments that modify the behavious of the functions 
 ### `pkg/tests/testhat/test_*.R`
 
 -   `@testing <functionname>`: mark `functionname` as tested. Should usually go next the associated `test_that()` call. This is used by `get_test_coverage()`.
--   `@skip`: skip test when running `test_this::test()`. Best placed directly below the `context()` call.
+-   `@skip`: skip test when running `testthis::test_with_skip()`. Best placed directly below the `context()` call.
 
 also look at `/test/testthat/test_Taglist.R` for examples.
 
