@@ -12,7 +12,8 @@ is_testfiles <- function(x){
 
 
 is_in_rdir <- function(x) {
-  grepl('/R/', x, fixed = TRUE)
+  pat <- file.path('/R', basename(x))
+  grepl(pat, x, fixed = TRUE)
 }
 
 
