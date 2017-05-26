@@ -56,7 +56,10 @@ test_subdir <- function(subdir, pkg = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_integration <- function(pkg = '.', ...){
-  test_subdir(subdir = 'integration_tests', pkg = pkg, ...)
+  test_subdir(
+    subdir = options('testthis.integration_tests_path'),
+    pkg = pkg,
+    ...)
 }
 
 
@@ -65,7 +68,10 @@ test_integration <- function(pkg = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_acceptance <- function(pkg = '.', ...){
-  test_subdir(subdir = 'acceptance_tests', pkg = pkg, ...)
+  test_subdir(
+    subdir = options('testthis.acceptance_tests_path'),
+    pkg = pkg,
+    ...)
 }
 
 
@@ -74,7 +80,8 @@ test_acceptance <- function(pkg = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_manual <- function(pkg = '.', ...){
-  test_subdir(subdir = 'manual_tests', pkg = pkg, ...)
+  test_subdir(
+    subdir = options('testthis.manual_tests_path'),
+    pkg = pkg,
+    ...)
 }
-
-

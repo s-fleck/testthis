@@ -54,3 +54,21 @@
 #'
 #' @docType package
 "_PACKAGE"
+
+
+
+.onLoad <- function(...) {
+  op <- options()
+
+  op.testthis <- list(
+    testthis.sep = '_',
+    testthis.integration_tests_path = "integration_tests",
+    testthis.acceptance_tests_path = "acceptance_tests",
+    testthis.manual_tests_path = "manual_tests"
+  )
+
+  toset <- !(names(op.testthis) %in% names(op))
+  if(any(toset)) options(op.testthis[toset])
+
+  invisible()
+}

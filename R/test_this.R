@@ -32,7 +32,3 @@ lest_this <- function(){
   devtools::load_all()
   test_this()
 }
-
-
-
-.onLoad <- function(...) options(testthis.sep = '_')
