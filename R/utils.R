@@ -11,10 +11,18 @@ is_testfiles <- function(x){
 
 
 
+
+#' Check if a file is /R/
+#'
+#' @param x a file path
+#'
+#' @return logical
+#'
 is_in_rdir <- function(x) {
   pat <- file.path('/R', basename(x))
   grepl(pat, x, fixed = TRUE)
 }
+
 
 
 
@@ -34,6 +42,7 @@ get_current_file <- function(){
 
 
 
+
 get_pkg_testfile_names_from_tags <- function(pkg = '.'){
   infiles <- list_rdir_files(pkg)
 
@@ -48,6 +57,7 @@ get_pkg_testfile_names_from_tags <- function(pkg = '.'){
     stringsAsFactors = FALSE
   )
 }
+
 
 
 
