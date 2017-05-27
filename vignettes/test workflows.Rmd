@@ -1,0 +1,86 @@
+---
+title: "Test workflows"
+author: "Stefan Fleck"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: bibliography.bib
+nocite: | 
+  @martin2008
+vignette: >
+  %\VignetteIndexEntry{Test workflows}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Background
+
+Automated testing is a powerful tool to ensure correct functioning of
+software. This vignette assumes that you are already familar with the concept of 
+unit testing. If you are not I recommend @wickham2015 's chapter on testing 
+[(link)](http://r-pkgs.had.co.nz/tests.html), or for a more extensive treatment
+@martin2008 's classic Clean Code (which is about Java, but many of the 
+principles are transferable to R).
+
+
+* While organizing unit tests if fairly straigh forward and well supported by
+  testthat, there is less advice on how to structure longer running and more
+  messy tests. 
+* The practices described in this document are aimed at people that implement
+  analysis workflows inside R packages. Many of the practices of this vignette
+  should be avoided in multi-purpose packages aimed at a wide release.
+
+
+A proposed testing taxonomy for R
+
+# Basic folder structure
+  * `/test/testthat`: main tests dir, unit tests go here.
+  * `/test/testthat/test_data`: binary data necessary for tests goes here.
+    should be in `.rds` format (see `?readDS()`). 
+  * `/test/testthat/test_data_raw`: scripts used to create test_data (similar 
+    to the `data_raw` directory proposed by @wickham2015
+    [(link)](http://r-pkgs.had.co.nz/data.html).
+    
+  Additionaly, unit tests may not be enough for your project  
+  
+  * `/test/testthat/test_out`: test outputs that have to be checked manually.
+    this directory should also go into your `.gitignore` and `.Rbuildignore` 
+    files. See sections for manual tests below.
+    
+
+
+# unit tests
+
+* test a unit of code
+* go into `/test/testthat`
+* executed regularily durring programming sessions, all your unit tests together
+  should run in under one minute [@wickham2015].
+
+
+# integration tests (aka component tests)
+
+* test how various components of a programm interact
+* executed less frequently than unit tests
+
+
+# acceptance tests
+
+* Good practice to formulate your project goals
+* Idea: When all acceptance tests pass, your programm is finished
+* Defined by the stakeholders. E.g. your boss tells you "reproduce this 
+  SAS-analysis workflow in R". The acceptance test would be checking the final
+  output of your analysis workflow against the final output of the sas workflow.
+* automated implementeion of project requirements
+
+
+
+# manual tests
+
+* should be avoided at all costs
+* tests tha produce output that has to be checked manually (plots, `.xlsx` files, reports)
+* run only on occasion
+* outtputs go into `/tests/testthat/test_out`
+
+
+
+
+# References
