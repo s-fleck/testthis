@@ -1,0 +1,129 @@
+---
+title: "Test workflows"
+author: "Stefan Fleck"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: bibliography.bib
+nocite: | 
+  @martin2008
+vignette: >
+  %\VignetteIndexEntry{Test workflows}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Background
+
+Automated testing is a powerful tool to ensure correct functioning of
+software. This vignette assumes that you are already familar with the concept 
+and benefits of automated tests. If you are not I recommend @wickham2015 's 
+chapter on testing [(via)](http://r-pkgs.had.co.nz/tests.html) for a quick 
+overview, or @martin2008 's classic Clean Code for a more extensive discussion 
+of the subject (code examples are in Java, but many of the principles apply 
+unversilay).
+
+This document is aimed at poeple that implement analysis workflows in R 
+packages. Many of the practices of the advice given in this vignette do not
+apply to multi-purpose packages aimed at a wide release, and might even be
+counter-productive.
+
+
+# A proposed folder structure
+
+While organizing unit tests if fairly straigh forward and well supported by
+testthat, there is less advice on how to structure longer running and more
+messy tests. 
+
+```
+tests
+  +-- testthat
+  |  +-- test_data
+  |  +-- test_data_raw
+  |  +-- test_out
+  |  +-- integration_tests
+  |  +-- acceptance_tests
+  |  +-- manual_tests
+```
+
+  * **/test/testthat**: Test root. Unit tests go here direclty. These tests
+    will be run by `devtools::test()` (CTRL+SHIFT+T in Rstudio).
+  * **/test/testthat/test_data**: Data necessary for tests goes here. Binary data
+    should be in the `.rds` format; see `?readDS()`. 
+  * **/test/testthat/test_data_raw**: Scripts used to create the files in 
+    test_data; similar to the `data_raw` directory proposed by @wickham2015
+    [(via)](http://r-pkgs.had.co.nz/data.html).
+  * **/test/testthat/test_out**: Test outputs that have to be checked manually,
+    such as reports and plots. This directory should also go into your 
+    `.gitignore` and `.Rbuildignore` files. 
+  * **/test/testthat/integration_tests**: Integration tests (see below)
+  * **/test/testthat/acceptance_tests**: Acceptance tests (see below)
+  * **/test/testthat/manual_tests**: Manual tests (see below)
+    
+
+# A taxonomy of tests
+
+Unit tests (the lowest level of tests) are reltively easy to classify. For the
+other levels of thest there is more dissent in the litarture.
+
+* What I am trying to outline here is a structure of tests that makes sense in 
+  the context of R packages, which are relatively small pieces of software.
+
+
+## unit tests
+
+* Test a small unit of code, e.g a single function.
+* All your unit tests together should ideally run in under one minute 
+  [@wickham2015]. Unit test should be regularily executed during programming 
+  sessions.
+* Example: [dplyr::distinct](https://github.com/tidyverse/dplyr/blob/master/tests/testthat/test-distinct.R)
+
+
+## functional tests
+
+* test how various components of a programm interact
+* Go into **/test/testthat/functional_tests**
+* executed less frequently than unit tests
+* Example: You have function a that writes a data.frame to an external database. 
+  The function is not quite straight forward and splits up the data.frame into
+  several tables so that you have a normalized data set. You also have a function
+  that fetches the data.frame back from the table and reassembles it. Your 
+  integration test would be comparing if sending and receiving a data.frame
+  from the data.base results in exactly the same data.frame.
+
+
+## acceptance tests
+
+* Test if a project fulfills the project *requirements*. In other words, all
+  your acceptance tests passing indicates that your program is finished. 
+* Can be seen as a special kind of functional tests.
+* Go into **/test/testthat/acceptance_tests**
+* Example: Your boss tells you to port an analysis workflow from SAS code to R. 
+  You formulate the goal your boss as an automated acceptance tests by comparing 
+  the output of your R workflow against the results produced by the legacy SAS 
+  code. If both workflows produce the same result given the same input data,
+  your test passes and your goal is fulfilled.
+
+
+## manual tests
+
+Not really a level of tests like the ones above, but it makes sense to think
+of them as their own category.
+
+* Tests that require human supervision
+* Only if they cannot be avoided
+* Example: Tests tha produce output that has to be checked manually (plots, 
+  formatting-heavy `.xlsx` files, reports)
+* Run only on occasion
+* outtputs go into `/tests/testthat/test_out`
+
+
+# Documenting tests - Tests as documentatin
+
+* Tests themselfs are documentation
+
+* Example from @percival2014 for functional tests (in python) 
+[(via)](http://chimera.labs.oreilly.com/books/1234000000754/ch02.html). The code 
+is in python, but this example is more about how 
+
+
+# References
