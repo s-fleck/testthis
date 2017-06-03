@@ -40,7 +40,10 @@ test_subdir <- function(subdir, pkg = '.', ...){
     inst <- file.path(path, "inst", "tests", subdir)
     if (dir.exists(inst))
       return(inst)
-    stop("No testthat directories found in ", path, call. = FALSE)
+    stop(
+      sprintf("%s not found in any of the test dirs of %s", subdir, path),
+      call. = FALSE
+    )
   }
 
 
