@@ -174,16 +174,14 @@ your test passes and your goal is fulfilled.
 
 ```{r acceptance test example, eval = FALSE}
 test_that("SAS workflow for analysing business data was successfully ported to R.", {
+  expected_results <- testthis::load_test('expected_results.rda')  
+  test_input_data <- fetch_input_data(projectdb, loggin_credentials)
+  aux_dat         <- fetch_aux_data_from_web()
+  
+  tdat            <- prepare(test_input_data)
+  new_workflow_result <- run_complicated_analysis(tdat, aux_dat)
 
-expected_results <- testthis::load_test('expected_results.rda')  
-
-test_input_data <- fetch_input_data(projectdb, loggin_credentials)
-aux_dat         <- fetch_aux_data_from_web()
-tdat            <- prepare(test_input_data)
-
-new_workflow_result <- run_complicated_analysis(tdat, aux_dat)
-
-expect_identical(new_workflow_results, expected_results)
+  expect_identical(new_workflow_results, expected_results)
 })
 ```
 
