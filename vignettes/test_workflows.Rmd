@@ -14,7 +14,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Background
+# Introduction
 
 Automated testing is a powerful tool to ensure correct functioning of
 software. This vignette assumes that you are already familiar with the concept 
@@ -24,24 +24,24 @@ overview, or the classic Clean Code by @martin2008 for a more extensive
 discussion of the subject (code examples are in Java, but many of the principles 
 apply universally).
 
-# Introduction
-
 This document proposes a structure for organizing code and data for tests that
 go beyond simple self contained unit tests --- e.g. long-running tests, tests
-that require access to a database, etc... .
-Many of the practices of the advice given in this vignette do not
+that require access to a external resources that might not always be available, 
+etc... . Many of the practices of the advice given in this vignette do not
 apply to multi-purpose packages aimed at a wide release, and might even be
 counter-productive.
 
 
+
 # A Taxonomy of Tests
 
-Unit tests (the lowest level of tests) are relatively easy to classify. For the
-other levels of tests there is more dissent in the literature.
-
-* What I am trying to outline here is a structure of tests that makes sense in 
-  the context of R packages, which are relatively small pieces of software.
-
+A lot has been written on the subject of software testing, but much of the 
+literature is aimed at developers that have to deal with large and complex
+software systems. This section presents a system for tests that I found
+useful in the context of developing R packages. It is not important what you 
+call the different categories of tests, but it does make sense to keep tests 
+based on different principles and with different aims (such as unit- and 
+functional tests) sepparated.
 
 ## Unit Tests
 
@@ -90,7 +90,7 @@ test_that("unique returns unique values of a character vector ", {
 
 Test a slice of functionality from the user perspective. As opposed to to unit
 testing, functional testing usually follows a black-box principle: Check if for
-gived inputs the expected outputs are produced, without knowledge of what 
+given inputs the expected outputs are produced, without knowledge of what 
 happens in between.
 
 **Benefits:**
@@ -108,7 +108,13 @@ happens in between.
   from regularly running your unit tests via devtools::test (Ctrl+Shift+T in 
   Rstudio). This can become necessary if, for example, you need to write large 
   amounts of data to a database or test the performance of a simulation.
-  
+
+**Usecases**
+
+* Fast-runing functional tests can augment a suite of unit tests
+* Slow-runing unit tests can help you test the functionality of a complex 
+  system that require access to external resources, e.g. an R package that 
+  communicates with a database inside your company
 
 **Example**
 
@@ -141,7 +147,7 @@ from @percival2014
 Test if a system fulfills the project *requirements*. All acceptance tests 
 passing indicates that the program is finished. If you think of user tests
 as *programmer-level*, and functional tests as *user-level*, acceptance tests 
-would be *boss-level* (i.e. test the goals set by your boss). 
+would be *boss-level* (i.e. test the goals set by your client/employer). 
 
 **Benefits:**
 
@@ -155,11 +161,15 @@ would be *boss-level* (i.e. test the goals set by your boss).
 Acceptance tests need only to be run occasionaly and can be long-running or
 rely on external resources (but use with care). 
 
+**Usecases**
+
+See Example
+
 **Example:**
 
-Your boss tells you to reimplement an analysis workflow from SAS code to R. 
-You formulate the goal your boss as an automated acceptance tests by comparing 
-the output of your R workflow against the results produced by the legacy SAS 
+Your boss tells you to re-implement an analysis workflow from SAS code to R. 
+You formulate that goal as automated acceptance tests by comparing 
+the output of your R workflow against the results produced by the legacy 
 code. If both workflows produce the same result given the same input data,
 your test passes and your goal is fulfilled.
 
@@ -186,17 +196,17 @@ expect_identical(new_workflow_results, expected_results)
 **Concept:**
 
 Tests that require human supervision, because they cannot be formulated well
-programmatically. They do not fit in the hirachy above but a rather parallel to
+programmatically. They do not fit in the hierarchy above but a rather parallel to
 it. You can, for example, have manual acceptance tests (but you should never 
 ever have manual unit tests). You should have only a handful of manual tests
 for a project, and only if they absolutely cannot be avoided. Think of them 
-as deal-with-the-devil level tests.
+as deal-with-the-devil-level tests.
 
 **Benefits:**
 
 Sometimes you will have to write code that produces pre-formatted excel
 workbooks or complex plots that have to look nice. Manual tests provide a 
-framework of organizing such outputs
+framework of organizing such outputs.
 
 **Runtime:**
 
@@ -212,7 +222,12 @@ test_that("plot is pretty", {
   # Look at pretty plot
 })
 ```
-# A Proposed Folder Structure for Tests
+
+
+
+# Organizing the tests/testhat directory
+
+## A Proposed Folder Structure
 
 While organizing unit tests if fairly straight forward and well supported by
 testthat, there is less advice on how to structure longer running and more
@@ -249,14 +264,27 @@ tests
 If you use them, *test_data* and *test_out* need to be added to your 
 *.gitignore* and *.Rbuildignore* files. 
 
+## Tools Provided by testthis
+
+Testthis provides convenience functions to deal with tests that are organized
+in the manner outlined above:
+
+* `test_acceptance()`, `test_functional()`, `test_manual()` and `test_subdir()`
+  for executing tests in subdirs of *test/testthat/*. Think of them as drop-inst
+  for devtools::test() for tests that you want to keep separate from your 
+  unit tests (for example because they are long-running).
+* `save_test()` and `load_test()` for saving and loading data from 
+  `test_data()` in the `.rds` format.
+  
 You can easily set up functions to interact with a custom test folder structure
-via the test_subfolder()` function.
+via the `test_subfolder()` function.
 
 ```{r eval = FALSE}
 test_long <- function(){test_subdir('long_tests')}
 test_long()
 
 ```
+
 
 # Links
 
