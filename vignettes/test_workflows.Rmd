@@ -34,7 +34,7 @@ apply to multi-purpose packages aimed at a wide release, and might even be
 counter-productive.
 
 
-# A taxonomy of tests
+# A Taxonomy of Tests
 
 Unit tests (the lowest level of tests) are relatively easy to classify. For the
 other levels of tests there is more dissent in the literature.
@@ -43,7 +43,7 @@ other levels of tests there is more dissent in the literature.
   the context of R packages, which are relatively small pieces of software.
 
 
-## unit tests
+## Unit Tests
 
 **Concept:** 
 
@@ -84,7 +84,7 @@ test_that("unique returns unique values of a character vector ", {
 * [dplyr::distinct()](https://github.com/tidyverse/dplyr/blob/master/tests/testthat/test-distinct.R)
 * [data.table data.frame-like functions](https://github.com/Rdatatable/data.table/blob/master/tests/testthat/test-data.frame-like.R)
 
-## functional tests
+## Functional Tests
 
 **Concept:**  
 
@@ -134,7 +134,7 @@ from @percival2014
 
 
 
-## Acceptance tests
+## Acceptance Tests
 
 **Concept:**
 
@@ -143,11 +143,6 @@ passing indicates that the program is finished. If you think of user tests
 as *programmer-level*, and functional tests as *user-level*, acceptance tests 
 would be *boss-level* (i.e. test the goals set by your boss). 
 
-**Runtime:**
-
-Acceptance tests need only to be run occasionaly and can be long-running or
-rely on external resources (but use with care). 
-
 **Benefits:**
 
 * Provides proof that your software performs as expected
@@ -155,6 +150,11 @@ rely on external resources (but use with care).
   goals in a testable manner. If you have a boss, acceptance tests should be
   designed in a feedback process with your boss.
   
+**Runtime:**
+
+Acceptance tests need only to be run occasionaly and can be long-running or
+rely on external resources (but use with care). 
+
 **Example:**
 
 Your boss tells you to reimplement an analysis workflow from SAS code to R. 
@@ -163,7 +163,7 @@ the output of your R workflow against the results produced by the legacy SAS
 code. If both workflows produce the same result given the same input data,
 your test passes and your goal is fulfilled.
 
-```{r functional test example, eval = FALSE}
+```{r acceptance test example, eval = FALSE}
 test_that("SAS workflow for analysing business data was successfully ported to R.", {
 
 expected_results <- testthis::load_test('expected_results.rda')  
@@ -178,7 +178,10 @@ expect_identical(new_workflow_results, expected_results)
 })
 ```
 
-## Manual tests
+
+
+
+## Manual Tests
 
 **Concept:**
 
@@ -189,19 +192,19 @@ ever have manual unit tests). You should have only a handful of manual tests
 for a project, and only if they absolutely cannot be avoided. Think of them 
 as deal-with-the-devil level tests.
 
-**Runtime:**
-
-Run only on occasion, so can be long-running.
-
 **Benefits:**
 
 Sometimes you will have to write code that produces pre-formatted excel
 workbooks or complex plots that have to look nice. Manual tests provide a 
 framework of organizing such outputs
 
+**Runtime:**
+
+Run only on occasion, so can be long-running.
+
 **Example**
 
-```{r functional test example, eval = FALSE}
+```{r manual test example, eval = FALSE}
 test_that("plot is pretty", {
   tres <- produce_pretty_plot(iris)
   ggsave('pretty.png', tres)
@@ -209,7 +212,7 @@ test_that("plot is pretty", {
   # Look at pretty plot
 })
 ```
-# A proposed folder structure
+# A Proposed Folder Structure for Tests
 
 While organizing unit tests if fairly straight forward and well supported by
 testthat, there is less advice on how to structure longer running and more
