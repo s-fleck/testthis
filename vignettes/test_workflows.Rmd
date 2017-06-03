@@ -120,13 +120,12 @@ happens in between.
 
 ```{r functional test example, eval = FALSE}
 test_that("t.test returns a p value < 0.95 for significantly different sample means", {
-
-# Karl wants to use a t test to see if the weight of carps 
-# significantly differ from the weight of trouts (which it does). 
-carps  <- rnorm(100, mean = 7)  
-trouts <- rnorm(100, mean = 2) 
-
-expect_true(t.test(carps, trouts, alternative = 'two.sided')$p.value < 0.95)
+  # Karl wants to use a t test to see if the weight of carps 
+  # significantly differ from the weight of trouts (which it does). 
+  carps  <- rnorm(100, mean = 7)  
+  trouts <- rnorm(100, mean = 2) 
+  
+  expect_true(t.test(carps, trouts, alternative = 'two.sided')$p.value < 0.95)
 })
 
 
