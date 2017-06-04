@@ -33,6 +33,7 @@ counter-productive.
 
 
 
+
 # A Taxonomy of Tests
 
 A lot has been written on the subject of software testing, but much of the 
@@ -47,8 +48,7 @@ functional tests) sepparated.
 
 **Concept:** 
 
-Test a small unit of code, e.g a single function, from the programmer's 
-perspective.
+Test a small unit of code from the programmer's perspective.
 
 **Benefits:**
 
@@ -224,6 +224,20 @@ test_that("plot is pretty", {
 
 # Organizing the tests/testhat directory
 
+When your tests start becoming longer than you want them to be, there are
+two basic approaches to organize them
+
+  * Dividide them into short and long-running tests
+    * Advantage: You can still run all tests that perform well enough, 
+      regardless of whether they are acceptance, functional, unit, etc..
+    * Disadvantage: The structure of your tests suite is a bit more arbitrary
+      and it might be harder to stay organized
+  * Divide them by class of test (see next chapter)
+    * Neat subdivision of testing principle, forces you think about functional
+      tests vs. unit tests.
+    * Functional and acceptance tests that would run quick enough to be 
+      executed regularily will only be executed with your long-runing tests
+      
 ## A Proposed Folder Structure
 
 While organizing unit tests if fairly straight forward and well supported by
@@ -233,9 +247,9 @@ testthat, there is less advice on how to structure longer running and more
 ```
 tests
   +-- testthat
-  |  +-- test_data
-  |  +-- test_data_raw
-  |  +-- test_out
+  |  +-- testdata
+  |  +-- testdata-raw
+  |  +-- testout
   |  +-- functional_tests
   |  +-- acceptance_tests
   |  +-- manual_tests
@@ -243,13 +257,13 @@ tests
 
 * **/test/testthat**: Test root. Unit tests go here directly. These tests
   will be run by `devtools::test()` (CTRL+SHIFT+T in Rstudio).
-* **/test/testthat/test_data**: Data necessary for tests goes here. Binary data
+* **/test/testthat/testdata**: Data necessary for tests goes here. Binary data
   should be in the `.rds` format; see `?readDS()`. Unit tests should not 
   use data from this directory but rather be self contained, but for 
   functional or acceptance tests it might be useful to compare the results of 
   an analysis workflow against a reference data set.
-* **/test/testthat/test_data_raw**: Contains scripts that create the files in 
-  test_data; similar to the `data_raw` directory proposed in @wickham2015
+* **/test/testthat/testdata-raw**: Contains scripts that create the files in 
+  testdata; similar to the `data-raw` directory proposed in @wickham2015
   [(via)](http://r-pkgs.had.co.nz/data.html).
 * **/test/testthat/test_out**: Output directory for manual tests. As mentioned
   in the manual tests section, output that has to be checked manually should
@@ -258,7 +272,7 @@ tests
 * **/test/testthat/acceptance_tests**: Acceptance tests 
 * **/test/testthat/manual_tests**: Manual tests 
   
-If you use them, *test_data* and *test_out* need to be added to your 
+If you use them, *testdata* and *test_out* need to be added to your 
 *.gitignore* and *.Rbuildignore* files. 
 
 ## Tools Provided by testthis
@@ -271,7 +285,7 @@ in the manner outlined above:
   for devtools::test() for tests that you want to keep separate from your 
   unit tests (for example because they are long-running).
 * `save_test()` and `load_test()` for saving and loading data from 
-  `test_data()` in the `.rds` format.
+  `testdata()` in the `.rds` format.
   
 You can easily set up functions to interact with a custom test folder structure
 via the `test_subfolder()` function.
