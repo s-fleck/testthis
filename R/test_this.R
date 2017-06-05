@@ -18,7 +18,7 @@ test_this <- function(){
     message('Running tests in ', fname)
     testthat::test_file(fname)
   } else {
-    message(fname, ' does not exist.')
+    msg_testfile_does_not_exist(fname)
   }
 }
 

@@ -18,10 +18,7 @@ open_tests <- function(){
     if(file.exists(fname)){
       rstudioapi::navigateToFile(fname)
     } else {
-      message(
-        sprintf('Testfile %s does not exists. ', fname),
-        'You can create it with test_skeleton().'
-      )
+      msg_testfile_does_not_exist(fname)
     }
 
 
