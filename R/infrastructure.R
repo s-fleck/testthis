@@ -17,7 +17,7 @@ use_testdata <- function(
 ){
   pkg <- as.package(pkg)
 
-  use_directory(file.path("tests", "testthat", "testdata"), ignore = TRUE, pkg = pkg)
+  use_directory(file.path("tests", "testthat", "testdata"), ignore = FALSE, pkg = pkg)
 
   message(
     "* You can save data files for tests via `save_test()`\n",
@@ -51,7 +51,7 @@ use_testdata_raw <- function(pkg = ".") {
 # cited from devtools
 use_directory <- function(
   path,
-  ignore = FALSE,
+  buildignore = FALSE,
   pkg = "."
 ){
   pkg <- as.package(pkg)
@@ -68,11 +68,8 @@ use_directory <- function(
     dir.create(pkg_path, showWarnings = FALSE, recursive = TRUE)
   }
 
-  if (ignore) {
-    message(
-      "* Adding `", path, "` to `.Rbuildignore`.\n"
-    )
-
+  if (buildignore) {
+    message("* Adding `", path, "` to `.Rbuildignore`.\n")
     devtools::use_build_ignore(path, pkg = pkg)
   }
 

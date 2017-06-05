@@ -27,9 +27,7 @@ is_in_rdir <- function(x) {
 
 
 get_current_file <- function(){
-  if (!requireNamespace("rstudioapi")){
-    stop('This function is designed to be used from within Rstudio')
-  }
+  require_rstudio()
 
   res <- rstudioapi::getActiveDocumentContext()$path
 

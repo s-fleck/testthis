@@ -5,10 +5,7 @@
 #'
 #' @export
 open_tests <- function(){
-  if(!requireNamespace("rstudioapi")){
-    stop('This function is designed to be used from within Rstudio')
-  }
-
+  require_rstudio()
 
   cfile <- get_current_file()
 

@@ -18,9 +18,7 @@ test_skeleton <- function(
   open = TRUE,
   sep = options('testthis.sep')
 ){
-  if(!requireNamespace("rstudioapi")){
-    stop('This function is designed to be used from within Rstudio')
-  }
+  require_rstudio()
 
 
   if(missing(fname)){
