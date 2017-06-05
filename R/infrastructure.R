@@ -20,7 +20,7 @@ use_testdata <- function(
   use_directory(file.path("tests", "testthat", "testdata"), ignore = TRUE, pkg = pkg)
 
   message(
-    "* You can save data files for tests via save_test()\n",
+    "* You can save data files for tests via `save_test()`\n",
     "* Scripts that produce test data should go in testdata-raw"
   )
 
