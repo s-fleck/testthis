@@ -1,77 +1,41 @@
-#' Use data in a package.
+#' Create \code{testdata} folder.
 #'
-#' This function makes it easy to save package data in the correct format.
+#' A folder to put binary data in that are required (only) by your unit tests
 #'
-#' @param ... Unquoted names of existing objects to save.
-#' @param pkg Package where to store data. Defaults to package in working
-#'   directory.
-#' @param overwrite By default, \code{use_data} will not overwrite existing
-#'   files. If you really want to do so, set this to \code{TRUE}.
-#' @inheritParams base::readRDS
+#' @param ... Objects to save.
+#' @template pkg
 #'
 #' @export
 #' @family infrastructure
 #' @examples
 #' \dontrun{
-#' x <- 1:10
-#' y <- 1:100
-#'
-#' use_data(x, y) # For external use
-#' use_data(x, y, internal = TRUE) # For internal use
+#'   use_testdata(letters, LETTERS)
 #' }
 use_testdata <- function(
   ...,
-  pkg = ".",
-  internal = FALSE,
-  overwrite = FALSE,
-  compress = "bzip2"
+  pkg = "."
 ){
-  pkg  <- as.package(pkg)
-  objs <- eval(substitute(alist(...)))
+  pkg <- as.package(pkg)
 
-  # Prepare / check output paths
-    dir_name <- file.path(pkg$path, "tests", "testthat", "testdata")
-    if (!file.exists(dir_name)) {
-      use_directory(
-        path = file.path("tests", "testthat", "testdata"),
-        ignore = TRUE,
-        pkg = pkg
-      )
-    }
+  use_directory(file.path("tests", "testthat", "testdata"), ignore = TRUE, pkg = pkg)
 
-    paths <- file.path(dir_name, paste0(objs, ".rds"))
-    if(!overwrite & any(file.exists(paths))){
-      existing <- paste(basename(paths[file.exists(paths)]), collapse = ', ')
-      msg <- sprintf(
-        "%s already exist in %s and overwrite == FALSE",
-        existing, dir_name
-      )
-      stop(msg)
-    }
+  message(
+    "* You can save data files for tests via save_test()\n",
+    "* Scripts that produce test data should go in testdata-raw"
+  )
 
-  # Save
-    message(sprintf(
-      "Saving %s to %s",
-      paste(basename(paths), collapse = ", "),
-      dir_name
-    ))
-
-    mapply(
-      saveRDS,
-      list(...),
-      file = paths,
-      MoreArgs = list(compress = compress)
-    )
-
-  invisible()
+  invisible(TRUE)
 }
 
 
 
-#' Use \code{testdata-raw} to compute package datasets.
+#' Create \code{testdata-raw} folder.
 #'
-#' @param pkg Package where to create \code{testdata-raw}. Defaults to package in
-#'   working directory.
+#' A folder to put scripts in that produce the files in \file{testdata}
+#'
+#' @param pkg Package in which to create \file{testdata-raw}. Defaults to
+#'   package in current working directory.
+#'
 #' @export
 #' @family infrastructure
 use_testdata_raw <- function(pkg = ".") {
@@ -79,10 +43,7 @@ use_testdata_raw <- function(pkg = ".") {
 
   use_directory(file.path("tests", "testthat", "testdata-raw", ignore = FALSE, pkg = pkg))
 
-  message(
-    "Next: \n",
-    "* Put scripts that produce testsdata in tests/testthat/testdata-raw\n",
-    "* Use testthis::use_testdata() to add testdata to package")
+  invisible(TRUE)
 }
 
 
@@ -97,8 +58,10 @@ use_directory <- function(
   pkg_path <- file.path(pkg$path, path)
 
   if (file.exists(pkg_path)) {
-    if (!file.info(pkg_path)$isdir) {
+    if (!dir.exists(pkg_path)) {
       stop("`", path, "` exists but is not a directory.", call. = FALSE)
+    } else {
+      message("* Directory `", path, "` already exists.")
     }
   } else {
     message("* Creating `", path, "`.")
@@ -106,7 +69,10 @@ use_directory <- function(
   }
 
   if (ignore) {
-    message("* Adding `", path, "` to `.Rbuildignore`.")
+    message(
+      "* Adding `", path, "` to `.Rbuildignore`.\n"
+    )
+
     devtools::use_build_ignore(path, pkg = pkg)
   }
 
@@ -114,6 +80,15 @@ use_directory <- function(
 }
 
 
+
 dots <- function(...) {
   eval(substitute(alist(...)))
+}
+
+
+
+testdata_exists <- function(pkg = '.'){
+  dir.exists(file.path(
+    devtools::as.package(pkg)$path, "tests", "testthat", "testdata"
+  ))
 }

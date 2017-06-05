@@ -1,15 +1,27 @@
-#' Load/Save object to test_data directory
+#' Load/Save objects to be used in tests
 #'
-#' @param ... R objects to save to test data dir, usually \file{/tests/testthat/test_data/<subdir>}.
-#' @param pkg Package where to store data. Defaults to package in working directory.
+#' Loads or saves single R objects to \file{tests/testthat/testdata} in the
+#' `.rds` format.
+#'
+#' @param ... R objects to save to testdata dir.
 #' @param subdir subdirectory of \file{test_data} to save to / read from.
-#' @param overwrite logical. overwrite existing file?
+#' @inheritParams base::readRDS
+#' @template overwrite
+#' @template pkg
 #'
 #' @section Side effects:
-#'   Saves/reads an R object to a \file{test_data} dir in the current package
+#'   Saves/reads an R object to a \file{testdata} dir in the current package
+#'
+#' @family infrastructure
 #'
 #' @export
-save_test <- function(..., pkg = '.', subdir = NULL, overwrite = FALSE){
+save_test <- function(
+  ...,
+  pkg = '.',
+  subdir = NULL,
+  overwrite = FALSE,
+  compress = TRUE
+){
   # Preconditions
     assert_that(is.flag(overwrite))
     assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
@@ -19,7 +31,7 @@ save_test <- function(..., pkg = '.', subdir = NULL, overwrite = FALSE){
   # Find and prepare test_data directory
     pkg       <- devtools::as.package(pkg)
     pkg_dir   <- base::system.file(package = pkg$package)                #base:: prevents devtools from inserting /inst/ into path
-    cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'test_data')
+    cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'testdata')
 
     if(!is.null(subdir)){
       cache_dir <- file.path(cache_dir, subdir)
@@ -52,7 +64,7 @@ save_test <- function(..., pkg = '.', subdir = NULL, overwrite = FALSE){
     message('Saving to \n', paste('*', save_files, collapse = '\n'))
 
     for(i in seq_along(save_files)){
-      saveRDS(list(...)[[i]], file = save_files[i])
+      saveRDS(list(...)[[i]], file = save_files[i], compress = compress)
     }
 }
 
