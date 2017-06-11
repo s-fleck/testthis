@@ -29,13 +29,3 @@ test_that("use_testdata creates testdata dir", {
     recursive = TRUE
   )
 })
-
-
-
-# expect_true(file.exists('tests/testthat/testdata/test_pkg/tests/testthat/testdata/iris.rds'))
-# expect_true(file.exists('tests/testthat/testdata/test_pkg/tests/testthat/testdata/cars.rds'))
-# expect_error(
-#   use_testdata(iris, cars, pkg = tpkg),
-#   "iris.rds, cars.rds already exist in"
-# )
-
