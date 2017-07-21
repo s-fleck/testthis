@@ -7,9 +7,9 @@
 #' @section Side effects:
 #'   Creates a file.
 #'
-#' @param fname optional: Targt R script file to open. If empty the file
+#' @param fname optional: Target R script file to open. If empty the file
 #'   currently open in the editor will be used.
-#' @param open Should the test file be opend after it is created?
+#' @param open Should the test file be opened after it is created?
 #'
 #' @export
 #'

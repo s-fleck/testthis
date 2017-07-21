@@ -7,13 +7,13 @@
 #' @section Introduction:
 #'
 #'   Testthis provides several tools to make unit testing in R slightly more
-#'   confortable. It is designed to be used in conjunction with \code{testthat}
+#'   comfortable. It is designed to be used in conjunction with \code{testthat}
 #'   package. I modelled this package after my own workflow so many of the
 #'   functions it provides expect that you organize your tests in a certain way.
 #'
 #' @section Rstudio addins (requires Rstudio):
 #'
-#'   This package contains several simple Rstudio addins. The motiviation behind
+#'   This package contains several simple Rstudio addins. The motivation behind
 #'   defining those function as Rstudio addins is that you can easily assign
 #'   hotkeys to them in Rstudio (\code{Tools/Modify Keyboard Shortcuts})
 #'
@@ -34,7 +34,7 @@
 #' @section Test coverage checklist:
 #'
 #'   This package provides a checklist-like approach to extracting test-coverage
-#'   of a package. If you want automatic analsys of test coverage, you have to
+#'   of a package. If you want automatic analysis of test coverage, you have to
 #'   look somewhere else.
 #'
 #'   To mark \code{anyfunction} as tested, you have to put the comment \code{#*

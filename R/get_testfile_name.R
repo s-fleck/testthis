@@ -2,12 +2,12 @@
 #'
 #' Get the name of an associated test file for an R script
 #'
-#' @param sep Default seperator to use when creating test files, i.e whether
+#' @param sep Default separator to use when creating test files, i.e whether
 #'   you want your files to be named `test_foofunction.R` or
 #'   `test-foofunction.R`
 #'
-#' @return If the currenlty open file:
-#' * Is a normal R script: the path to the associated test file, usualy
+#' @return If the currently open file:
+#' * Is a normal R script: the path to the associated test file, usually
 #'   \file{tests/testthat/test_currentlyopenfile.R}. An alternative name for
 #'   the test file can be specified via the special comment tag `#* @testfile <filename>`.
 #'

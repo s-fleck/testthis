@@ -8,7 +8,7 @@
 #'
 #' \tabular{ll}{
 #'   `test_integration()` \tab Integration tests, also called component tests.
-#'     Put tests here that test if several functions / parts of your programm
+#'     Put tests here that test if several functions / parts of your program
 #'     work together as expected \cr
 #'   `test_acceptance()` \tab Acceptance tests. This is the highest levels of
 #'     tests. Put tests here that verifies if your package fulfills the
@@ -16,7 +16,7 @@
 #'   `test_manual()` \tab Manual tests. Put tests here that produce output
 #'     that has to be manually verified, such as: console output, pdf files,
 #'     plots. It is recommended you collect the output files of such tests in
-#'     'tests/testhat/test_out'. \cr
+#'     'tests/testthat/test_out'. \cr
 #' }
 #'
 #' The above functions assume the respective test files are in
@@ -24,7 +24,7 @@
 #' `testthat/manual_tests`
 #'
 #' @inheritParams devtools::test
-#' @param subdir subdir of `inst/tests/` or `tests/testthat` that containts the
+#' @param subdir subdir of `inst/tests/` or `tests/testthat` that contains the
 #'   tests
 #' @param ... passed on to `devtools::test()`
 #'

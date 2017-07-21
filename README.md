@@ -2,7 +2,7 @@
 Overview
 --------
 
-Testthis provides several tools to make unit testing in R slightly more confortable. It is designed to be used in conjunction with `testthat` and `devtools` packages.
+Testthis provides several tools to make unit testing in R slightly more comfortable. It is designed to be used in conjunction with `testthat` and `devtools` packages.
 
 Rstudio addins (requires Rstudio)
 ---------------------------------
@@ -114,7 +114,7 @@ Test\_this tags are special comments that modify the behavious of the functions 
 
 -   `@testfile <filename>`: manually specifiy associated test file. Should usually start with `test_`. This is used by `test_this()`, `lest_this()` and `open_tests()`.
 
-### `pkg/tests/testhat/test_*.R`
+### `pkg/tests/testthat/test_*.R`
 
 -   `@testing <functionname>`: mark `functionname` as tested. Should usually go next the associated `test_that()` call. This is used by `get_test_coverage()`.
 -   `@skip`: skip test when running `testthis::test_with_skip()`. Best placed directly below the `context()` call.
@@ -126,4 +126,4 @@ Package options
 
 You can set the following global options using `options()`:
 
--   `testthis.sep`: Default seperator to use when creating test files with `test_skeleton()`. Defaults to `_`, must be either `_` or `-`. I.e whether you want your files to be named `test_foofunction.R` or `test-foofunction.R`
+-   `testthis.sep`: Default separator to use when creating test files with `test_skeleton()`. Defaults to `_`, must be either `_` or `-`. I.e whether you want your files to be named `test_foofunction.R` or `test-foofunction.R`

@@ -134,7 +134,7 @@ get_pkg_tested_functions_from_desc <- function(pkg){
 
 #' Extract 'desc' arguments from all test_that functions from .R script files
 #'
-#' @param infile character. Patht to an .R script file, or a list of such paths;
+#' @param infile character. Path to an .R script file, or a list of such paths;
 #' usually created with list.files("/path/to/directory")
 #' @return content of the 'desc' arguments of test_that functions
 extract_test_that_desc <- function(infile){

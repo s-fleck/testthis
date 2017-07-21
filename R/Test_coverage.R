@@ -108,7 +108,7 @@ print.Test_coverage <- function(x, ...){
 #'
 #' @param pkg path to package
 #' @param from_tags Checks the files if your test directory for testthis tags.
-#' Speicifically, if you have the comment \code{#* @testing myfunction} in any
+#' Specifically, if you have the comment \code{#* @testing myfunction} in any
 #' of your test files, myfunction will be marked as tested.
 #' @param from_desc Checks the \code{desc} argument \code{test_that(...)} of
 #' the tests in your test directory for functions names. E.g. if you have a
