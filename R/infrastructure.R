@@ -29,6 +29,7 @@ use_testdata <- function(
 
 
 
+
 #' Create \code{testdata-raw} folder.
 #'
 #' A folder to put scripts in that produce the files in \file{testdata}
@@ -45,6 +46,7 @@ use_testdata_raw <- function(pkg = ".") {
 
   invisible(TRUE)
 }
+
 
 
 
@@ -78,9 +80,11 @@ use_directory <- function(
 
 
 
+
 dots <- function(...) {
   eval(substitute(alist(...)))
 }
+
 
 
 

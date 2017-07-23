@@ -35,9 +35,6 @@ get_pkg_exports <- function(pkg = '.'){
 
 
 
-
-
-
 #' Get exported functions of a package
 #'
 #' Lists the functions exported by a package (according to the NAMESPACE file)
@@ -94,6 +91,7 @@ get_pkg_testignore <- function(pkg){
     return(NULL)
   }
 }
+
 
 
 

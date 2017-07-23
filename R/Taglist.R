@@ -31,6 +31,7 @@ get_rdir_taglist <- function(pkg = '.'){
 
 
 
+
 get_test_taglist <- function(pkg = '.'){
   ttfiles  <- list_test_files(pkg, full_names = TRUE)
   taglists <- lapply(ttfiles, get_taglist)
@@ -71,10 +72,12 @@ get_taglist <- function(infile){
 
 
 
+
 get_tag <- function(dat, tag){
   assert_that('Taglist' %in% class(dat))
   dat[[tag]]
 }
+
 
 
 
@@ -86,9 +89,13 @@ extract_testthis_comments <- function(infile){
 }
 
 
+
+
 detect_testthis_comments <- function(x){
   grepl('^\\s*#\\*\\s*@.*', x, ignore.case = TRUE)
 }
+
+
 
 
 #' testthis tokenizer

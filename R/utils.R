@@ -28,7 +28,6 @@ is_in_rdir <- function(x) {
 
 get_current_file <- function(){
   require_rstudio()
-
   res <- rstudioapi::getActiveDocumentContext()$path
 
   if (identical(res, '')){
