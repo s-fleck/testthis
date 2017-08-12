@@ -3,7 +3,7 @@ context("test_Taglist")
 
 
 tfile <-  file.path(
-  testthat::test_path(), 'test_data', 'testthis_tags.R')
+  testthat::test_path(), 'testdata', 'testthis_tags.R')
 
 test_that("test_parse_testthis_comments works as expected", {
   #* @testing detect_testthis_comments ------
