@@ -1,27 +1,30 @@
-#' Create a test skeleton file  for the currently open .R file
+#' Create a test skeleton file for the currently open .R file
 #'
 #' If the file currently open in the Rstudio editor is called \code{my_function.R},
 #' this creates the file \file{/tests/testthat/test_my_function.R} and fills it
 #' with a basic test skeleton.
 #'
 #' @section Side effects:
-#'   Creates a file.
+#'   Creates an R script file in the file system.
 #'
-#' @param fname optional: Target R script file to open. If empty the file
+#' @param fname Character scalar. Target R script file to open. If empty the file
 #'   currently open in the editor will be used.
-#' @param open Should the test file be opened after it is created?
+#' @param open Logical scalar. Should the test file be opened after it is created?
+#' @param sep Character scalar. Separator between \file{test} and \file{fname}
+#'   when constructing the test file name. Should either be `"_"` or `"-"` for
+#'   compatibility with testthat.
 #'
 #' @export
 #'
 test_skeleton <- function(
-  fname,
+  fname = NULL,
   open = TRUE,
   sep = options('testthis.sep')
 ){
   require_rstudio()
 
 
-  if(missing(fname)){
+  if(is.null(fname)){
     fname <- get_testfile_name(sep = sep)
   }
 
