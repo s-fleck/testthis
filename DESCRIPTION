@@ -1,7 +1,7 @@
 Package: testthis
 Type: Package
 Title: Rstudio addins and utils for testthat
-Version: 0.0.8.9004
+Version: 0.0.8.9005
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: This package automates menial tasks associated with creating and
@@ -11,15 +11,15 @@ Description: This package automates menial tasks associated with creating and
   "tests/testthat/test_myfun.R".
 License: MIT + file LICENSE
 Imports:
-  devtools,
-  stringi,
   assertthat,
+  devtools,
+  usethis,
+  testthat,
+  stringi,
+  magrittr,
   utils,
   stats,
-  testthat,
-  magrittr,
-  tools,
-  stats
+  tools
 Suggests:
   knitr,
   rmarkdown,
