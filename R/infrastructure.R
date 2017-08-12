@@ -15,10 +15,8 @@ use_testdata <- function(
   ...,
   pkg = "."
 ){
-  pkg <- as.package(pkg)
-
-  use_directory(file.path("tests", "testthat", "testdata"), ignore = FALSE, pkg = pkg)
-
+  base_path <- as.package(pkg)$path
+  usethis::use_directory(file.path("tests", "testthat", "testdata"), ignore = FALSE, base_path = pkg)
   message(
     "* You can save data files for tests via `save_test()`\n",
     "* Scripts that produce test data should go in testdata-raw"
@@ -40,49 +38,9 @@ use_testdata <- function(
 #' @export
 #' @family infrastructure
 use_testdata_raw <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-
-  use_directory(file.path("tests", "testthat", "testdata-raw", ignore = FALSE, pkg = pkg))
-
+  base_path <- as.package(pkg)$path
+  usethis::use_directory(file.path("tests", "testthat", "testdata-raw", ignore = FALSE, base_path = pkg))
   invisible(TRUE)
-}
-
-
-
-
-# cited from devtools
-use_directory <- function(
-  path,
-  buildignore = FALSE,
-  pkg = "."
-){
-  pkg <- as.package(pkg)
-  pkg_path <- file.path(pkg$path, path)
-
-  if (file.exists(pkg_path)) {
-    if (!dir.exists(pkg_path)) {
-      stop("`", path, "` exists but is not a directory.", call. = FALSE)
-    } else {
-      message("* Directory `", path, "` already exists.")
-    }
-  } else {
-    message("* Creating `", path, "`.")
-    dir.create(pkg_path, showWarnings = FALSE, recursive = TRUE)
-  }
-
-  if (buildignore) {
-    message("* Adding `", path, "` to `.Rbuildignore`.\n")
-    devtools::use_build_ignore(path, pkg = pkg)
-  }
-
-  invisible(TRUE)
-}
-
-
-
-
-dots <- function(...) {
-  eval(substitute(alist(...)))
 }
 
 

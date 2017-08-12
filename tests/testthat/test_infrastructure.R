@@ -5,27 +5,22 @@ test_that("use_testdata creates testdata dir", {
   #* @testing testdata_exists
   #* @testing use_testdata
 
-  tpkg <- 'tests/testthat/testdata/test_pkg/'
+  tpkg <- file.path(testthat::test_path(), "testdata/test_pkg")
 
   expect_false(testdata_exists(tpkg))
 
   expect_message(
     use_testdata(pkg = tpkg),
-    "Creating `tests/testthat/testdata`"
+    "You can save data files for tests via"
   )
 
-  expect_message(
-    use_testdata(pkg = tpkg),
-    "already exists"
-  )
-
-  message("* ", path, " already exists.")
-
-  expect_true(dir.exists('tests/testthat/testdata/test_pkg/tests/testthat/testdata'))
-  expect_true(testdata_exists())
+  expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
+  expect_true(testdata_exists(pkg = tpkg))
 
   unlink(
-    'tests/testthat/testdata/test_pkg/tests/testthat/testdata',
+    file.path(tpkg, "tests/testthat/testdata"),
     recursive = TRUE
   )
+
+  expect_false(testdata_exists(tpkg))
 })
