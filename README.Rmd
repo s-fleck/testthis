@@ -83,7 +83,7 @@ which tests exist):
 get_test_coverage(pkg = system.file(package = 'testthis'))
 ```
 
-## Test This Tags
+## Testthis Tags
 
 Test_this tags are special comments that modify the behavious of the functions
 supplied by this package. They are of the Form `#* @tag <value>`. Please not 

@@ -52,7 +52,7 @@ The test\_coverage summary for a package may look like this (+ marks function fo
 
 ``` r
 get_test_coverage(pkg = system.file(package = 'testthis'))
-#> Package testthis, Test Coverage: 18.2%
+#> Package testthis, Test Coverage: 20.4%
 #>  
 #>  exported functions ....................                    
 #>  - get_test_coverage
@@ -67,6 +67,8 @@ get_test_coverage(pkg = system.file(package = 'testthis'))
 #>  - test_subdir      
 #>  - test_this        
 #>  - test_with_skip   
+#>  + use_testdata     
+#>    use_testdata_raw 
 #> 
 #>  S3 Methods ....................                     
 #>   print.Test_coverage
@@ -98,15 +100,18 @@ get_test_coverage(pkg = system.file(package = 'testthis'))
 #>    is_valid.Test_coverage            
 #>    list_rdir_files                   
 #>  + list_test_files                   
+#>    msg_testfile_does_not_exist       
 #>    open_associated_rfile             
+#>    require_rstudio                   
 #>  + skip_test_files                   
 #>    taglist                           
 #>    test_coverage                     
+#>  + testdata_exists                   
 #>  + testthis_tokenizer
 ```
 
-Test This Tags
---------------
+Testthis Tags
+-------------
 
 Test\_this tags are special comments that modify the behavious of the functions supplied by this package. They are of the Form `#* @tag <value>`. Please not that only some test\_this tags really require a `<value>`. The tag system should be considered to be in an alpha-state.
 
