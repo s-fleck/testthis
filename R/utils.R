@@ -45,7 +45,7 @@ get_pkg_testfile_names_from_tags <- function(pkg = '.'){
 
   res <- lapply(infiles, get_taglist) %>%
     lapply(get_tag, 'testfile') %>%
-    setNames(infiles) %>%
+    stats::setNames(infiles) %>%
     unlist()
 
   data.frame(
