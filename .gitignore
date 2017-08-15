@@ -9,3 +9,4 @@ rsconnect
 rpubs
 testdata
 *.rds
+*.directory

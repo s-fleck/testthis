@@ -83,7 +83,7 @@ get_pkg_tested_functions <- function(pkg, from_tags, from_desc){
 #' @return a character vector
 get_pkg_testignore <- function(pkg){
   pkg <- devtools::as.package(pkg)
-  tfile <- file.path(pkg$path, 'tests', 'testthat', '.testthisignore')
+  tfile <- file.path(pkg$path, 'tests', 'testthat', '_testthisignore')
 
   if (file.exists(tfile)){
     return(readLines(tfile))

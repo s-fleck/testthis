@@ -9,8 +9,9 @@
 #'   to / read from.
 #' @inheritParams base::readRDS
 #' @template overwrite
+#' @inheritParams usethis::use_directory
 #' @template pkg
-#' @return `use_testdata()` returns `TRUE` if object was succesfully saved.
+#' @return `use_testdata()` returns `TRUE` if object was successfully saved.
 #'
 #' @section Side effects:
 #'   `use_testdata()` saves an R object to a \file{testdata} dir in `pkg`.
@@ -111,7 +112,7 @@ use_testdata_raw <- function(pkg = "."){
 #'
 #' Create a subdir in \file{tests/testthat/} and optionally an R script
 #' containing a helper function to run all tests in that subdir. Useful for
-#' sepparating long-running tests from your unit tests.
+#' separating long-running tests from your unit tests.
 #'
 #' @param path Character scalar. Will be processed with [base::make.names()] to
 #'   make a syntactically valid name.
@@ -124,7 +125,7 @@ use_testdata_raw <- function(pkg = "."){
 #' @template pkg
 #' @family infrastructure
 #'
-#' @return
+#' @return `TRUE` on success (invisibly).
 #' @export
 #'
 #' @examples
@@ -190,7 +191,7 @@ has_testdata <- function(pkg = '.'){
 #' Use a tester function
 #'
 #' Quickly create an \R script that contains a function for running all tests
-#' in a predifined directory. This function powers the `make_tester` option
+#' in a predefined directory. This function powers the `make_tester` option
 #' of [use_test_subdir()] and you will likely not need to run it manually.
 #'
 #' @param path Name of the subdirectory oft \file{tests/testthat/} for which
@@ -199,13 +200,13 @@ has_testdata <- function(pkg = '.'){
 #' @param tester_path \R script file in which to store the tester functions
 #' @template pkg
 #'
-#' @return `TRUE` on success
+#' @return `TRUE` on success (invisibly).
 #' @export
 #' @family infrastructure
 #'
 use_tester <- function(
   path,
-  ignore = false,
+  ignore = FALSE,
   tester_path = file.path("R", "testthis-testers.R"),
   pkg = "."
 ){
