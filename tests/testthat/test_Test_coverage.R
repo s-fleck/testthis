@@ -1,12 +1,6 @@
 context("test_Test_coverage")
 
 
-test_that("test_Test_coverage works as expected", {
-  skip('cannot get the test to work with R CMD Check')
-
-  expect_silent(dat <- get_test_coverage())
-})
-
 
 test_that("test_Test_coverage works as expected", {
   #* @testing print.test_coverage
