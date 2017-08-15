@@ -2,7 +2,15 @@
 #'
 #' Create a subdir in \file{tests/testthat/} and optionally an R script
 #' containing a helper function to run all tests in that subdir. Useful for
-#' separating long-running tests from your unit tests.
+#' separating long-running tests from your unit tests, or storing tests that
+#' you do not want to run on CRAN or durring R CMD Check.
+#'
+#' `use_integration_tests()` and `use_acceptance_tests()` are shorthands for
+#' creating the respective test subdirs, for which testthis supplies the
+#' predefined `test_integration()` and `test_acceptance()` functions.
+#' You can modify the default paths for
+#' acceptance and integration tests by setting the respective `options()`, but
+#' it is recommended to create your own test subdirs instead.
 #'
 #' @param path Character scalar. Will be processed with [base::make.names()] to
 #'   make a syntactically valid name.
@@ -94,4 +102,28 @@ use_tester <- function(
 
   write(rcode, fname, append = TRUE)
   invisible(TRUE)
+}
+
+
+
+
+#' @rdname use_test_subdir
+use_integration_tests <- function(pkg = "."){
+  use_test_subdir(
+    options('testthis.integration_tests_path'),
+    make_tester = FALSE,
+    pkg = pkg
+  )
+}
+
+
+
+
+#' @rdname use_test_subdir
+use_acceptance_tests <- function(pkg = "."){
+  use_test_subdir(
+    options('testthis.acceptance_tests_path'),
+    make_tester = FALSE,
+    pkg = pkg
+  )
 }
