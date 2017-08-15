@@ -1,1 +1,1 @@
-#' @param pkg a path. target package
+#' @param pkg Character scalar. Path to target package.

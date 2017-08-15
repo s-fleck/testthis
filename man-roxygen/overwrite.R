@@ -1,1 +1,1 @@
-#' @param overwrite logical. Should existing files be overwritten?
+#' @param overwrite Logical scalar. Should existing files be overwritten?
