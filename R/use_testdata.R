@@ -108,72 +108,6 @@ use_testdata_raw <- function(pkg = "."){
 
 
 
-#' Use test subdir
-#'
-#' Create a subdir in \file{tests/testthat/} and optionally an R script
-#' containing a helper function to run all tests in that subdir. Useful for
-#' separating long-running tests from your unit tests.
-#'
-#' @param path Character scalar. Will be processed with [base::make.names()] to
-#'   make a syntactically valid name.
-#' @param make_tester Logical or character scalar. Create an R script with a
-#'   test helper function. If `TRUE` an R script file will be placed into the
-#'   \file{R/} directory of \file{pkg}, containing a function definition
-#'   for running the tests in `path`. The file will be named
-#'   \file{testthis-testers.R}, but you can specify  your own name by
-#'   passing a character scalar to make_tester. See [use_tester()] for details.
-#' @template pkg
-#' @family infrastructure
-#'
-#' @return `TRUE` on success (invisibly).
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' use_test_subdir("special_tests", make_tester = TRUE)
-#'
-#' ## Reload the Package manually...
-#' ## Create some tests in tests/testthat/test_special_tests/
-#'
-#' test_special_tests()
-#' }
-#'
-use_test_subdir <- function(
-  path,
-  make_tester = TRUE,
-  pkg = "."
-){
-  # Preconditions
-    assert_that(is.scalar(path) && is.character(path))
-    assert_that(is.scalar(make_tester))
-    assert_that(is.scalar(is.logical(make_tester) || is.character(make_tester)))
-
-
-  # Process arguments
-    path <- make.names(path)
-    base_path <- devtools::as.package(pkg)$path
-
-
-  # Logic
-    usethis::use_directory(
-      file.path("tests", "testthat", path),
-      ignore = FALSE,
-      base_path = base_path
-    )
-
-    if (is.character(make_tester)) {
-      use_tester(path, tester_path = make_tester, pkg = pkg)
-    } else if (make_tester) {
-      use_tester(path, pkg = pkg)
-    }
-
-
-  invisible(TRUE)
-}
-
-
-
-
 #' @rdname use_testdata
 #'
 #' @return `has_testdata()` returns `TRUE` if `pkg` has a
@@ -187,43 +121,6 @@ has_testdata <- function(pkg = '.'){
 
 
 
-
-#' Use a tester function
-#'
-#' Quickly create an \R script that contains a function for running all tests
-#' in a predefined directory. This function powers the `make_tester` option
-#' of [use_test_subdir()] and you will likely not need to run it manually.
-#'
-#' @param path Name of the subdirectory oft \file{tests/testthat/} for which
-#'   to create a tester function.
-#' @param ignore Logical. Add `tester_path` to .Rbuildignore?
-#' @param tester_path \R script file in which to store the tester functions
-#' @template pkg
-#'
-#' @return `TRUE` on success (invisibly).
-#' @export
-#' @family infrastructure
-#'
-use_tester <- function(
-  path,
-  ignore = FALSE,
-  tester_path = file.path("R", "testthis-testers.R"),
-  pkg = "."
-){
-  fname <- file.path(devtools::as.package(pkg)$path, tester_path)
-  funname   <- paste0("test_", path)
-
-  message(sprintf("creating tester function %s() in %s", funname, fname))
-  rcode <- sprintf('%s <- function() testthis::test_subdir("%s")\n', funname, path)
-
-  write(rcode, fname, append = TRUE)
-  invisible(TRUE)
-}
-
-
-
-
-# Utils -------------------------------------------------------------------
 
 #' @param infile rds file to read (must end in .rds, otherwise .rds ending is
 #'   automatically added)
@@ -257,4 +154,3 @@ read_testdata <- function(infile, subdir = NULL, pkg = '.'){
 
   readRDS(path)
 }
-
