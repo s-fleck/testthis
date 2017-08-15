@@ -19,6 +19,7 @@ Imports:
   magrittr,
   utils,
   stats,
+  rprojroot,
   tools
 Suggests:
   knitr,
