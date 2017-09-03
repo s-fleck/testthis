@@ -1,14 +1,14 @@
 Package: testthis
 Type: Package
-Title: Rstudio addins and utils for testthat
-Version: 0.0.8.9006
+Title: Utility functions and Rstudio addins to make using the testthat
+  package even more fun
+Version: 0.0.8.9007
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: This package automates menial tasks associated with creating and
-  running automated unit tests with the testthat package. It also provides
-  Rstudio addins for the most common functions, so that hotkeys can easily be
-  assigned. Everything in this package assumes that tests for "R/myfun.R" go into
-  "tests/testthat/test_myfun.R".
+  running automated unit tests with the testthat package. It further provides
+  Rstudio addins for tasks such as navigating between an R source file and an 
+  associated test file, or running tests in a single testfile. 
 License: MIT + file LICENSE
 Imports:
   assertthat,
