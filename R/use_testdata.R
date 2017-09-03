@@ -137,7 +137,7 @@ read_testdata <- function(infile, subdir = NULL, pkg = '.'){
   # Find test_data dir
   pkg       <- devtools::as.package(pkg)
   pkg_dir   <- base::system.file(package = pkg$package)
-  cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'test_data')
+  cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'testdata')
 
   if(!is.null(subdir)){
     cache_dir <- file.path(cache_dir, subdir)
