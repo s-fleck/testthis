@@ -38,7 +38,7 @@ use_testdata <- function(
 
 
   # Find and prepare test_data directory
-  base_path <- as.package(pkg)$path
+  base_path <- devtools::as.package(pkg)$path
   tdata_dir <- file.path("tests", "testthat", "testdata")
   if(!is.null(subdir)){
     tdata_dir <- file.path(tdata_dir, subdir)

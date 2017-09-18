@@ -3,7 +3,7 @@
 #' Create a subdir in \file{tests/testthat/} and optionally an R script
 #' containing a helper function to run all tests in that subdir. Useful for
 #' separating long-running tests from your unit tests, or storing tests that
-#' you do not want to run on CRAN or durring R CMD Check.
+#' you do not want to run on CRAN or during R CMD Check.
 #'
 #' `use_integration_tests()` and `use_acceptance_tests()` are shorthands for
 #' creating the respective test subdirs, for which testthis supplies the

@@ -1,21 +1,21 @@
 Package: testthis
 Type: Package
-Title: Utility functions and Rstudio addins to make using the testthat
-  package even more fun
+Title: Utility Functions and Rstudio Addins to Make Using the testthat
+  Package Even More Fun
 Version: 1.0.0
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: 
   Rstudio addins for several common testing-related tasks during package 
   development, such as switching between a source file and an associated test 
-  file or running unit tests in a single test file (hotkeyable!). 
+  file, or running unit tests in a single test file (hotkeyable!). 
   testthis also provides utility function to manage tests in subdirectories of
   the test/testthis directory.
 License: MIT + file LICENSE
 Imports:
   assertthat,
   devtools,
-  usethis,
+  usethis (>= 0.1.0),
   testthat,
   stringi,
   magrittr,
@@ -31,3 +31,5 @@ Encoding: UTF-8
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+URL: https://github.com/s-fleck/testthis
+BugReports: https://github.com/s-fleck/testthis/issues

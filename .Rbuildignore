@@ -4,3 +4,4 @@
 ^README-.*\.png$
 ^data-raw$
 ^man-roxygen$
+^R/testthis-testers\.R$

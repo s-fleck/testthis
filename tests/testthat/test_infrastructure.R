@@ -8,14 +8,14 @@ test_that("use_testdata creates testdata dir", {
   #* @testing use_testdata
   package_state <- list.files(".", recursive = TRUE)
 
-  tpkg <- file.path(testthat::test_path(), "testdata/test_pkg")
+  tpkg <- file.path(rprojroot::find_testthat_root_file("testdata", "test_pkg"))
 
   # Check for clean state
   expect_false(has_testdata(tpkg))
 
   # Check creation of testdata dir
     expect_message(
-      use_testdata(pkg = tpkg),
+      use_testdata(iris, pkg = tpkg),
       "You can save data files for tests via"
     )
     expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
