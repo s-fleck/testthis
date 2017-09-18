@@ -1,6 +1,6 @@
 #' Get testfile name
 #'
-#' Get the name of an associated test file for an R script
+#' Get the name of a test associated with target R script
 #'
 #' @param sep Default separator to use when creating test files, i.e whether
 #'   you want your files to be named `test_foofunction.R` or
@@ -9,12 +9,11 @@
 #' @return If the currently open file:
 #' * Is a normal R script: the path to the associated test file, usually
 #'   \file{tests/testthat/test_currentlyopenfile.R}. An alternative name for
-#'   the test file can be specified via the special comment tag `#* @testfile <filename>`.
+#'   the test file can be specified via the special comment tag
+#'   `#* @testfile <filename>`.
 #'
 #' * Is a test file (i.e. its name starts with `test_` or
 #'   `test-`): the path to the currently open file.
-#'
-#' @md
 #'
 get_testfile_name <- function(sep = options('testthis.sep')){
 

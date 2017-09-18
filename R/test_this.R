@@ -10,6 +10,8 @@
 #' via \code{devtools::test()} (CTRL+SHIFT+T).
 #'
 #' @export
+#' @return `NULL` (invisibly)
+#'
 #' @rdname test_this.R
 test_this <- function(){
   fname <- get_testfile_name()
@@ -20,6 +22,8 @@ test_this <- function(){
   } else {
     msg_testfile_does_not_exist(fname)
   }
+
+  invisible()
 }
 
 

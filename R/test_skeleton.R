@@ -14,6 +14,8 @@
 #'   when constructing the test file name. Should either be `"_"` or `"-"` for
 #'   compatibility with testthat.
 #'
+#' @return `NULL` (invisibly)
+#'
 #' @export
 #'
 test_skeleton <- function(
@@ -22,7 +24,6 @@ test_skeleton <- function(
   sep = options('testthis.sep')
 ){
   require_rstudio()
-
 
   if(is.null(fname)){
     fname <- get_testfile_name(sep = sep)
@@ -48,4 +49,6 @@ test_skeleton <- function(
   if(open){
     rstudioapi::navigateToFile(fname)
   }
+
+  invisible()
 }

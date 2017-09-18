@@ -7,7 +7,6 @@
 #' `vignette("testthis")` for infos on testthis tags.
 #'
 #' @inheritParams devtools::test
-#' @md
 #'
 #' @export
 test_with_skip <- function(pkg = '.', ...){

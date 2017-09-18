@@ -1,6 +1,6 @@
 #' Open associated test_file
 #'
-#' If the currently open file in the Rstudio editor is called \code{myfun.R} this
+#' If the currently open file in the Rstudio editor is called \file{myfun.R} this
 #' opens \file{tests/testthat/test_myfun.R} in a new tab.
 #'
 #' @export

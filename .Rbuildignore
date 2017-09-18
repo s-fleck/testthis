@@ -5,3 +5,4 @@
 ^data-raw$
 ^man-roxygen$
 ^R/testthis-testers\.R$
+^cran-comments\.md$

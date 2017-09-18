@@ -28,7 +28,8 @@
 #'   tests
 #' @param ... passed on to `devtools::test()`
 #'
-#' @md
+#' @return `NULL` (invisibly)
+#'
 #' @export
 test_subdir <- function(subdir, pkg = '.', ...){
 
@@ -51,6 +52,8 @@ test_subdir <- function(subdir, pkg = '.', ...){
     `devtools:::find_test_dir` = find_test_dir_mock,
     devtools::test(pkg = pkg, ...)
   )
+
+  invisible()
 }
 
 
