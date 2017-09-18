@@ -10,3 +10,4 @@ rpubs
 testdata
 *.rds
 *.directory
+R/testthis-testers.R
