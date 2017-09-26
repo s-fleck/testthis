@@ -8,8 +8,8 @@
 #' Possible tags:
 #'
 #' testfile *path_to_file* ... Put this in a file to manually set
-#' the name of an associated test file (relevant for \code{test_this},
-#' \code{open_tests}, etc...)
+#' the name of an associated test file (relevant for `test_this()`,
+#' `open_testfile()`, etc...)
 #'
 #' testing *function_name* ... put this in a testfile to mark the current file
 #' includes tests for a function

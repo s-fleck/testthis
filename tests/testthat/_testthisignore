@@ -1,6 +1,6 @@
 get_test_coverage
 lest_this
-open_tests
+open_testfile
 test_acceptance
 test_integration
 test_manual

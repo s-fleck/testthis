@@ -7,21 +7,21 @@ Testthis provides tools to make unit testing in R more comfortable. It is design
 Rstudio addins
 --------------
 
-Provides Rstudio addins for common tasks, that can also be assigned to hotkeys. I recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp` to the following functions[1]:
+Provides Rstudio addins for common tasks, that can also be assigned to hotkeys. I recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp` to the following functions (under *Tools/Modify Keyboard Shortcuts*):
 
--   `test_this()`: Tests the currently open file.
--   `lest_this()`: "Load and test"; first calls `devtools::load_all()`, and then test the currently open file
--   `open_tests()`: Opens the associated testfile in an editor window. If the currently open file already is a testfile, it opens the associated file in the `/R` directory.
+-   `test_this()`: Run tests associated with the currently open R script file.
+-   `lest_this()`: "Load and test"; As above, but call `devtools::load_all()` first
+-   `open_testfile()`: Opens the associated testfile in an editor window. If the currently open file already is a testfile, it opens the associated file in the `/R` directory. Can be used to jump back and forth between both.
 
-The function above assume that if the current filename is `currentfile.R`, the associated test file is `/tests/testthat/test_currentfile.R`. If you want to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere in your code, usually the top or bottom of your .R file.
+The functions above assume that if the current filename is `currentfile.R`, the associated test file is `/tests/testthat/test_currentfile.R`. If you want to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere in your code, usually the top or bottom of your .R file. Each R script can only have a single associated testfile.
 
-The following example will associate the file `/tests/testthat/other_test_file.R` instead of `/tests/testthat/test_open_tests.R` with `R/open_tests`:
+The following example will associate the file `/tests/testthat/other_test_file.R` instead of `/tests/testthat/test_open_testfile.R` with `R/open_testfile`:
 
 ``` r
-# file R/open_tests.R
+# file R/open_testfile.R
 #* @testfile other_testfile
 
-open_tests <- function(){
+open_testfile <- function(){
   fname <- get_testfile_name()
 
   if(file.exists(fname)){
@@ -79,7 +79,7 @@ get_test_coverage(pkg = system.file(package = 'testthis'))
 #>  exported functions ....................                    
 #>  - get_test_coverage
 #>  - lest_this        
-#>  - open_tests       
+#>  - open_testfile    
 #>    read_testdata    
 #>  - test_acceptance  
 #>  - test_integration 
@@ -138,11 +138,11 @@ get_test_coverage(pkg = system.file(package = 'testthis'))
 Testthis Tags
 -------------
 
-Test\_this tags are special comments that modify the behavious of the functions supplied by this package. They are of the Form `#* @tag <value>`. Please not that only some test\_this tags really require a `<value>`. The tag system should be considered to be in an alpha-state.
+Test\_this tags are special comments that modify the behavious of the functions supplied by this package. They are of the Form `#* @tag <value>`. Please not that only some test\_this tags really require a `<value>`. The tag system should be considered to be in a beta-state.
 
 ### `pkg/R/*.R`
 
--   `@testfile <filename>`: manually specifiy associated test file. Should usually start with `test_`. This is used by `test_this()`, `lest_this()` and `open_tests()`.
+-   `@testfile <filename>`: manually specifiy associated test file. Should usually start with `test_`. This is used by `test_this()`, `lest_this()` and `open_testfile()`.
 
 ### `pkg/tests/testthat/test_*.R`
 
@@ -157,5 +157,3 @@ Package options
 You can set the following global options using `options()`:
 
 -   `testthis.sep`: Default separator to use when creating test files with `test_skeleton()`. Defaults to `_`, must be either `_` or `-`. I.e whether you want your files to be named `test_foofunction.R` or `test-foofunction.R`
-
-[1] you can do so under *Tools/Modify Keyboard Shortcuts*
