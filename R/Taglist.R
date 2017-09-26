@@ -15,6 +15,7 @@
 #' includes tests for a function
 #'
 #' @param dat a list
+#' @noRd
 #'
 taglist <- function(dat){
   class(dat) <- c('Taglist', 'list')
@@ -101,6 +102,7 @@ detect_testthis_comments <- function(x){
 #' testthis tokenizer
 #'
 #' @param x a scalar character containing testthis tags
+#' @noRd
 #'
 testthis_tokenizer <- function(x){
   assert_that(is.scalar(x))

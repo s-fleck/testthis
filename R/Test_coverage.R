@@ -166,9 +166,10 @@ print.Test_coverage <- function(x, ...){
 
 #' Get functions defined in target package
 #'
-#' Helper functions internally by used internaly by [get_test_coverage()].
+#' Helper functions internally by used internally by [get_test_coverage()].
 #'
 #' @inheritParams get_test_coverage
+#' @noRd
 #' @return `get_pkg_functions()` returns a character vector of *all* functions
 #'   defined in `pkg`.
 #'
@@ -188,7 +189,7 @@ get_pkg_functions <- function(pkg = '.'){
 #' @rdname get_pkg_functions
 #' @return `get_pkg_exports()` returns a character vector of functions *exported*
 #'   from `pkg`s NAMESPACE.
-#'
+#' @noRd
 get_pkg_exports <- function(pkg = '.'){
   pkg %>%
     devtools::as.package() %>%
@@ -202,7 +203,7 @@ get_pkg_exports <- function(pkg = '.'){
 #' @rdname get_pkg_functions
 #' @return `get_pkg_S3methods()` returns a character vector of all *S3 methods*
 #'   exported from `pkg`s NAMESPACE.
-#'
+#' @noRd
 get_pkg_S3methods <- function(pkg = '.'){
   dd <- pkg %>%
     devtools::as.package() %>%
@@ -218,7 +219,7 @@ get_pkg_S3methods <- function(pkg = '.'){
 #' @rdname get_pkg_functions
 #' @return  `get_pkg_tested_functions()` returns a character vector of all
 #'   *functions for which unit tests exist*.
-#'
+#' @noRd
 get_pkg_tested_functions <- function(pkg, from_tags, from_desc){
   res <- vector()
 
@@ -239,7 +240,7 @@ get_pkg_tested_functions <- function(pkg, from_tags, from_desc){
 #' @rdname get_pkg_functions
 #' @return `get_pkg_testignore()` returns a character vector of all
 #'   functions listed in \file{tests/testthat/_testthisignore}.
-#'
+#' @noRd
 get_pkg_testignore <- function(pkg){
   pkg <- devtools::as.package(pkg)
   tfile <- file.path(pkg$path, 'tests', 'testthat', '_testthisignore')
@@ -294,6 +295,7 @@ get_pkg_tested_functions_from_desc <- function(pkg){
 #' @param infile character. Path to an .R script file, or a list of such paths;
 #' usually created with list.files("/path/to/directory")
 #' @return content of the 'desc' arguments of test_that functions
+#' @noRd
 extract_test_that_desc <- function(infile){
   exps  <- unlist(lapply(infile, parse))
   exps  <- exps[grep('test_that', as.list(exps))]

@@ -17,6 +17,7 @@ is_testfiles <- function(x){
 #' @param x a file path
 #'
 #' @return logical
+#' @noRd
 #'
 is_in_rdir <- function(x) {
   pat <- file.path('/R', basename(x))
@@ -72,4 +73,15 @@ get_testfile_name_from_tag <- function(infile){
     tfile = paste0(res, '.R'),
     stringsAsFactors = FALSE
   )
+}
+
+
+
+
+build_site_testthis <- function(){
+  file.rename("README.md", "README.mdtmp")
+  on.exit(file.rename("README.mdtmp", "README.md"))
+  file.rename("README.Rmd", "README.Rmdtmp")
+  on.exit(file.rename("README.Rmdtmp", "README.Rmd"), add = TRUE)
+  pkgdown::build_site()
 }

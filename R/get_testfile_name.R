@@ -14,6 +14,7 @@
 #'
 #' * Is a test file (i.e. its name starts with `test_` or
 #'   `test-`): the path to the currently open file.
+#' @noRd
 #'
 get_testfile_name <- function(sep = options('testthis.sep')){
 

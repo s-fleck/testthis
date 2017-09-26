@@ -7,3 +7,4 @@
   does no longer automatically create test files.
 * testthis now depends on the new usethis package that replaces some of the
   functionality from devtools
+* Prevent creation of .rd files for unexported functions with @noRd
