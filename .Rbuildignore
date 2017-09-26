@@ -6,3 +6,4 @@
 ^man-roxygen$
 ^R/testthis-testers\.R$
 ^cran-comments\.md$
+^docs$
