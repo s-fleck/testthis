@@ -19,7 +19,7 @@ It furhter provides functions for managing subdirectories of the `tests/testthat
 -   `read_testdata()` is a simple wrapper for `readRDS()` to read files in `tests/testhat/testdata`.
 -   `use_test_subdir()` and `test_subdir()` for putting/running tests in subdirectories of `tests/testhat/`. These tests will *not* be run on CRAN or by `devtools::test()`.
 
-Testthis also provides the experimental feature `get_test_coverage()`. This displays the test coverage of a package, but in contrast the [covr](https://github.com/r-lib/covr) the test coverage is not calculated automatically. To work, `get_test_coverage()` requires you to put special comment tags in your test-source files. Please see the package vignette for examples.
+Testthis also provides the experimental feature `get_test_coverage()`. In contrast to the popular [covr](https://github.com/r-lib/covr) package, this does *not* calculate the coverage automatically. It rather requires you to put special comment tags in your test-source files. You can use it like a todo/checklist.
 
 Installation
 ------------
@@ -29,3 +29,8 @@ testthis is CRAN-ready, but not yet on CRAN. This is beause it depends on the r-
     # install.packages("devtools")
     devtools::install_github("r-lib/usethis")
     devtools::install_github("s-fleck/testthis")
+
+Usage
+-----
+
+For a detailed overview of all testthis features with usage examples please refer to the package [vignette](http://rpubs.com/hoelk/testthis).
