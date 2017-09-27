@@ -1,3 +1,9 @@
+# testthis 1.0.0.9000
+
+* Reorganized package documentation (README, vignette, `?testthis`)
+
+
+
 # testthis 1.0.0
 
 * Reworked an expanded infrastructure functions, such as `use_testdata()` and

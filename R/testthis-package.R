@@ -1,19 +1,28 @@
 #' Testthis-package
 #'
+#' Rstudio addins for several common testing-related tasks during package
+#' development, such as switching between a source file and an associated test
+#' file, or running unit tests in a single test file (hotkeyable!).
+#' testthis also provides utility function to manage tests in subdirectories of
+#' the test/testthis directory.
+#'
+#' For details please refer to `vignette("testthis")`
+#'
 #' @name testthis
 #' @import assertthat
 #' @importFrom magrittr %>%
 #'
-#' @section Introduction:
+#' @section Package options:
 #'
-#'   Testthis provides several tools to make unit testing in R slightly more
-#'   comfortable. It is designed to be used in conjunction with the packages
-#'   \pkg{testthat}, \pkg{usethis} packages and \pkg{devtools}.
-#'
-#'   For more info please refer to the package vignette via `vignette("testthis")`
+#' \describe{
+#' \item{`testthis.sep`}{Default separator to use when creating test files with
+#'   `test_skeleton()`. Defaults to `_`, must be either `_` or `-`; i.e whether
+#'   you want your files to be named `test_foofunction.R` or `test-foofunction.R`}
+#' }
 #'
 #' @docType package
 "_PACKAGE"
+
 
 
 

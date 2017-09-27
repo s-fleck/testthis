@@ -24,7 +24,7 @@ library(rstudioapi)
 ## Overview
 
 Testthis provides tools to make unit testing in R more comfortable. It is 
-designed to complement the packages `testthat`, `devtools` and `usethis`. 
+designed to complement the packages **testthat**, **devtools** and **usethis**. 
 
 
 
@@ -40,6 +40,8 @@ to the following functions (under *Tools/Modify Keyboard Shortcuts*):
 * `open_testfile()`: Opens the associated testfile in an editor window. If the 
   currently open file already is a testfile, it opens the associated file in
   the `/R` directory. Can be used to jump back and forth between both.
+* `test_with_skip()`: Like `devtools::test()`, but does not run test files that
+  contain the line `#' @skip.`
 
 The functions above assume that if the current filename is `currentfile.R`,
 the associated test file is `/tests/testthat/test_currentfile.R`. If you want
@@ -105,6 +107,8 @@ testthis provides helpers do deal with files in subdirectories of
   (optionally) an R script in `/R` that contains a helper function to run all 
   tests in that subdir. By default, said .R script will be added to your 
   packages `.Rbuildignore` as it is only useful during package development.
+  Tests in subdirectories of a packages test dir will *not* be run on CRAN
+  on CRAN or by `devtools::test()`.
 * You can also just manually use `test_subdir("mysubdir")` to run tests in a
   subdir of `tests/testthat`.
 * `test_acceptance()`, `test_manual()` and
@@ -170,15 +174,3 @@ be considered to be in a beta-state.
   directly below the `context()` call.
 
 also look at `/test/testthat/test_Taglist.R` for examples.
-
-
-
-
-Package options
----------------
-
-You can set the following global options using `options()`:
-
-* `testthis.sep`: Default separator to use when creating test files with 
-  `test_skeleton()`. Defaults to `_`, must be either `_` or `-`. I.e whether
-  you want your files to be named `test_foofunction.R` or `test-foofunction.R`
