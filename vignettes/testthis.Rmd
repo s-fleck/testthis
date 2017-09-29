@@ -90,6 +90,16 @@ files a bit easier:
   in `tests/testhat/testdata`. 
 
 
+```{r, eval = FALSE}
+use_testdata(iris)
+## Saving to 
+## * r/testthis/tests/testthat/testdata/iris.rds
+
+tdat <- read_testdata("iris.rds")
+
+use_testdata_raw()
+## ✔ Creating 'tests/testthat/testdata-raw/'
+```
  
 
 ## Managing test subdirectories
@@ -116,6 +126,15 @@ testthis provides helpers do deal with files in subdirectories of
   `integration_tests`, `acceptance_tests` and `manual_tests` subdirectories of
   `test/testthat`.
 
+
+```{r, eval = FALSE}
+use_test_subdir("foobar_tests")
+## ✔ Creating 'tests/testthat/foobar_tests/'
+## creating tester function test_foobar_tests() in r/testthis/R/testthis-testers.R
+
+test_subdir("foobar_tests")
+## No tests: no files in r/testthis/tests/testthat/foobar_tests match '^test.*\.[rR]$'
+```
 
 
 

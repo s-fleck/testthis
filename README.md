@@ -33,4 +33,21 @@ testthis is CRAN-ready, but not yet on CRAN. This is beause it depends on the r-
 Usage
 -----
 
+
+    library(testthis)
+
+    open_testfile()  # can be assigned to a hotkey
+    ## The file `tests/testthat/test_README.Rmd` does not exist. 
+    ## You can create it with testthis::test_skeleton().
+
+    test_skeleton()
+    ## * Creating `tests/testthat/test_myscript.R`
+
+    open_testfile()
+    ## > Opens `tests/testthat/test_myscript.R` (in RStudio)
+
+    test_this()  # can be assigned to a hotkey
+    ## > Runs tests in `tests/testthat/test_myscript.R` (in RStudio,)
+    ## > works from the original .R file as well as from the file containing the tests
+
 For a detailed overview of all testthis features with usage examples please refer to the package [vignette](http://rpubs.com/hoelk/testthis).
