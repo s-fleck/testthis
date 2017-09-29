@@ -140,8 +140,8 @@ test_subdir("foobar_tests")
 
 ## Test coverage checklist
 
-**This is an experimental feature, comments and feature request are welcome**
-Testthis now provides a checklist like test coverage analyser. This is 
+**This is an experimental feature, comments and feature request are welcome**.
+Testthis provides a checklist like test coverage analyser. This is 
 non-automatic and requires you to manually mark functions as tested in your 
 code via special comments. If you look for automatic test coverage analysis, 
 you might want to check out the `covr` package instead.
@@ -178,13 +178,13 @@ supplied by this package. They are of the Form `#* @tag <value>`. Please not
 that only some test_this tags really require a `<value>`. The tag system should
 be considered to be in a beta-state.
 
-### `pkg/R/*.R`
+**Valid tags for script files in the /R/ dir (`pkg/R/*.R`)**
 
 * `@testfile <filename>`: manually specifiy associated test file. Should 
   usually start with `test_`. This is used by `test_this()`, `lest_this()` and
   `open_testfile()`.
 
-### `pkg/tests/testthat/test_*.R`
+**Valid tags or test files (`pkg/tests/testthat/test_*.R`)**
 
 * `@testing <functionname>`:  mark `functionname` as tested.
   Should usually go next the associated `test_that()` call. This is used by
