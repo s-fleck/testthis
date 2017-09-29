@@ -5,7 +5,7 @@
 #'
 #' @param x a character vector of ignores (function names).
 #'
-#' @return
+#' @return `TRUE` (invisibly).
 #' @export
 #' @family infrastructure
 #'
@@ -19,11 +19,12 @@ use_testignore <- function(x, base_path = "."){
   testignore <- "tests/testthat/_testignore"
   testignore <- file.path(devtools::as.package(base_path)$path, testignore)
 
-  cat(sprintf("Adding '%s' to '%s'", x, testignore))
+  message(sprintf("Adding '%s' to '%s'", x, testignore))
   if(file.exists(testignore)){
     existing_ignores <- readLines(testignore)
     x <- union(existing_ignores, x)
   }
 
   writeLines(x, testignore)
+  invisible()
 }
