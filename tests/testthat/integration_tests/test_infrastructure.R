@@ -11,7 +11,7 @@ test_that("use_tester works as expected", {
 
   # Check if tester file is created at the correct path and not empty
   expect_message(expect_true(
-    use_tester("footests", base_path = tpkg)),
+    use_tester("footests", base_path = tpkg, ignore = FALSE)),
     "creating tester function test_footests()"
   )
 
@@ -40,7 +40,7 @@ test_that("use_test_subdir works as expected", {
   # Check if tester file is created at the correct path and not empty
   expect_output(
   expect_message(expect_true(
-    use_test_subdir("footests", base_path = tpkg)),
+    use_test_subdir("footests", base_path = tpkg, ignore_tester = FALSE)),
     "creating tester function test_footests()"
   ),
     "Creating"

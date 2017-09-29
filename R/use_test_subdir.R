@@ -20,6 +20,7 @@
 #'   for running the tests in `path`. The file will be named
 #'   \file{testthis-testers.R}, but you can specify  your own name by
 #'   passing a character scalar to make_tester. See [use_tester()] for details.
+#' @param ignore_tester Logical. Add \file{tester} file to \file{.Rbuildignore}?
 #' @template base_path
 #' @family infrastructure
 #'
@@ -39,7 +40,8 @@
 use_test_subdir <- function(
   path,
   make_tester = TRUE,
-  base_path = "."
+  base_path = ".",
+  ignore_tester = TRUE
 ){
   # Preconditions
   assert_that(is.scalar(path) && is.character(path))
@@ -60,9 +62,9 @@ use_test_subdir <- function(
   )
 
   if (is.character(make_tester)) {
-    use_tester(path, tester_path = make_tester, base_path = base_path, ignore = TRUE)
+    use_tester(path, tester_path = make_tester, base_path = base_path, ignore = ignore_tester)
   } else if (make_tester) {
-    use_tester(path, base_path = base_path)
+    use_tester(path, base_path = base_path, ignore = ignore_tester)
   }
 
 
