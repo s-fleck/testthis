@@ -23,7 +23,7 @@
 #'   * exp: Is function is exported?
 #'   * s3: Is function an S3 method?
 #'   * tested: Do unit tests exist for function?
-#'   * ignore: Is function listed in \file{tests/testthat/_testthisignore}?
+#'   * ignore: Is function listed in \file{tests/testthat/_testignore}?
 #'
 #' @export
 #' @examples
@@ -239,11 +239,11 @@ get_pkg_tested_functions <- function(pkg, from_tags, from_desc){
 
 #' @rdname get_pkg_functions
 #' @return `get_pkg_testignore()` returns a character vector of all
-#'   functions listed in \file{tests/testthat/_testthisignore}.
+#'   functions listed in \file{tests/testthat/_testignore}.
 #' @noRd
 get_pkg_testignore <- function(pkg){
   pkg <- devtools::as.package(pkg)
-  tfile <- file.path(pkg$path, 'tests', 'testthat', '_testthisignore')
+  tfile <- file.path(pkg$path, 'tests', 'testthat', '_testignore')
 
   if (file.exists(tfile)){
     return(readLines(tfile))

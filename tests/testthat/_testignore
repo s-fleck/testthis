@@ -7,3 +7,5 @@ test_manual
 test_subdir
 test_this
 test_with_skip
+use_testignore
+blubb

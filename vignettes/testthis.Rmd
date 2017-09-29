@@ -148,7 +148,12 @@ you might want to check out the `covr` package instead.
 
 For testthis to recognize wheter a unit test exists for a function, the function
 name must either be mention in a `testthat()` `desc` argument, or marked via
-special comment tag: `#* @testing functionname`. The following example will mark
+special comment tag: `#* @testing functionname`. If you want to mark a function
+as not requiring testing, you can add the function name to the file
+`/tests/testthat/_testignore` manually, or with `use_testignore()`.
+
+
+The following example will mark
 the functions `parse_testthis_comments` and `detect_testthis_comments` as 
 tested:
 
