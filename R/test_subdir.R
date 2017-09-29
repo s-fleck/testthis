@@ -24,6 +24,7 @@
 #' `testthat/manual_tests`
 #'
 #' @inheritParams devtools::test
+#' @template base_path
 #' @param subdir subdir of `inst/tests/` or `tests/testthat` that contains the
 #'   tests
 #' @param ... passed on to `devtools::test()`

@@ -6,6 +6,7 @@
 #' See the devtools documentation for further info or
 #' `vignette("testthis")` for infos on testthis tags.
 #'
+#' @template base_path
 #' @inheritParams devtools::test
 #'
 #' @export

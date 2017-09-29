@@ -4,6 +4,7 @@
 #' (for [get_test_coverage()])
 #'
 #' @param x a character vector of ignores (function names).
+#' @template base_path
 #'
 #' @return `TRUE` (invisibly).
 #' @export
