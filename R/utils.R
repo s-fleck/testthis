@@ -74,14 +74,3 @@ get_testfile_name_from_tag <- function(infile){
     stringsAsFactors = FALSE
   )
 }
-
-
-
-
-build_site_testthis <- function(){
-  file.rename("README.md", "README.mdtmp")
-  on.exit(file.rename("README.mdtmp", "README.md"))
-  file.rename("README.Rmd", "README.Rmdtmp")
-  on.exit(file.rename("README.Rmdtmp", "README.Rmd"), add = TRUE)
-  pkgdown::build_site()
-}
