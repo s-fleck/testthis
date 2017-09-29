@@ -170,7 +170,7 @@ The test_coverage summary for a package may look like this (+ marks function for
 which tests exist):
 
 ```{r}
-get_test_coverage(pkg = system.file(package = 'testthis'))
+get_test_coverage(base_path = system.file(package = 'testthis'))
 ```
 
 
