@@ -1,6 +1,8 @@
 # testthis 1.0.0.9000
 
 * Reorganized package documentation (README, vignette, `?testthis`)
+* all `pkg =` function arguments have been changed to `base_path =` for
+  consistency with the **usethis** package.
 
 
 
