@@ -96,7 +96,7 @@ use_testdata <- function(
 #' @export
 #' @family infrastructure
 use_testdata_raw <- function(pkg = "."){
-  base_path <- as.package(pkg)$path
+  base_path <- devtools::as.package(pkg)$path
   usethis::use_directory(
     file.path("tests", "testthat", "testdata-raw"),
     ignore = FALSE,
