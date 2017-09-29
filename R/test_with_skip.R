@@ -9,9 +9,9 @@
 #' @inheritParams devtools::test
 #'
 #' @export
-test_with_skip <- function(pkg = '.', ...){
+test_with_skip <- function(base_path = '.', ...){
   fltr <- list_test_files(
-    pkg,
+    base_path,
     full_names = FALSE,
     skip = TRUE
   )

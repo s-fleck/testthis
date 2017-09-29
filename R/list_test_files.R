@@ -1,10 +1,10 @@
 list_test_files <- function(
-  pkg,
+  base_path,
   full_names = TRUE,
   skip = FALSE
 ){
-  pkg     <- devtools::as.package(pkg)
-  tpath   <- file.path(pkg$path, 'tests', 'testthat')
+  base_path     <- devtools::as.package(base_path)
+  tpath   <- file.path(base_path$path, 'tests', 'testthat')
   res     <- list.files(
     tpath,
     full.names = TRUE
@@ -27,12 +27,12 @@ list_test_files <- function(
 
 
 list_rdir_files <- function(
-  pkg,
+  base_path,
   full_names = TRUE,
   skip = FALSE
 ){
-  pkg     <- devtools::as.package(pkg)
-  tpath   <- file.path(pkg$path, 'R')
+  base_path     <- devtools::as.package(base_path)
+  tpath   <- file.path(base_path$path, 'R')
   list.files(
     tpath,
     full.names = full_names

@@ -16,13 +16,13 @@ test_that("use_testdata creates testdata dir", {
   # Check creation of testdata dir
   expect_output(
     expect_message(
-      use_testdata(iris, pkg = tpkg),
+      use_testdata(iris, base_path = tpkg),
       "You can save data files for tests via"
     ),
     "Creating"
   )
     expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
-    expect_true(has_testdata(pkg = tpkg))
+    expect_true(has_testdata(base_path = tpkg))
 
     # Cleanup
     unlink(
@@ -35,7 +35,7 @@ test_that("use_testdata creates testdata dir", {
   # Check creation of testdata dfiles
     expect_output(
       expect_message(
-        use_testdata(iris, pkg = tpkg),
+        use_testdata(iris, base_path = tpkg),
         "You can save data files for tests via"
       ),
         "Creating"
@@ -43,7 +43,7 @@ test_that("use_testdata creates testdata dir", {
 
     expect_output(
       expect_message(
-        use_testdata(iris, subdir = "iris", pkg = tpkg),
+        use_testdata(iris, subdir = "iris", base_path = tpkg),
         "You can save data files for tests via"
       ),
         "Creating"

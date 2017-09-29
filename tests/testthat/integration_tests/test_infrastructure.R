@@ -11,9 +11,10 @@ test_that("use_tester works as expected", {
 
   # Check if tester file is created at the correct path and not empty
   expect_message(expect_true(
-    use_tester("footests", pkg = tpkg)),
+    use_tester("footests", base_path = tpkg)),
     "creating tester function test_footests()"
   )
+
   efile <- file.path(tpkg, "R", "testthis-testers.R")
 
   expect_true(file.exists(efile))
@@ -37,10 +38,14 @@ test_that("use_test_subdir works as expected", {
   tpkg <- rprojroot::find_testthat_root_file("testdata", "test_pkg")
 
   # Check if tester file is created at the correct path and not empty
+  expect_output(
   expect_message(expect_true(
-    use_test_subdir("footests", pkg = tpkg)),
+    use_test_subdir("footests", base_path = tpkg)),
     "creating tester function test_footests()"
+  ),
+    "Creating"
   )
+
   edir  <- file.path(tpkg, "tests", "testthat", "footests")
   efile <- file.path(tpkg, "R", "testthis-testers.R")
 

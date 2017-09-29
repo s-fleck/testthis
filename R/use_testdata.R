@@ -10,11 +10,11 @@
 #' @inheritParams base::readRDS
 #' @template overwrite
 #' @inheritParams usethis::use_directory
-#' @template pkg
+#' @template base_path
 #' @return `use_testdata()` returns `TRUE` if object was successfully saved.
 #'
 #' @section Side effects:
-#'   `use_testdata()` saves an R object to a \file{testdata} dir in `pkg`.
+#'   `use_testdata()` saves an R object to a \file{testdata} dir in `base_path`.
 #'
 #' @export
 #' @family infrastructure
@@ -29,16 +29,16 @@ use_testdata <- function(
   overwrite = FALSE,
   ignore = FALSE,
   compress = TRUE,
-  pkg = '.'
+  base_path = '.'
 ){
   # Preconditions
   assert_that(is.flag(overwrite))
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
-  assert_that(is.scalar(pkg) && is.character(pkg))
+  assert_that(is.scalar(base_path) && is.character(base_path))
 
 
   # Find and prepare test_data directory
-  base_path <- devtools::as.package(pkg)$path
+  base_path <- devtools::as.package(base_path)$path
   tdata_dir <- file.path("tests", "testthat", "testdata")
   if(!is.null(subdir)){
     tdata_dir <- file.path(tdata_dir, subdir)
@@ -91,12 +91,12 @@ use_testdata <- function(
 #'
 #' A folder to put scripts in that produce the files in \file{testdata}
 #'
-#' @template pkg
+#' @template base_path
 #'
 #' @export
 #' @family infrastructure
-use_testdata_raw <- function(pkg = "."){
-  base_path <- devtools::as.package(pkg)$path
+use_testdata_raw <- function(base_path = "."){
+  base_path <- devtools::as.package(base_path)$path
   usethis::use_directory(
     file.path("tests", "testthat", "testdata-raw"),
     ignore = FALSE,
@@ -110,12 +110,12 @@ use_testdata_raw <- function(pkg = "."){
 
 #' @rdname use_testdata
 #'
-#' @return `has_testdata()` returns `TRUE` if `pkg` has a
+#' @return `has_testdata()` returns `TRUE` if `base_path` has a
 #' \file{tests/testthat/testdata} folder.
 #'
-has_testdata <- function(pkg = '.'){
+has_testdata <- function(base_path = '.'){
   dir.exists(file.path(
-    devtools::as.package(pkg)$path, "tests", "testthat", "testdata"
+    devtools::as.package(base_path)$path, "tests", "testthat", "testdata"
   ))
 }
 
@@ -128,15 +128,15 @@ has_testdata <- function(pkg = '.'){
 #'
 #' @return `read_testdata()` returns a single \R object
 #' @export
-read_testdata <- function(infile, subdir = NULL, pkg = '.'){
+read_testdata <- function(infile, subdir = NULL, base_path = '.'){
   # Preconditions
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
-  assert_that(is.scalar(pkg) && is.character(pkg))
+  assert_that(is.scalar(base_path) && is.character(base_path))
 
 
   # Find test_data dir
-  pkg       <- devtools::as.package(pkg)
-  pkg_dir   <- base::system.file(package = pkg$package)
+  base_path       <- devtools::as.package(base_path)
+  pkg_dir   <- base::system.file(package = base_path$package)
   cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'testdata')
 
   if(!is.null(subdir)){

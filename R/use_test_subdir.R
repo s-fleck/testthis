@@ -16,11 +16,11 @@
 #'   make a syntactically valid name.
 #' @param make_tester Logical or character scalar. Create an R script with a
 #'   test helper function. If `TRUE` an R script file will be placed into the
-#'   \file{R/} directory of \file{pkg}, containing a function definition
+#'   \file{R/} directory of \file{base_path}, containing a function definition
 #'   for running the tests in `path`. The file will be named
 #'   \file{testthis-testers.R}, but you can specify  your own name by
 #'   passing a character scalar to make_tester. See [use_tester()] for details.
-#' @template pkg
+#' @template base_path
 #' @family infrastructure
 #'
 #' @return `TRUE` on success (invisibly).
@@ -39,7 +39,7 @@
 use_test_subdir <- function(
   path,
   make_tester = TRUE,
-  pkg = "."
+  base_path = "."
 ){
   # Preconditions
   assert_that(is.scalar(path) && is.character(path))
@@ -49,7 +49,7 @@ use_test_subdir <- function(
 
   # Process arguments
   path <- make.names(path)
-  base_path <- devtools::as.package(pkg)$path
+  base_path <- devtools::as.package(base_path)$path
 
 
   # Logic
@@ -60,9 +60,9 @@ use_test_subdir <- function(
   )
 
   if (is.character(make_tester)) {
-    use_tester(path, tester_path = make_tester, pkg = pkg, ignore = TRUE)
+    use_tester(path, tester_path = make_tester, base_path = base_path, ignore = TRUE)
   } else if (make_tester) {
-    use_tester(path, pkg = pkg)
+    use_tester(path, base_path = base_path)
   }
 
 
@@ -82,7 +82,7 @@ use_test_subdir <- function(
 #'   to create a tester function.
 #' @param ignore Logical. Add `tester_path` to \file{.Rbuildignore}?
 #' @param tester_path \R script file in which to store the tester functions
-#' @template pkg
+#' @template base_path
 #'
 #' @return `TRUE` on success (invisibly).
 #' @export
@@ -92,9 +92,9 @@ use_tester <- function(
   path,
   ignore = TRUE,
   tester_path = file.path("R", "testthis-testers.R"),
-  pkg = "."
+  base_path = "."
 ){
-  fname   <- file.path(devtools::as.package(pkg)$path, tester_path)
+  fname   <- file.path(devtools::as.package(base_path)$path, tester_path)
   funname <- paste0("test_", path)
 
   message(sprintf("creating tester function %s() in %s", funname, fname))
@@ -120,11 +120,11 @@ use_tester <- function(
 
 
 #' @rdname use_test_subdir
-use_integration_tests <- function(pkg = "."){
+use_integration_tests <- function(base_path = "."){
   use_test_subdir(
     options('testthis.integration_tests_path'),
     make_tester = FALSE,
-    pkg = pkg
+    base_path = base_path
   )
 }
 
@@ -132,10 +132,10 @@ use_integration_tests <- function(pkg = "."){
 
 
 #' @rdname use_test_subdir
-use_acceptance_tests <- function(pkg = "."){
+use_acceptance_tests <- function(base_path = "."){
   use_test_subdir(
     options('testthis.acceptance_tests_path'),
     make_tester = FALSE,
-    pkg = pkg
+    base_path = base_path
   )
 }

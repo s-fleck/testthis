@@ -31,7 +31,7 @@
 #' @return `NULL` (invisibly)
 #'
 #' @export
-test_subdir <- function(subdir, pkg = '.', ...){
+test_subdir <- function(subdir, base_path = '.', ...){
 
   find_test_dir_mock <- function (path)
   {
@@ -50,7 +50,7 @@ test_subdir <- function(subdir, pkg = '.', ...){
 
   testthat::with_mock(
     `devtools:::find_test_dir` = find_test_dir_mock,
-    devtools::test(pkg = pkg, ...)
+    devtools::test(pkg = base_path, ...)
   )
 
   invisible()
@@ -61,10 +61,10 @@ test_subdir <- function(subdir, pkg = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_integration <- function(pkg = '.', ...){
+test_integration <- function(base_path = '.', ...){
   test_subdir(
     subdir = options('testthis.integration_tests_path'),
-    pkg = pkg,
+    base_path = base_path,
     ...)
 }
 
@@ -73,10 +73,10 @@ test_integration <- function(pkg = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_acceptance <- function(pkg = '.', ...){
+test_acceptance <- function(base_path = '.', ...){
   test_subdir(
     subdir = options('testthis.acceptance_tests_path'),
-    pkg = pkg,
+    base_path = base_path,
     ...)
 }
 
@@ -85,9 +85,9 @@ test_acceptance <- function(pkg = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_manual <- function(pkg = '.', ...){
+test_manual <- function(base_path = '.', ...){
   test_subdir(
     subdir = options('testthis.manual_tests_path'),
-    pkg = pkg,
+    base_path = base_path,
     ...)
 }

@@ -12,7 +12,7 @@ test_that('get_pkg_tested_functions_from_desc works', {
     list.files                    = function(...) {
       file.path(rprojroot::find_testthat_root_file('testdata', 'testthat_parse_cases.R'))
     },
-    get_pkg_tested_functions_from_desc(pkg = '.')
+    get_pkg_tested_functions_from_desc(base_path = '.')
   )
 
   expect_identical(tres, tfuns[1:4])
