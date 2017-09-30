@@ -7,3 +7,4 @@
 ^R/testthis-testers\.R$
 ^cran-comments\.md$
 ^docs$
+.*rsconnect.*
