@@ -30,16 +30,13 @@ use_testignore <- function(
 
   # Logic
     if(file.exists(testignore)){
-      x_frmt <- paste(sprintf("'%s'", x), collapse = ", ")
-      message(sprintf(
-        "Adding %s to '%s'",
-        x_frmt,
-        testignore
-      ))
       existing_ignores <- readLines(testignore)
       x <- union(existing_ignores, x)
     }
 
-  writeLines(x, testignore)
+    x_frmt <- paste(sprintf("'%s'", x), collapse = ", ")
+    message(sprintf("Adding %s to '%s'", x_frmt, testignore))
+    writeLines(x, testignore)
+
   invisible()
 }
