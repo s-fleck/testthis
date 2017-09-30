@@ -16,15 +16,29 @@
 #' use_testignore("helperfunction")
 #' }
 #'
-use_testignore <- function(x, base_path = "."){
-  testignore <- "tests/testthat/_testignore"
-  testignore <- file.path(devtools::as.package(base_path)$path, testignore)
+use_testignore <- function(
+  x,
+  base_path = "."
+){
+  # Preconditions
+    assert_that(is.character(x))
+    assert_that(is.character(base_path) && is.scalar(base_path))
 
-  message(sprintf("Adding '%s' to '%s'", x, testignore))
-  if(file.exists(testignore)){
-    existing_ignores <- readLines(testignore)
-    x <- union(existing_ignores, x)
-  }
+  # Process arguments
+    testignore <- "tests/testthat/_testignore"
+    testignore <- file.path(devtools::as.package(base_path)$path, testignore)
+
+  # Logic
+    if(file.exists(testignore)){
+      x_frmt <- paste(sprintf("'%s'", x), collapse = ", ")
+      message(sprintf(
+        "Adding %s to '%s'",
+        x_frmt,
+        testignore
+      ))
+      existing_ignores <- readLines(testignore)
+      x <- union(existing_ignores, x)
+    }
 
   writeLines(x, testignore)
   invisible()
