@@ -14,20 +14,20 @@
 #'   \item{`test_integration()`}{Integration tests, also called component tests.
 #'     Put tests here that test if several functions / parts of your program
 #'     work together as expected. You can create the relevant subdir
-#'     \file{testthat/integration_tests/} with [`use_integration_tests()`].
+#'     \file{testthat/integration_tests/} with `use_integration_tests()`.
 #'
 #'     }
 #'   \item{`test_acceptance()`}{Acceptance tests. This is the highest levels of
 #'     tests. Put tests here that verifies if your package fulfills the
 #'     goals/requirements you set out to achieve with your package were met.
 #'     You can create the relevant subdir \file{testthat/acceptance_tests/}
-#'     with [`use_acceptance_tests()`].
+#'     with `use_acceptance_tests()`.
 #'     }
 #'   \item{`test_manual()`}{Manual tests. Put tests here that produce output
 #'     that has to be manually verified, such as: console output, pdf files,
 #'     plots. It is recommended you collect the output files of such tests in
 #'     \file{tests/testthat/testout}. You can create the relevant subdir
-#'     with \file{testthat/manual_tests/} with [`use_manual_tests()`].}
+#'     with \file{testthat/manual_tests/} with `use_manual_tests()`.}
 #' }
 #'
 #' You can modify the default paths for manual, acceptance and integration tests

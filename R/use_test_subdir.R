@@ -1,16 +1,12 @@
-#' Use test subdir
+#' Use test subdirectories
 #'
 #' Create a subdir in \file{tests/testthat/} and optionally an R script
 #' containing a helper function to run all tests in that subdir. Useful for
 #' separating long-running tests from your unit tests, or storing tests that
-#' you do not want to run on CRAN or during R CMD Check.
+#' you do not want to run on CRAN or during R CMD Check. For running tests in
+#' \file{tests/testthat/} subdirectories see [`test_subdir()`].
 #'
-#' `use_integration_tests()` and `use_acceptance_tests()` are shorthands for
-#' creating the respective test subdirs, for which testthis supplies the
-#' predefined `test_integration()` and `test_acceptance()` functions.
-#' You can modify the default paths for
-#' acceptance and integration tests by setting the respective `options()`, but
-#' it is recommended to create your own test subdirs instead.
+#' @inheritSection test_subdir Test subdirectory presets
 #'
 #' @param path Character scalar. Will be processed with [base::make.names()] to
 #'   make a syntactically valid name.
@@ -22,6 +18,7 @@
 #'   passing a character scalar to make_tester. See [use_tester()] for details.
 #' @param ignore_tester Logical. Add \file{tester} file to \file{.Rbuildignore}?
 #' @template base_path
+#' @seealso [`test_subdir()`]
 #' @family infrastructure
 #'
 #' @return `TRUE` on success (invisibly).
@@ -137,6 +134,18 @@ use_integration_tests <- function(base_path = "."){
 use_acceptance_tests <- function(base_path = "."){
   use_test_subdir(
     options('testthis.acceptance_tests_path'),
+    make_tester = FALSE,
+    base_path = base_path
+  )
+}
+
+
+
+
+#' @rdname use_test_subdir
+use_manual_tests <- function(base_path = "."){
+  use_test_subdir(
+    options('testthis.manual_tests_path'),
     make_tester = FALSE,
     base_path = base_path
   )
