@@ -1,13 +1,15 @@
 list_test_files <- function(
   base_path,
   full_names = TRUE,
-  skip = FALSE
+  skip = FALSE,
+  recursive = TRUE
 ){
   base_path     <- devtools::as.package(base_path)
   tpath   <- file.path(base_path$path, 'tests', 'testthat')
   res     <- list.files(
     tpath,
-    full.names = TRUE
+    full.names = TRUE,
+    recursive = recursive
   )
 
   res <- res[grepl('.*\\.R$', res, ignore.case = TRUE)]
