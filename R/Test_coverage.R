@@ -65,7 +65,6 @@ get_test_coverage <- function(
 
 test_coverage <- function(dat){
   class(dat) <- c('Test_coverage', 'data.frame')
-
   assert_that(is_valid(dat))
   return(dat)
 }
@@ -258,7 +257,6 @@ get_pkg_testignore <- function(base_path){
 get_pkg_tested_functions_from_tags <- function(base_path){
   taglists <- get_test_taglist(base_path)
   res      <- sort(unlist(unique(lapply(taglists, get_tag, 'testing'))))
-
   return(res)
 }
 
