@@ -1,8 +1,9 @@
-# testthis 1.0.0.9000
+# testthis 1.0.1
 
 * Reorganized package documentation (README, vignette, `?testthis`)
 * all `pkg =` function arguments have been changed to `base_path =` for
   consistency with the **usethis** package.
+* `get_test_coverage()` now recognizes tests in test subdirs
 
 
 
