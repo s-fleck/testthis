@@ -118,6 +118,7 @@ use_tester <- function(
 
 
 
+#' @export
 #' @rdname use_test_subdir
 use_integration_tests <- function(base_path = "."){
   use_test_subdir(
@@ -130,6 +131,7 @@ use_integration_tests <- function(base_path = "."){
 
 
 
+#' @export
 #' @rdname use_test_subdir
 use_acceptance_tests <- function(base_path = "."){
   use_test_subdir(
@@ -142,6 +144,7 @@ use_acceptance_tests <- function(base_path = "."){
 
 
 
+#' @export
 #' @rdname use_test_subdir
 use_manual_tests <- function(base_path = "."){
   use_test_subdir(
