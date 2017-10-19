@@ -122,7 +122,7 @@ use_tester <- function(
 #' @rdname use_test_subdir
 use_integration_tests <- function(base_path = "."){
   use_test_subdir(
-    options('testthis.integration_tests_path'),
+    unlist(options('testthis.integration_tests_path')),
     make_tester = FALSE,
     base_path = base_path
   )
@@ -135,7 +135,7 @@ use_integration_tests <- function(base_path = "."){
 #' @rdname use_test_subdir
 use_acceptance_tests <- function(base_path = "."){
   use_test_subdir(
-    options('testthis.acceptance_tests_path'),
+    unlist(options('testthis.acceptance_tests_path')),
     make_tester = FALSE,
     base_path = base_path
   )
@@ -148,7 +148,7 @@ use_acceptance_tests <- function(base_path = "."){
 #' @rdname use_test_subdir
 use_manual_tests <- function(base_path = "."){
   use_test_subdir(
-    options('testthis.manual_tests_path'),
+    unlist(options('testthis.manual_tests_path')),
     make_tester = FALSE,
     base_path = base_path
   )
