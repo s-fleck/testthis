@@ -2,7 +2,7 @@ Package: testthis
 Type: Package
 Title: Utility Functions and Rstudio Addins to Make Using the testthat
   Package Even More Fun
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: 
