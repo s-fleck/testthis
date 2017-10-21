@@ -111,7 +111,7 @@ test_manual <- function(base_path = '.', ...){
 test_all <- function(
   base_path = ".",
   ...,
-  reporter = testthat::MinimalReporter
+  reporter = testthat::ProgressReporter
 ){
   pkg_dir <- devtools::as.package(base_path)$path
 
@@ -124,15 +124,12 @@ test_all <- function(
 
   dirs <- dirs[dirs != "testdata"]
 
-  cat("Running unit tests\n")
-  suppressMessages(
-    devtools::test(pkg = base_path, reporter = reporter)
+  testthat::with_mock(
+    devtools::test(reporter = reporter),
+    `testthat::find_test_scripts` = function (path, filter = NULL, invert = FALSE, ...) {
+      files <- dir(path, "^test.*\\.[rR]$", full.names = TRUE, recursive = TRUE)
+      files <- grep("tests/testthat/testdata", files, value = TRUE, invert = TRUE)
+      testthat:::filter_test_scripts(files, filter, invert, ...)
+    }
   )
-
-  suppressMessages(
-  for(d in dirs) {
-    cat("\nRunning tests in", d, "\n")
-    test_subdir(d, reporter = reporter)
-  })
-
 }
