@@ -21,8 +21,9 @@ test_that("use_testdata creates testdata dir", {
     ),
     "Creating"
   )
-    expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
-    expect_true(has_testdata(base_path = tpkg))
+
+  expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
+  expect_true(has_testdata(base_path = tpkg))
 
     # Cleanup
     unlink(
