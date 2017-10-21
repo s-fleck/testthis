@@ -50,8 +50,13 @@ test_that("use_testdata creates testdata dir", {
         "Creating"
     )
 
-    expect_true(file.exists(file.path(tpkg, "tests/testthat/testdata/iris.rds")))
-    expect_true(file.exists(file.path(tpkg, "tests/testthat/testdata/iris/iris.rds")))
+    expect_true(
+      file.exists(file.path(tpkg, "tests/testthat/testdata/iris.rds"))
+    )
+
+    expect_true(
+      file.exists(file.path(tpkg, "tests/testthat/testdata/iris/iris.rds"))
+    )
 
     # Cleanup
     unlink(
