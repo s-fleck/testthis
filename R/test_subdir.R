@@ -102,3 +102,37 @@ test_manual <- function(base_path = '.', ...){
     base_path = base_path,
     ...)
 }
+
+
+
+#' `test_all()` Runs the tests in \file{tests/testthat} and its (first-level) subdirectories
+#' @rdname test_subdir
+#' @export
+test_all <- function(
+  base_path = ".",
+  ...,
+  reporter = testthat::MinimalReporter
+){
+  pkg_dir <- devtools::as.package(base_path)$path
+
+  dirs    <- basename(
+    list.dirs(
+      file.path(pkg_dir, testthat::test_path()),
+      recursive = FALSE
+    )
+  )
+
+  dirs <- dirs[dirs != "testdata"]
+
+  cat("Running unit tests\n")
+  suppressMessages(
+    devtools::test(pkg = base_path, reporter = reporter)
+  )
+
+  suppressMessages(
+  for(d in dirs) {
+    cat("\nRunning tests in", d, "\n")
+    test_subdir(d, reporter = reporter)
+  })
+
+}

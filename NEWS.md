@@ -1,3 +1,10 @@
+# testthis 1.0.1.9000
+
+* added `test_all()` to run tests in all subdirectories
+
+
+
+
 # testthis 1.0.1
 
 * Reorganized package documentation (README, vignette, `?testthis`)
