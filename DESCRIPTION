@@ -22,7 +22,8 @@ Imports:
   utils,
   stats,
   rprojroot,
-  tools
+  tools,
+  colt
 Suggests:
   knitr,
   rmarkdown,
