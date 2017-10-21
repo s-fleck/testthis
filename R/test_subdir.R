@@ -46,8 +46,7 @@
 #' @export
 test_subdir <- function(subdir, base_path = '.', ...){
 
-  find_test_dir_mock <- function (path)
-  {
+  find_test_dir_mock <- function (path){
     testthat <- file.path(path, "tests", "testthat", subdir)
     if (dir.exists(testthat))
       return(testthat)
@@ -105,7 +104,9 @@ test_manual <- function(base_path = '.', ...){
 
 
 
-#' `test_all()` Runs the tests in \file{tests/testthat} and its (first-level) subdirectories
+
+#' `test_all()` Runs the tests in \file{tests/testthat} and all its
+#'   subdirectories (except \file{testdata} and \file{testdata-raw}).
 #' @rdname test_subdir
 #' @export
 test_all <- function(
@@ -126,10 +127,31 @@ test_all <- function(
 
   testthat::with_mock(
     devtools::test(reporter = reporter),
-    `testthat::find_test_scripts` = function (path, filter = NULL, invert = FALSE, ...) {
-      files <- dir(path, "^test.*\\.[rR]$", full.names = TRUE, recursive = TRUE)
-      files <- grep("tests/testthat/testdata", files, value = TRUE, invert = TRUE)
-      testthat:::filter_test_scripts(files, filter, invert, ...)
-    }
+    `testthat::find_test_scripts` = find_test_scripts_mock
   )
+}
+
+
+
+
+find_test_scripts_mock <- function(
+  path,
+  filter = NULL,
+  invert = FALSE,
+  ...
+){
+  files <- dir(
+    path, "^test.*\\.[rR]$",
+    full.names = TRUE,
+    recursive = TRUE
+  )
+
+  files <- grep(
+    "tests/testthat/test(data/)|(data-raw/)",
+    files,
+    value = TRUE,
+    invert = TRUE
+  )
+
+  testthat:::filter_test_scripts(files, filter, invert, ...)
 }
