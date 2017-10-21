@@ -7,7 +7,6 @@ man
 README.html
 rsconnect
 rpubs
-testdata
 *.rds
 *.directory
 docs

@@ -5,18 +5,16 @@ test_that("list_test_files works as expected", {
   #* @testing list_test_files
   #* @testing skip_test_files
 
-  pkg  <- devtools::as.package(base::system.file(package = 'testthis'))
-  tdir <- file.path(pkg, 'tests', 'testthat', 'test_data')
+  pkg <- devtools::as.package(base::system.file("tests", "testthat", "testdata", "test_pkg", package = 'testthis'))
 
   # List all test files in /test/test_that
     tres <- with_mock(
       `devtools::as.package` = function(...) {pkg},
-      `base::file.path`      = function(...) {tdir},
-      list_test_files('.')
+      list_test_files()
     )
     expect_identical(
       tres,
-      list.files(tdir, full.names = TRUE)
+      list.files(file.path(pkg$path, "tests", "testthat"), full.names = TRUE)
     )
 
 
@@ -24,11 +22,10 @@ test_that("list_test_files works as expected", {
   # testthis tag @skip
   tres <- with_mock(
     `devtools::as.package` = function(...) {pkg},
-    `base::file.path`      = function(...) {tdir},
     list_test_files('.', skip = TRUE)
   )
 
-  eres <- list.files(tdir, full.names = TRUE)
+  eres <- list.files(file.path(pkg$path, "tests", "testthat"), full.names = TRUE)
   eres <- eres[!grepl('testthis_tags.R', eres, fixed = TRUE)]  # file that contains @skip
 
   expect_identical(

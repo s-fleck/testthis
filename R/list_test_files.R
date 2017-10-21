@@ -4,9 +4,9 @@ list_test_files <- function(
   skip = FALSE,
   recursive = TRUE
 ){
-  base_path     <- devtools::as.package(base_path)
-  tpath   <- file.path(base_path$path, 'tests', 'testthat')
-  res     <- list.files(
+  pkg   <- devtools::as.package(base_path)
+  tpath <- file.path(pkg$path, 'tests', 'testthat')
+  res   <- list.files(
     tpath,
     full.names = TRUE,
     recursive = recursive

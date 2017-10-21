@@ -9,8 +9,8 @@ test_that('get_pkg_tested_functions_from_desc works', {
 
   tres <- with_mock(
     `testthis::get_pkg_functions` = function(...) tfuns,
-    list.files                    = function(...) {
-      file.path(rprojroot::find_testthat_root_file('testdata', 'testthat_parse_cases.R'))
+    list_test_files               = function(...) {
+      file.path(rprojroot::find_testthat_root_file('testdata', "test_pkg", "tests", "testthat", "testthat_parse_cases.R"))
     },
     get_pkg_tested_functions_from_desc(base_path = '.')
   )

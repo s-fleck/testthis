@@ -2,10 +2,12 @@ context("test_Taglist")
 #* @skip
 
 
-tfile <-  file.path(
-  testthat::test_path(), 'testdata', 'testthis_tags.R')
 
 test_that("test_parse_testthis_comments works as expected", {
+  tfile <-  file.path(
+    testthat::test_path(), "testdata", "test_pkg", "tests", "testthat", "testthis_tags.R"
+  )
+
   #* @testing detect_testthis_comments ------
   t1 <- '#* @testing  testthis_tokenize'
   t2 <- '#* @testfile testthis_tokenize -----'
@@ -39,6 +41,10 @@ test_that("test_parse_testthis_comments works as expected", {
 
 
 test_that("extracting testthis tags works as expected", {
+  tfile <-  file.path(
+    testthat::test_path(), "testdata", "test_pkg", "tests", "testthat", "testthis_tags.R"
+  )
+
   tdat <- get_taglist(tfile)
 
   expect_s3_class(tdat, 'Taglist')
@@ -59,6 +65,10 @@ test_that("extracting testthis tags works as expected", {
 
 
 test_that("get_tag works as expected", {
+  tfile <-  file.path(
+    testthat::test_path(), "testdata", "test_pkg", "tests", "testthat", "testthis_tags.R"
+  )
+
   tlist <- get_taglist(tfile)
 
   expect_identical(get_tag(tlist, 'testfile'),
