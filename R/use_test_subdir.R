@@ -12,12 +12,11 @@
 #'   make a syntactically valid name.
 #' @param make_tester Logical or character scalar. Create an R script with a
 #'   test helper function. If `TRUE` an R script file will be placed into the
-#'   \file{R/} directory of \file{base_path}, containing a function definition
+#'   \file{R/} directory of the current package, containing a function definition
 #'   for running the tests in `path`. The file will be named
 #'   \file{testthis-testers.R}, but you can specify  your own name by
 #'   passing a character scalar to make_tester. See [use_tester()] for details.
 #' @param ignore_tester Logical. Add \file{tester} file to \file{.Rbuildignore}?
-#' @template base_path
 #' @seealso [`test_subdir()`]
 #' @family infrastructure
 #'
@@ -37,7 +36,6 @@
 use_test_subdir <- function(
   path,
   make_tester = TRUE,
-  base_path = ".",
   ignore_tester = TRUE
 ){
   # Preconditions
@@ -48,20 +46,19 @@ use_test_subdir <- function(
 
   # Process arguments
   path <- make.names(path)
-  base_path <- devtools::as.package(base_path)$path
+  base_path <- usethis::proj_get()
 
 
   # Logic
   usethis::use_directory(
     file.path("tests", "testthat", path),
-    ignore = FALSE,
-    base_path = base_path
+    ignore = FALSE
   )
 
   if (is.character(make_tester)) {
-    use_tester(path, tester_path = make_tester, base_path = base_path, ignore = ignore_tester)
+    use_tester(path, tester_path = make_tester, ignore = ignore_tester)
   } else if (make_tester) {
-    use_tester(path, base_path = base_path, ignore = ignore_tester)
+    use_tester(path, ignore = ignore_tester)
   }
 
 
@@ -90,10 +87,9 @@ use_test_subdir <- function(
 use_tester <- function(
   path,
   ignore = TRUE,
-  tester_path = file.path("R", "testthis-testers.R"),
-  base_path = "."
+  tester_path = file.path("R", "testthis-testers.R")
 ){
-  fname   <- file.path(devtools::as.package(base_path)$path, tester_path)
+  fname   <- file.path(usethis::proj_get(), tester_path)
   funname <- paste0("test_", path)
 
   message(sprintf("creating tester function %s() in %s", funname, fname))
@@ -120,11 +116,10 @@ use_tester <- function(
 
 #' @export
 #' @rdname use_test_subdir
-use_integration_tests <- function(base_path = "."){
+use_integration_tests <- function(){
   use_test_subdir(
     unlist(options('testthis.integration_tests_path')),
-    make_tester = FALSE,
-    base_path = base_path
+    make_tester = FALSE
   )
 }
 
@@ -133,11 +128,10 @@ use_integration_tests <- function(base_path = "."){
 
 #' @export
 #' @rdname use_test_subdir
-use_acceptance_tests <- function(base_path = "."){
+use_acceptance_tests <- function(){
   use_test_subdir(
     unlist(options('testthis.acceptance_tests_path')),
-    make_tester = FALSE,
-    base_path = base_path
+    make_tester = FALSE
   )
 }
 
@@ -146,10 +140,9 @@ use_acceptance_tests <- function(base_path = "."){
 
 #' @export
 #' @rdname use_test_subdir
-use_manual_tests <- function(base_path = "."){
+use_manual_tests <- function(){
   use_test_subdir(
     unlist(options('testthis.manual_tests_path')),
-    make_tester = FALSE,
-    base_path = base_path
+    make_tester = FALSE
   )
 }

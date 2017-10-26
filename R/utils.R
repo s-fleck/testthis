@@ -41,8 +41,8 @@ get_current_file <- function(){
 
 
 
-get_pkg_testfile_names_from_tags <- function(base_path = '.'){
-  infiles <- list_rdir_files(base_path)
+get_pkg_testfile_names_from_tags <- function(){
+  infiles <- list_rdir_files()
 
   res <- lapply(infiles, get_taglist) %>%
     lapply(get_tag, 'testfile') %>%

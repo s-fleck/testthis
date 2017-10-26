@@ -6,7 +6,6 @@
 #' `test_that()` calls, or used test_this tags. If you want automatic
 #' analysis of test coverage, you must look in other packages such as `covr`.
 #'
-#' @template base_path
 #' @param from_tags Logical scalar. Checks the files if your test directory for
 #'   testthis tags. Specifically, if you have the comment `#* @testing myfunction`
 #'   in any of your test files, myfunction will be marked as tested.
@@ -34,29 +33,27 @@
 #' }
 #'
 get_test_coverage <- function(
-  base_path = '.',
   from_tags = TRUE,
   from_desc = TRUE
 ){
-  all  <- get_pkg_functions(base_path = base_path)
+  all  <- get_pkg_functions()
   tst  <- get_pkg_tested_functions(
-    base_path = base_path,
     from_tags = from_tags,
     from_desc = from_desc
   )
-  ign <- get_pkg_testignore(base_path = base_path)
+  ign <- get_pkg_testignore()
 
 
   res <- data.frame(
     fun    = all,
-    exp    = all %in% get_pkg_exports(base_path = base_path),
-    s3     = all %in% get_pkg_S3methods(base_path = base_path),
+    exp    = all %in% get_pkg_exports(),
+    s3     = all %in% get_pkg_S3methods(),
     tested = all %in% tst,
     ignore = all %in% ign,
     stringsAsFactors = FALSE
   )
 
-  attr(res, 'package') <- devtools::as.package(base_path)$package
+  attr(res, 'package') <- usethis::proj_get()
   test_coverage(res)
 }
 
@@ -170,15 +167,25 @@ print.Test_coverage <- function(x, ...){
 #' @inheritParams get_test_coverage
 #' @noRd
 #' @return `get_pkg_functions()` returns a character vector of *all* functions
-#'   defined in `base_path`.
+#'   defined in package.
 #'
-get_pkg_functions <- function(base_path = '.'){
-  base_path  <- devtools::as.package(base_path)
+get_pkg_functions <- function(){
+  pkg  <- devtools::as.package(usethis::proj_get())
+
+  ns <- tryCatch(
+    asNamespace(pkg$package),
+    error = function(e){
+    stop(
+      "Functions can only be detected for installed packages"
+    )
+  })
+
   res  <- as.character(unclass(
     utils::lsf.str(
-      envir = asNamespace(base_path$package),
+      envir = asNamespace(pkg$package),
       all = TRUE)
   ))
+
   return(res)
 }
 
@@ -187,13 +194,18 @@ get_pkg_functions <- function(base_path = '.'){
 
 #' @rdname get_pkg_functions
 #' @return `get_pkg_exports()` returns a character vector of functions *exported*
-#'   from `base_path`s NAMESPACE.
+#'   from the current packages NAMESPACE.
 #' @noRd
-get_pkg_exports <- function(base_path = '.'){
-  base_path %>%
+get_pkg_exports <- function(){
+  ns <- usethis::proj_get() %>%
     devtools::as.package() %>%
-    devtools::parse_ns_file() %>%
-    magrittr::extract2('exports')
+    devtools::parse_ns_file()
+
+  if (identical(ns$exportPatterns, "^[[:alpha:]]+")){
+    return(get_pkg_functions())
+  } else {
+    ns[["exports"]]
+  }
 }
 
 
@@ -201,15 +213,22 @@ get_pkg_exports <- function(base_path = '.'){
 
 #' @rdname get_pkg_functions
 #' @return `get_pkg_S3methods()` returns a character vector of all *S3 methods*
-#'   exported from `base_path`s NAMESPACE.
+#'   exported from the current packages NAMESPACE.
 #' @noRd
-get_pkg_S3methods <- function(base_path = '.'){
-  dd <- base_path %>%
+get_pkg_S3methods <- function(){
+  ns <- usethis::proj_get() %>%
     devtools::as.package() %>%
-    devtools::parse_ns_file() %>%
-    magrittr::extract2('S3methods')
+    devtools::parse_ns_file()
 
-  apply(dd, 1, function(x) paste(stats::na.omit(x), collapse = '.'))
+  if (identical(ns$exportPatterns, "^[[:alpha:]]+")){
+    warning(
+      "Detecting exported functions only works if all functions are ",
+      "explicitly exported in the NAMESPACE file (for example via Roxygen)"
+  )}
+
+  ns %>%
+    magrittr::extract2('S3methods') %>%
+    apply(1, function(x) paste(stats::na.omit(x), collapse = '.'))
 }
 
 
@@ -219,15 +238,15 @@ get_pkg_S3methods <- function(base_path = '.'){
 #' @return  `get_pkg_tested_functions()` returns a character vector of all
 #'   *functions for which unit tests exist*.
 #' @noRd
-get_pkg_tested_functions <- function(base_path, from_tags, from_desc){
+get_pkg_tested_functions <- function(from_tags, from_desc){
   res <- vector()
 
   if(from_tags){
-    res <- c(res, get_pkg_tested_functions_from_tags(base_path))
+    res <- c(res, get_pkg_tested_functions_from_tags())
   }
 
   if(from_desc){
-    res <- c(res, get_pkg_tested_functions_from_desc(base_path))
+    res <- c(res, get_pkg_tested_functions_from_desc())
   }
 
   return(res)
@@ -240,9 +259,8 @@ get_pkg_tested_functions <- function(base_path, from_tags, from_desc){
 #' @return `get_pkg_testignore()` returns a character vector of all
 #'   functions listed in \file{tests/testthat/_testignore}.
 #' @noRd
-get_pkg_testignore <- function(base_path){
-  base_path <- devtools::as.package(base_path)
-  tfile <- file.path(base_path$path, 'tests', 'testthat', '_testignore')
+get_pkg_testignore <- function(){
+  tfile <- file.path(usethis::proj_get(), 'tests', 'testthat', '_testignore')
 
   if (file.exists(tfile)){
     return(readLines(tfile))
@@ -254,8 +272,8 @@ get_pkg_testignore <- function(base_path){
 
 
 
-get_pkg_tested_functions_from_tags <- function(base_path){
-  taglists <- get_test_taglist(base_path)
+get_pkg_tested_functions_from_tags <- function(){
+  taglists <- get_test_taglist()
   res      <- sort(unlist(unique(lapply(taglists, get_tag, 'testing'))))
   return(res)
 }
@@ -263,11 +281,11 @@ get_pkg_tested_functions_from_tags <- function(base_path){
 
 
 
-get_pkg_tested_functions_from_desc <- function(base_path){
-  ttfiles <- list_test_files(base_path, full_names = TRUE)
+get_pkg_tested_functions_from_desc <- function(){
+  ttfiles <- list_test_files(full_names = TRUE)
   descs   <- extract_test_that_desc(ttfiles)
 
-  pkgfuns <- get_pkg_functions(base_path)
+  pkgfuns <- get_pkg_functions()
   res <- rep(NA, length(pkgfuns))
 
   for(i in seq_along(pkgfuns)){

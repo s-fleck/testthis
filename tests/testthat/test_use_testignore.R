@@ -1,20 +1,22 @@
 context("use_testignore")
 
+proj <- usethis::proj_get()
 
 test_that("use_testignore works as expected", {
   fs   <- list.files(".")
   tpkg <- rprojroot::find_testthat_root_file("testdata", "test_pkg")
+  usethis::proj_set(tpkg)
   ti   <- file.path(tpkg, "tests/testthat/_testignore")
 
-  expect_message(use_testignore("blubb", base_path = tpkg))
+  expect_message(use_testignore("blubb"))
   expect_true(file.exists(ti))
   tdat1 <- readLines(ti)
 
-  expect_message(use_testignore("blubb2", base_path = tpkg))
+  expect_message(use_testignore("blubb2"))
   tdat2 <- readLines(ti)
 
   expect_false(identical(tdat1, tdat2))
-  expect_message(use_testignore("blubb2", base_path = tpkg))
+  expect_message(use_testignore("blubb2"))
   tdat3 <- readLines(ti)
 
   expect_identical(tdat2, tdat3)
@@ -22,4 +24,7 @@ test_that("use_testignore works as expected", {
   # Cleanup
   unlink(file.path(tpkg, "tests/testthat/_testignore"))
   expect_identical(fs, list.files("."))
+  usethis::proj_set(proj)
 })
+
+usethis::proj_set(proj)

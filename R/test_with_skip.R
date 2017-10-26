@@ -6,13 +6,11 @@
 #' See the devtools documentation for further info or
 #' `vignette("testthis")` for infos on testthis tags.
 #'
-#' @template base_path
 #' @inheritParams devtools::test
 #'
 #' @export
-test_with_skip <- function(base_path = '.', ...){
+test_with_skip <- function(...){
   fltr <- list_test_files(
-    base_path,
     full_names = FALSE,
     skip = TRUE
   )

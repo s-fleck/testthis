@@ -25,16 +25,16 @@ taglist <- function(dat){
 
 
 
-get_rdir_taglist <- function(base_path = '.'){
-  ttfiles  <- list_rdir_files(base_path, full_names = TRUE)
+get_rdir_taglist <- function(){
+  ttfiles  <- list_rdir_files(full_names = TRUE)
   lapply(ttfiles, get_taglist)
 }
 
 
 
 
-get_test_taglist <- function(base_path = '.'){
-  ttfiles  <- list_test_files(base_path, full_names = TRUE)
+get_test_taglist <- function(){
+  ttfiles  <- list_test_files(full_names = TRUE)
   taglists <- lapply(ttfiles, get_taglist)
 }
 

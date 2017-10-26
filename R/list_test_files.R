@@ -1,11 +1,9 @@
 list_test_files <- function(
-  base_path,
   full_names = TRUE,
   skip = FALSE,
   recursive = TRUE
 ){
-  pkg   <- devtools::as.package(base_path)
-  tpath <- file.path(pkg$path, 'tests', 'testthat')
+  tpath <- file.path(usethis::proj_get(), 'tests', 'testthat')
   res   <- list.files(
     tpath,
     full.names = TRUE,
@@ -29,12 +27,10 @@ list_test_files <- function(
 
 
 list_rdir_files <- function(
-  base_path,
   full_names = TRUE,
   skip = FALSE
 ){
-  base_path     <- devtools::as.package(base_path)
-  tpath   <- file.path(base_path$path, 'R')
+  tpath   <- file.path(usethis::proj_get(), 'R')
   list.files(
     tpath,
     full.names = full_names

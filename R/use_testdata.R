@@ -14,7 +14,7 @@
 #' @return `use_testdata()` returns `TRUE` if object was successfully saved.
 #'
 #' @section Side effects:
-#'   `use_testdata()` saves an R object to a \file{testdata} dir in `base_path`.
+#'   `use_testdata()` saves an R object to a \file{testdata} dir in the current package.
 #'
 #' @export
 #' @family infrastructure
@@ -28,17 +28,15 @@ use_testdata <- function(
   subdir = NULL,
   overwrite = FALSE,
   ignore = FALSE,
-  compress = TRUE,
-  base_path = '.'
+  compress = TRUE
 ){
   # Preconditions
   assert_that(is.flag(overwrite))
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
-  assert_that(is.scalar(base_path) && is.character(base_path))
 
 
   # Find and prepare test_data directory
-  base_path <- devtools::as.package(base_path)$path
+  base_path <- usethis::proj_get()
   tdata_dir <- file.path("tests", "testthat", "testdata")
   if(!is.null(subdir)){
     tdata_dir <- file.path(tdata_dir, subdir)
@@ -46,7 +44,7 @@ use_testdata <- function(
   save_path <- file.path(base_path, tdata_dir)
 
   show_dir_creation_message <- !dir.exists(save_path)
-  usethis::use_directory(tdata_dir, ignore = FALSE, base_path = base_path)
+  usethis::use_directory(tdata_dir, ignore = FALSE)
   if(show_dir_creation_message){
     message(
       "* You can save data files for tests via `save_test()`\n",
@@ -91,16 +89,12 @@ use_testdata <- function(
 #'
 #' A folder to put scripts in that produce the files in \file{testdata}
 #'
-#' @template base_path
-#'
 #' @export
 #' @family infrastructure
-use_testdata_raw <- function(base_path = "."){
-  base_path <- devtools::as.package(base_path)$path
+use_testdata_raw <- function(){
   usethis::use_directory(
     file.path("tests", "testthat", "testdata-raw"),
-    ignore = FALSE,
-    base_path = base_path
+    ignore = FALSE
   )
   invisible(TRUE)
 }
@@ -110,12 +104,12 @@ use_testdata_raw <- function(base_path = "."){
 
 #' @rdname use_testdata
 #'
-#' @return `has_testdata()` returns `TRUE` if `base_path` has a
+#' @return `has_testdata()` returns `TRUE` if package has a
 #' \file{tests/testthat/testdata} folder.
 #'
-has_testdata <- function(base_path = '.'){
+has_testdata <- function(){
   dir.exists(file.path(
-    devtools::as.package(base_path)$path, "tests", "testthat", "testdata"
+    usethis::proj_get(), "tests", "testthat", "testdata"
   ))
 }
 
@@ -128,16 +122,13 @@ has_testdata <- function(base_path = '.'){
 #'
 #' @return `read_testdata()` returns a single \R object
 #' @export
-read_testdata <- function(infile, subdir = NULL, base_path = '.'){
+read_testdata <- function(infile, subdir = NULL){
   # Preconditions
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
-  assert_that(is.scalar(base_path) && is.character(base_path))
 
 
   # Find test_data dir
-  base_path <- devtools::as.package(base_path)
-  pkg_dir   <- base::system.file(package = base_path$package)
-  cache_dir <- file.path(pkg_dir, 'tests', 'testthat', 'testdata')
+  cache_dir <- file.path(usethis::proj_get(), 'tests', 'testthat', 'testdata')
 
   if(!is.null(subdir)){
     cache_dir <- file.path(cache_dir, subdir)

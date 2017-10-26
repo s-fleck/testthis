@@ -1,6 +1,8 @@
 # testthis 1.0.2
 
 * added `test_all()` to run tests in all subdirectories
+* Use `usethis::proj_get()` instead of the `base_path` function argument for
+  compatbility with usethis.
 
 
 # testthis 1.0.1

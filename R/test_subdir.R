@@ -35,7 +35,6 @@
 #' own test subdirs instead.
 #'
 #' @inheritParams devtools::test
-#' @template base_path
 #' @param subdir subdir of `inst/tests/` or `tests/testthat` that contains the
 #'   tests
 #' @param ... passed on to `devtools::test()`
@@ -44,26 +43,13 @@
 #' @return A [testthat_results] object (invisibly)
 #'
 #' @export
-test_subdir <- function(subdir, base_path = '.', ...){
+test_subdir <- function(subdir, ...){
 
-  find_test_dir_mock <- function (path){
-    testthat <- file.path(path, "tests", "testthat", subdir)
-    if (dir.exists(testthat))
-      return(testthat)
-    inst <- file.path(path, "inst", "tests", subdir)
-    if (dir.exists(inst))
-      return(inst)
-    stop(
-      sprintf("%s not found in any of the test dirs of %s", subdir, path),
-      call. = FALSE
-    )
-  }
-
-
-  invisible(testthat::with_mock(
-    `devtools:::find_test_dir` = find_test_dir_mock,
-    devtools::test(pkg = base_path, ...)
+  browser()
+  testthat::test_dir(file.path(
+    usethis::proj_get(), testthat::test_path(), subdir
   ))
+
 }
 
 
@@ -71,10 +57,9 @@ test_subdir <- function(subdir, base_path = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_integration <- function(base_path = '.', ...){
+test_integration <- function(...){
   test_subdir(
     subdir = options('testthis.integration_tests_path'),
-    base_path = base_path,
     ...)
 }
 
@@ -83,10 +68,9 @@ test_integration <- function(base_path = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_acceptance <- function(base_path = '.', ...){
+test_acceptance <- function(...){
   test_subdir(
     subdir = options('testthis.acceptance_tests_path'),
-    base_path = base_path,
     ...)
 }
 
@@ -95,10 +79,9 @@ test_acceptance <- function(base_path = '.', ...){
 
 #' @rdname test_subdir
 #' @export
-test_manual <- function(base_path = '.', ...){
+test_manual <- function(...){
   test_subdir(
     subdir = options('testthis.manual_tests_path'),
-    base_path = base_path,
     ...)
 }
 
@@ -110,10 +93,9 @@ test_manual <- function(base_path = '.', ...){
 #' @rdname test_subdir
 #' @export
 test_all <- function(
-  base_path = ".",
   ...
 ){
-  pkg_dir <- devtools::as.package(base_path)$path
+  pkg_dir <- usethis::proj_get()
 
   dirs    <- basename(
     list.dirs(
@@ -131,6 +113,12 @@ test_all <- function(
 }
 
 
+
+
+
+dir_mock <- function(path = ".", pattern = NULL, ...){
+  list.files(path  = path, pattern = pattern, recursive = TRUE)
+}
 
 
 find_test_scripts_mock <- function(
@@ -152,5 +140,9 @@ find_test_scripts_mock <- function(
     invert = TRUE
   )
 
-  testthat:::filter_test_scripts(files, filter, invert, ...)
+  if(!is.null(filter)){
+    stop("filter not supported")
+  }
+
+  files
 }

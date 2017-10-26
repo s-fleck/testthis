@@ -4,7 +4,6 @@
 #' (for [get_test_coverage()])
 #'
 #' @param x a character vector of ignores (function names).
-#' @template base_path
 #'
 #' @return `TRUE` (invisibly).
 #' @export
@@ -17,16 +16,14 @@
 #' }
 #'
 use_testignore <- function(
-  x,
-  base_path = "."
+  x
 ){
   # Preconditions
     assert_that(is.character(x))
-    assert_that(is.character(base_path) && is.scalar(base_path))
 
   # Process arguments
     testignore <- "tests/testthat/_testignore"
-    testignore <- file.path(devtools::as.package(base_path)$path, testignore)
+    testignore <- file.path(usethis::proj_get(), testignore)
 
   # Logic
     if(file.exists(testignore)){
