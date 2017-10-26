@@ -44,8 +44,6 @@
 #'
 #' @export
 test_subdir <- function(subdir, ...){
-
-  browser()
   testthat::test_dir(file.path(
     usethis::proj_get(), testthat::test_path(), subdir
   ))

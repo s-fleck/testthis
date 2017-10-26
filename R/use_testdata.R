@@ -10,7 +10,6 @@
 #' @inheritParams base::readRDS
 #' @template overwrite
 #' @inheritParams usethis::use_directory
-#' @template base_path
 #' @return `use_testdata()` returns `TRUE` if object was successfully saved.
 #'
 #' @section Side effects:
@@ -36,12 +35,12 @@ use_testdata <- function(
 
 
   # Find and prepare test_data directory
-  base_path <- usethis::proj_get()
+  pkg <- usethis::proj_get()
   tdata_dir <- file.path("tests", "testthat", "testdata")
   if(!is.null(subdir)){
     tdata_dir <- file.path(tdata_dir, subdir)
   }
-  save_path <- file.path(base_path, tdata_dir)
+  save_path <- file.path(pkg, tdata_dir)
 
   show_dir_creation_message <- !dir.exists(save_path)
   usethis::use_directory(tdata_dir, ignore = FALSE)

@@ -43,11 +43,8 @@ use_test_subdir <- function(
   assert_that(is.scalar(make_tester))
   assert_that(is.scalar(is.logical(make_tester) || is.character(make_tester)))
 
-
   # Process arguments
   path <- make.names(path)
-  base_path <- usethis::proj_get()
-
 
   # Logic
   usethis::use_directory(
@@ -78,7 +75,6 @@ use_test_subdir <- function(
 #'   to create a tester function.
 #' @param ignore Logical. Add `tester_path` to \file{.Rbuildignore}?
 #' @param tester_path \R script file in which to store the tester functions
-#' @template base_path
 #'
 #' @return `TRUE` on success (invisibly).
 #' @export
