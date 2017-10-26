@@ -23,17 +23,18 @@ library(rstudioapi)
 
 ## Overview
 
-Testthis provides tools to make unit testing in R more comfortable. It is 
+Testthis contains tools to make unit testing in R more comfortable. It is 
 designed to complement the packages **testthat**, **devtools** and **usethis**. 
-
 
 
 
 ## RStudio addins 
 
-Provides RStudio addins for common tasks, that can also be assigned to hotkeys. 
-I recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp`
-to the following functions (under *Tools/Modify Keyboard Shortcuts*):
+Testthis provides RStudio addins for common tasks. These can be called like
+normal R function, but it is also possible to assigned to hotkeys to them in
+RStudio (*Tools/Modify Keyboard Shortcuts*). I recommend assigning 
+`ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp` to the following 
+functions:
 
 * `test_this()`: Run tests associated with the currently open R script file.
 * `lest_this()`: "Load and test"; As above, but call `devtools::load_all()` first
@@ -46,15 +47,15 @@ to the following functions (under *Tools/Modify Keyboard Shortcuts*):
 The functions above assume that if the current filename is `currentfile.R`,
 the associated test file is `/tests/testthat/test_currentfile.R`. If you want
 to modify this behaviour you can put the tag `#* @testfile anotherfile` anywhere
-in your code, usually the top or bottom of your .R file. Each R script can only
+in your code, usually the top or bottom of your `.R` file. Each R script can only
 have a single associated testfile.
 
 The following example will associate the file `/tests/testthat/other_test_file.R`
 instead of `/tests/testthat/test_open_testfile.R` with `R/open_testfile`:
 ```{r eval = FALSE}
 # file R/open_testfile.R
-#* @testfile other_testfile
 
+#* @testfile other_testfile
 open_testfile <- function(){
   fname <- get_testfile_name()
 

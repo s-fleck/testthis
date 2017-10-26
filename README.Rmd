@@ -8,7 +8,8 @@ output: github_document
 
 ## Overview
 
-Testhis provides RStudio addins for common package development tasks:
+Testhis provides utility functions and RStudio addins for common package 
+development tasks:
 
 * `test_this()`: Run tests associated with the currently open R script file.
 * `lest_this()`: "Load and test"; As above, but call `devtools::load_all()` first

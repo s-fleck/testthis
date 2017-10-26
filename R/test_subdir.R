@@ -1,4 +1,4 @@
-#' Use test subdirectories
+#' Run tests in subdirectories
 #'
 #' This is a simple wrapper for [devtools::test()], but rather than running
 #' the tests in \file{inst/tests/} or \file{tests/testthat}, it runs the tests

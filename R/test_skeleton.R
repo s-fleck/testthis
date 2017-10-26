@@ -15,6 +15,7 @@
 #'   compatibility with testthat.
 #'
 #' @return `NULL` (invisibly)
+#' @seealso [usethis::use_test()]
 #'
 #' @export
 #'

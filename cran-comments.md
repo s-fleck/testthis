@@ -14,8 +14,9 @@ This is a new release, so there are no reverse dependencies.
 
 ## Notes
 
-Most functions in this package modify the file system or are designed to be
-run interactively. That is why most code examples in the documentation are
-wrapped in `\dontrun{}`.
+* Most functions in this package modify the file system or are designed to be
+  run interactively. That is why most code examples in the documentation are
+  wrapped in `\dontrun{}`.
+* Removed all `:::` calls from the original submission.
 
 ---
