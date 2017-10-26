@@ -111,8 +111,7 @@ test_manual <- function(base_path = '.', ...){
 #' @export
 test_all <- function(
   base_path = ".",
-  ...,
-  reporter = testthat::ProgressReporter
+  ...
 ){
   pkg_dir <- devtools::as.package(base_path)$path
 
@@ -126,7 +125,7 @@ test_all <- function(
   dirs <- dirs[dirs != "testdata"]
 
   testthat::with_mock(
-    devtools::test(reporter = reporter),
+    devtools::test(...),
     `testthat::find_test_scripts` = find_test_scripts_mock
   )
 }

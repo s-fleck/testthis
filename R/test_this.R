@@ -1,7 +1,7 @@
 #' Test this file
 #'
 #' This is a convenience function to run testthat tests in a single .R file. If
-#' the file currently open in the Rstudio editor is called \code{my_function.R},
+#' the file currently open in the RStudio editor is called \code{my_function.R},
 #' \code{test_this()} calls \code{testthat::test_file()} on
 #' "tests/testthat/test_my_function.R". If the filename of the currently open
 #' file with starts with \code{test_} it will call \code{testthat::test_file()}

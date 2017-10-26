@@ -1,16 +1,16 @@
 Package: testthis
 Type: Package
-Title: Utility Functions and Rstudio Addins to Make Using the testthat
-  Package Even More Fun
-Version: 1.0.1.9001
+Title: Utils and 'RStudio' Addins to Make Testing Even More Fun
+Version: 1.0.2
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: 
-  Rstudio addins for several common testing-related tasks during package 
-  development, such as switching between a source file and an associated test 
-  file, or running unit tests in a single test file (hotkeyable!). 
-  testthis also provides utility function to manage tests in subdirectories of
-  the test/testthis directory.
+Description:
+  Utility functions and 'RStudio' addins to ease the life of people using
+  'testthat', 'devtools' and 'usethis' in their package development workflow.
+  Hotkeyable addins are provided for such common tasks as switching between a 
+  source file and an associated test file, or running unit tests in a single 
+  file. 'testthis' also provides utility function to manage and run tests in 
+  subdirectories of the test/testthat directory.
 License: MIT + file LICENSE
 Imports:
   assertthat,
@@ -22,9 +22,7 @@ Imports:
   utils,
   stats,
   rprojroot,
-  tools,
-  colt,
-  R6
+  tools
 Suggests:
   knitr,
   rmarkdown,

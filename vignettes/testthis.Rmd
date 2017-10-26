@@ -29,9 +29,9 @@ designed to complement the packages **testthat**, **devtools** and **usethis**.
 
 
 
-## Rstudio addins 
+## RStudio addins 
 
-Provides Rstudio addins for common tasks, that can also be assigned to hotkeys. 
+Provides RStudio addins for common tasks, that can also be assigned to hotkeys. 
 I recommend assigning `ctrl+alt+Insert`, `ctrl+alt+Pos1` and `ctrl+alt+PageUp`
 to the following functions (under *Tools/Modify Keyboard Shortcuts*):
 

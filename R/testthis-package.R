@@ -1,6 +1,6 @@
 #' Testthis-package
 #'
-#' Rstudio addins for several common testing-related tasks during package
+#' RStudio addins for several common testing-related tasks during package
 #' development, such as switching between a source file and an associated test
 #' file, or running unit tests in a single test file (hotkeyable!).
 #' testthis also provides utility function to manage tests in subdirectories of

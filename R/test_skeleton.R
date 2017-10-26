@@ -1,6 +1,6 @@
 #' Create a test skeleton file for the currently open .R file
 #'
-#' If the file currently open in the Rstudio editor is called \code{my_function.R},
+#' If the file currently open in the RStudio editor is called \code{my_function.R},
 #' this creates the file \file{/tests/testthat/test_my_function.R} and fills it
 #' with a basic test skeleton.
 #'

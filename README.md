@@ -2,6 +2,8 @@
 testthis
 ========
 
+[![CRAN status](http://www.r-pkg.org/badges/version/testthis)](https://cran.r-project.org/package=testthis)
+
 Overview
 --------
 
@@ -24,10 +26,11 @@ Testthis also provides the experimental feature `get_test_coverage()`. In contra
 Installation
 ------------
 
-testthis is CRAN-ready, but not yet on CRAN. This is beause it depends on the r-lib package usethis, which is also not yet on CRAN. You can install testthis like this:
+    # Testthis is on CRAN:
+    install.packages("testthis")
 
+    # You can also install the development version from GitHub:
     # install.packages("devtools")
-    devtools::install_github("r-lib/usethis")
     devtools::install_github("s-fleck/testthis")
 
 Usage

@@ -29,8 +29,8 @@
 #' @examples
 #'
 #' \dontrun{
-#' #' x <- get_test_coverage()
-#' as.data.frame(x)  # To view in tabular form
+#' x <- get_test_coverage()
+#' as.data.frame(x)
 #' }
 #'
 get_test_coverage <- function(

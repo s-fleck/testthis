@@ -5,7 +5,7 @@ test_that("list_test_files works as expected", {
   #* @testing list_test_files
   #* @testing skip_test_files
 
-  pkg <- devtools::as.package(base::system.file("tests", "testthat", "testdata", "test_pkg", package = 'testthis'))
+  pkg <- devtools::as.package(rprojroot::find_testthat_root_file("testdata", "test_pkg"))
 
   # List all test files in /test/test_that
     tres <- with_mock(

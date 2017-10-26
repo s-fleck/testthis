@@ -1,8 +1,6 @@
-# testthis 1.0.1.9000
+# testthis 1.0.2
 
 * added `test_all()` to run tests in all subdirectories
-
-
 
 
 # testthis 1.0.1
@@ -11,7 +9,6 @@
 * all `pkg =` function arguments have been changed to `base_path =` for
   consistency with the **usethis** package.
 * `get_test_coverage()` now recognizes tests in test subdirs
-
 
 
 # testthis 1.0.0
