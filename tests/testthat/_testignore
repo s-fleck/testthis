@@ -7,3 +7,5 @@ test_manual
 test_subdir
 test_this
 test_with_skip
+test_all
+test_skeleton
