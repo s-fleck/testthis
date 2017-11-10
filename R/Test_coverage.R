@@ -274,7 +274,8 @@ get_pkg_testignore <- function(){
 
 get_pkg_tested_functions_from_tags <- function(){
   taglists <- get_test_taglist()
-  res      <- sort(unlist(unique(lapply(taglists, get_tag, 'testing'))))
+  res      <- unlist(unique(lapply(taglists, get_tag, 'testing')))
+  if (!is.null(res)) res <- sort(res)
   return(res)
 }
 
