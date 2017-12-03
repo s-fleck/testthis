@@ -36,24 +36,24 @@ get_test_coverage <- function(
   from_tags = TRUE,
   from_desc = TRUE
 ){
-  all  <- get_pkg_functions()
-  tst  <- get_pkg_tested_functions(
+  dat  <- get_pkg_tested_functions(
     from_tags = from_tags,
     from_desc = from_desc
   )
-  ign <- get_pkg_testignore()
-
+  funs <- names(dat)
 
   res <- data.frame(
-    fun    = all,
-    exp    = all %in% get_pkg_exports(),
-    s3     = all %in% get_pkg_S3methods(),
-    tested = all %in% tst,
-    ignore = all %in% ign,
+    fun = funs,
+    exp = funs %in% get_pkg_exports(),
+    s3  = funs %in% get_pkg_S3methods(),
+    tested =  vapply(dat, function(x) length(x) > 0, logical(1)),
+    ignore = funs %in% get_pkg_testignore(),
+    paths = I(unname(dat)),
     stringsAsFactors = FALSE
   )
 
-  attr(res, 'package') <- usethis::proj_get()
+
+  attr(res, "package") <- usethis::proj_get()
   test_coverage(res)
 }
 
@@ -61,7 +61,7 @@ get_test_coverage <- function(
 
 
 test_coverage <- function(dat){
-  class(dat) <- c('Test_coverage', 'data.frame')
+  class(dat) <- c("Test_coverage", "data.frame")
   assert_that(is_valid(dat))
   return(dat)
 }
@@ -73,12 +73,12 @@ is_valid.Test_coverage <- function(dat){
   res <- list()
 
   res$names <- assert_that(identical(
-    c('fun', 'exp', 's3', 'tested', 'ignore'),
+    c("fun", "exp", "s3", "tested", "ignore", "paths"),
     names(dat))
   )
   res$types <- assert_that(identical(
     unname(unlist(lapply(dat, class))),
-    c('character', 'logical', 'logical', 'logical', 'logical'))
+    c("character", "logical", "logical", "logical", "logical", "AsIs"))
   )
 
   all(unlist(res))
@@ -91,63 +91,63 @@ is_valid.Test_coverage <- function(dat){
 print.Test_coverage <- function(x, ...){
 
   # Heading
-    pname <- attr(x, 'package')
-    if(is.null(pname)) pname <- ''
+    pname <- attr(x, "package")
+    if(is.null(pname)) pname <- ""
     tp <- sum(x$tested) / nrow(x) * 100
-    msg <- sprintf('Package %s, Test Coverage: %.1f%%\n', pname, tp)
+    msg <- sprintf("Package %s, Test Coverage: %.1f%%\n", pname, tp)
 
 
   # Functions
     dd  <- as.data.frame(x)
     dd$tested <- ""
-    dd$tested[x$ignore] <- '-'
-    dd$tested[x$tested] <- '+'
+    dd$tested[x$ignore] <- "-"
+    dd$tested[x$tested] <- "+"
 
     funs <- list()
 
       dexp <- dd[dd$exp == TRUE, ]
-      dexp <- dexp[order(dexp$fun), c('tested', 'fun')]
-      names(dexp) <- c('', '')
+      dexp <- dexp[order(dexp$fun), c("tested", "fun")]
+      names(dexp) <- c("", "")
       funs$exp <- dexp
 
 
       ds3 <- dd[dd$s3 == TRUE, ]
-      ds3 <- ds3[order(ds3$fun), c('tested', 'fun')]
-      names(ds3) <- c('', '')
+      ds3 <- ds3[order(ds3$fun), c("tested", "fun")]
+      names(ds3) <- c("", "")
       funs$s3 <- ds3
 
 
       dint <- dd[(dd$exp | dd$s3) == FALSE, ]
-      dint <- dint[order(dint$fun), c('tested', 'fun')]
-      names(dint) <- c('', '')
+      dint <- dint[order(dint$fun), c("tested", "fun")]
+      names(dint) <- c("", "")
       funs$int <- dint
 
 
   # Print
-    cat(msg, '\n')
+    cat(msg, "\n")
 
-    hline <- paste(rep('.', 20), collapse = '')
+    hline <- paste(rep(".", 20), collapse = "")
 
     if(nrow(funs$exp) > 0){
-      cat(' exported functions', hline)
+      cat(" exported functions", hline)
       print(funs$exp, row.names = FALSE, right = FALSE)
     }
 
 
     if(nrow(funs$s3) > 0){
       if(nrow(funs$exp) > 0){
-        cat('\n')
+        cat("\n")
       }
-      cat(' S3 Methods', hline)
+      cat(" S3 Methods", hline)
       print(funs$s3, row.names = FALSE, right = FALSE)
     }
 
 
     if(nrow(funs$int) > 0){
       if(nrow(funs$s3) > 0 || nrow(funs$exp) > 0){
-        cat('\n')
+        cat("\n")
       }
-      cat(' internal functions', hline)
+      cat(" internal functions", hline)
       print(funs$int, row.names = FALSE, right = FALSE)
     }
 
@@ -183,7 +183,7 @@ get_pkg_functions <- function(){
   res  <- as.character(unclass(
     utils::lsf.str(
       envir = asNamespace(pkg$package),
-      all = TRUE)
+      all.names = TRUE)
   ))
 
   return(res)
@@ -227,8 +227,8 @@ get_pkg_S3methods <- function(){
   )}
 
   ns %>%
-    magrittr::extract2('S3methods') %>%
-    apply(1, function(x) paste(stats::na.omit(x), collapse = '.'))
+    magrittr::extract2("S3methods") %>%
+    apply(1, function(x) paste(stats::na.omit(x), collapse = "."))
 }
 
 
@@ -239,17 +239,30 @@ get_pkg_S3methods <- function(){
 #'   *functions for which unit tests exist*.
 #' @noRd
 get_pkg_tested_functions <- function(from_tags, from_desc){
-  res <- vector()
+
+  funs <- get_pkg_functions()
+
+  res <- vector("list", length(funs)) %>%
+    setNames(funs)
 
   if(from_tags){
-    res <- c(res, get_pkg_tested_functions_from_tags())
+    dd <- get_pkg_tested_functions_from_tags()
+    for(fun in names(dd)){
+      res[[fun]] <- sort(dd[[fun]])
+    }
   }
 
   if(from_desc){
-    res <- c(res, get_pkg_tested_functions_from_desc())
+    dd <- get_pkg_tested_functions_from_desc()
+    for(fun in names(dd)){
+      res[[fun]] <- sort(union(res[[fun]], dd[[fun]]))
+    }
   }
 
-  return(res)
+
+  res <- res[names(res) %in% funs]
+  assert_that(identical(length(res), length(funs)))
+  res
 }
 
 
@@ -260,7 +273,7 @@ get_pkg_tested_functions <- function(from_tags, from_desc){
 #'   functions listed in \file{tests/testthat/_testignore}.
 #' @noRd
 get_pkg_testignore <- function(){
-  tfile <- file.path(usethis::proj_get(), 'tests', 'testthat', '_testignore')
+  tfile <- file.path(usethis::proj_get(), "tests", "testthat", "_testignore")
 
   if (file.exists(tfile)){
     return(readLines(tfile))
@@ -271,60 +284,79 @@ get_pkg_testignore <- function(){
 
 
 
-
+#' Guess tested functions based on contents of testthis tags
+#'
+#' @return A named `list` with on element per function of a package. The
+#'   names of the list are the names of the functions, the values are
+#'   `character` vectors of absolute file paths of test files that contain
+#'   tests for the respective functions.
+#' @noRd
+#'
 get_pkg_tested_functions_from_tags <- function(){
   taglists <- get_test_taglist()
-  res      <- unlist(unique(lapply(taglists, get_tag, 'testing')))
-  if (!is.null(res)) res <- sort(res)
-  return(res)
-}
+  files <- lapply(taglists, get_tag, "testing")
+  funs  <- unlist(files, use.names = FALSE)
 
+  res <- vector("list", length(funs)) %>%
+    setNames(funs)
 
-
-
-get_pkg_tested_functions_from_desc <- function(){
-  ttfiles <- list_test_files(full_names = TRUE)
-  descs   <- extract_test_that_desc(ttfiles)
-
-  pkgfuns <- get_pkg_functions()
-  res <- rep(NA, length(pkgfuns))
-
-  for(i in seq_along(pkgfuns)){
-    res[[i]] <- any(
-      stringi::stri_detect_fixed(
-        descs,
-        pattern = pkgfuns[[i]]
-      )
-    )
+  for(fl in names(files)){
+    for(fun in files[[fl]]){
+      res[[fun]] <- c(res[[fun]], fl)
+    }
   }
 
-  assert_that(identical(length(res), length(pkgfuns)))
-  assert_that(!any(is.na(res)))
-
-  return(pkgfuns[res])
+  res
 }
 
 
 
 
-#' Extract 'desc' arguments from all test_that functions from .R script files
+#' Guess tested functions based on contents of test_that desc argument
+#'
+#' @return A named `list` with on element per function of a package. The
+#'   names of the list are the names of the functions, the values are
+#'   `character` vectors of absolute file paths of test files that contain
+#'   tests for the respective functions.
+#' @noRd
+#'
+get_pkg_tested_functions_from_desc <- function(){
+  ttfiles <- list_test_files(full_names = TRUE, recursive = TRUE)
+  descs   <- extract_test_that_desc(ttfiles)
+  pkgfuns <- get_pkg_functions()
+
+  lapply(pkgfuns, function(.f){
+    r <- lapply(seq_along(descs), function(i){
+      is_tested <- grepl(pattern = .f, descs[[i]], fixed = TRUE)
+      if (any(is_tested)) names(descs)[[i]] else invisible()
+    })
+    as.character(r[vapply(r, Negate(is.null), logical(1))])
+  }) %>%
+    setNames(pkgfuns)
+}
+
+
+
+
+#' Extract "desc" arguments from all test_that functions from .R script files
 #'
 #' @param infile character. Path to an .R script file, or a list of such paths;
 #' usually created with list.files("/path/to/directory")
-#' @return content of the 'desc' arguments of test_that functions
+#' @return content of the "desc" arguments of test_that functions as a named
+#'   list (one element per file, names correspond to full file paths.)
 #' @noRd
 extract_test_that_desc <- function(infile){
-  exps  <- unlist(lapply(infile, parse))
-  exps  <- exps[grep('test_that', as.list(exps))]
+  exps  <- lapply(infile, parse) %>%
+    setNames(infile)
 
   # fun tries to account for all possibilities where desc is not the second
   # argument of testthat
   fun <- function(x) {
     .x <- as.list(x)
-    if('desc' %in% names(.x)){
+    if("desc" %in% names(.x)){
       return(.x$desc)
-    } else if ('code' %in% names(.x)){
-      codepos <- which('code' == names(.x))
+    } else if ("code" %in% names(.x)){
+      codepos <- which("code" == names(.x))
       if(identical(codepos, 2L)){
         return(.x[[3]])
       }
@@ -333,5 +365,9 @@ extract_test_that_desc <- function(infile){
     }
   }
 
-  lapply(exps, fun)
+
+  lapply(exps, function(.x) {
+    test_that_calls <- .x[grep("test_that", as.list(.x))]
+    lapply(test_that_calls, fun)
+  })
 }
