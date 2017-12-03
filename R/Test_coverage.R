@@ -98,57 +98,75 @@ print.Test_coverage <- function(x, ...){
 
 
   # Functions
-    dd  <- as.data.frame(x)
-    dd$tested <- ""
-    dd$tested[x$ignore] <- "-"
-    dd$tested[x$tested] <- "+"
+    dd <- as.data.frame(x)
+    sources <- file.path(pname, testthat::test_path()) %>%
+      list.dirs(recursive = FALSE, full.names = FALSE) %>%
+      magrittr::extract(!. %in% c("testdata", "testdata-raw")) %>%
+      setNames(strtrim(., 2))
 
-    funs <- list()
+    res <- vector("list", length(sources) + 3) %>%
+      setNames(c(names(sources), "u", "i", "fun"))
 
-      dexp <- dd[dd$exp == TRUE, ]
-      dexp <- dexp[order(dexp$fun), c("tested", "fun")]
-      names(dexp) <- c("", "")
-      funs$exp <- dexp
+    sub_tf <- function(x) ifelse(x, "+", " ")
+
+    res$fun <- dd$fun
+    res$u <- vapply(
+      dd$paths,
+      function(x) {
+        sub_tf(any(grepl(".*tests/testthat$", dirname(x))))
+      },
+      character(1)
+    )
+
+    for (i in seq_along(sources)){
+      res[[names(sources)[[i]] ]] <- vapply(
+        dd$paths,
+        function(x) {
+          sub_tf(any(grepl(paste0(sources[[i]], "/.*\\.R$"), x)))
+        },
+        character(1)
+      )
+    }
+
+    res$i <- sub_tf(dd$ignore)
+
+    res$grp <- apply(dd, 1, function(x) {
+      if (x$exp) "exp" else if (x$s3) "s3" else "int"
+    })
 
 
-      ds3 <- dd[dd$s3 == TRUE, ]
-      ds3 <- ds3[order(ds3$fun), c("tested", "fun")]
-      names(ds3) <- c("", "")
-      funs$s3 <- ds3
-
-
-      dint <- dd[(dd$exp | dd$s3) == FALSE, ]
-      dint <- dint[order(dint$fun), c("tested", "fun")]
-      names(dint) <- c("", "")
-      funs$int <- dint
+    unsanitized <- names(res)
+    res <- as.data.frame(res, row.names = seq_len(length(res[[1]])))
+    names(res) <- unsanitized
+    res <- split(res, res$grp)
 
 
   # Print
     cat(msg, "\n")
 
-    hline <- paste(rep(".", 20), collapse = "")
+    hline <- paste(paste(rep(".", 20), collapse = ""), "\n")
 
-    if(nrow(funs$exp) > 0){
+    if(nrow(res$exp) > 0){
       cat(" exported functions", hline)
-      print(funs$exp, row.names = FALSE, right = FALSE)
+      print(res$exp[, !colnames(res$exp) %in% "grp"], row.names = FALSE, right = FALSE)
     }
 
 
-    if(nrow(funs$s3) > 0){
-      if(nrow(funs$exp) > 0){
+    if(nrow(res$s3) > 0){
+      if(nrow(res$exp) > 0){
         cat("\n")
       }
       cat(" S3 Methods", hline)
-      print(funs$s3, row.names = FALSE, right = FALSE)
+      print(res$s3[, !colnames(res$s3) %in% "grp"], row.names = FALSE, right = FALSE)
     }
 
 
-    if(nrow(funs$int) > 0){
-      if(nrow(funs$s3) > 0 || nrow(funs$exp) > 0){
+    if(nrow(res$int) > 0){
+      if(nrow(res$s3) > 0 || nrow(res$exp) > 0){
         cat("\n")
       }
       cat(" internal functions", hline)
-      print(funs$int, row.names = FALSE, right = FALSE)
+      print(res$int[, !colnames(res$int) %in% "grp"], row.names = FALSE, right = FALSE)
     }
 
 
