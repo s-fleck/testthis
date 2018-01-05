@@ -1,3 +1,6 @@
+# testthis 1.0.2.9000
+* Maintenance Release to make vignette comply with new CRAN guidelines
+
 # testthis 1.0.2
 
 * added `test_all()` to run tests in all subdirectories
