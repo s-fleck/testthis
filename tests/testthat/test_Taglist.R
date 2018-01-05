@@ -56,7 +56,7 @@ test_that("extracting testthis tags works as expected", {
 
   expect_identical(tdat$skip, TRUE)
   expect_identical(tdat$testfile, c("testthis_tags", "testthis_tags2"))
-  expect_identical(
+  expect_setequal(
     tdat$testing,
     c("%foofun%", "detect_testthis_comments", "extract_testthis_comments",
       "get_taglist", "testthis_tokenizer")
@@ -74,7 +74,7 @@ test_that("get_tag works as expected", {
   expect_identical(get_tag(tlist, 'testfile'),
                    c('testthis_tags', 'testthis_tags2'))
 
-  expect_identical(
+  expect_setequal(
     get_tag(tlist, 'testing'),
     c("%foofun%", "detect_testthis_comments", "extract_testthis_comments",
       "get_taglist", "testthis_tokenizer")

@@ -11,6 +11,7 @@
 #' @name testthis
 #' @import assertthat
 #' @importFrom magrittr %>%
+#' @importFrom stats setNames
 #'
 #' @section Setting the project path:
 #'

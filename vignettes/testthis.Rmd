@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 
-devtools::load_all('.')
 library(testthis)
 library(rstudioapi)
 ```
@@ -167,10 +166,10 @@ test_that("parse_testthis_comments works as expected", {
 }
 ```
 
-The test_coverage summary for a package may look like this (+ marks function for
-which tests exist):
 
-```{r}
+To display the test coverage use:
+
+```{r, eval = FALSE}
 get_test_coverage()
 ```
 
