@@ -1,14 +1,13 @@
 #' Test this file
 #'
-#' This is a convenience function to run testthat tests in a single .R file. If
-#' the file currently open in the RStudio editor is called \code{my_function.R},
-#' \code{test_this()} calls \code{testthat::test_file()} on
-#' "tests/testthat/test_my_function.R". If the filename of the currently open
-#' file with starts with \code{test_} it will call \code{testthat::test_file()}
-#' on the current file.
+#' Runs testthat tests in a single .R file. If the file currently open in the
+#' RStudio editor is called `my_function.R`, `test_this()` calls
+#' `testthat::test_file()` on \file{tests/testthat/test_my_function.R}. If
+#' the filename of the currently open file with starts with `test_` it will
+#' call `testthat::test_file()` on the current file.
 #'
 #' This is useful in cases where you don't want to run all tests in a package
-#' via \code{devtools::test()} (CTRL+SHIFT+T).
+#' via `devtools::test()` (CTRL+SHIFT+T).
 #'
 #' @param ... passed on to [testthat::test_file()]
 #'
@@ -18,6 +17,12 @@
 #' @rdname test_this.R
 test_this <- function(...){
   fname <- get_testfile_name()
+
+  if (requireNamespace("rstudioapi", quietly = TRUE)){
+    rstudioapi::documentSaveAll()
+  }
+
+  devtools::load_all(usethis::proj_get())
 
   if(file.exists(fname)){
     message("Running tests in ", fname)
@@ -32,11 +37,14 @@ test_this <- function(...){
 
 
 
-#' \code{lest_this()} does the same, but calls \code{devtools::load_all()}
-#' first.
+#' \code{lest_this()} Deprecated. Please us `test_this()` instead.
 #' @export
 #' @rdname test_this.R
 lest_this <- function(...){
-  devtools::load_all()
+  .Deprecated(
+    msg = paste(
+      "'test_this()' now reloads package by default. 'lest_this()' is no",
+      "longer required and will be dropped in future versions."
+    ))
   test_this(...)
 }

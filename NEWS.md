@@ -1,5 +1,10 @@
-# testthis 1.0.2.9000
+# testthis 1.0.3
 * Maintenance Release to make vignette comply with new CRAN guidelines
+* test (`test_this()`, `test_subdir()`, etc..) functions now save all files in 
+  Rstudio and reload the package before running tests.
+* `lest_this()` has been Deprecated. `test_this()` now behaves like 
+  `lest_this()`
+  
 
 # testthis 1.0.2
 

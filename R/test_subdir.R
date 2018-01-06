@@ -44,6 +44,12 @@
 #'
 #' @export
 test_subdir <- function(subdir, ...){
+  if (requireNamespace("rstudioapi", quietly = TRUE)){
+    rstudioapi::documentSaveAll()
+  }
+
+  devtools::load_all(usethis::proj_get())
+
   testthat::test_dir(file.path(
     usethis::proj_get(), testthat::test_path(), subdir
   ))
@@ -93,6 +99,12 @@ test_manual <- function(...){
 test_all <- function(
   ...
 ){
+  if (requireNamespace("rstudioapi", quietly = TRUE)){
+    rstudioapi::documentSaveAll()
+  }
+
+  devtools::load_all(usethis::proj_get())
+
   pkg_dir <- usethis::proj_get()
 
   dirs    <- basename(
