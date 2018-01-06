@@ -1,9 +1,12 @@
 # testthis 1.0.3
-* Maintenance Release to make vignette comply with new CRAN guidelines
+
+* Maintenance release to make vignette comply with new CRAN guidelines
 * test (`test_this()`, `test_subdir()`, etc..) functions now save all files in 
   Rstudio and reload the package before running tests.
-* `lest_this()` has been Deprecated. `test_this()` now behaves like 
+* `lest_this()` has been deprecated. `test_this()` now behaves like 
   `lest_this()`
+  
+  
   
 
 # testthis 1.0.2
@@ -13,12 +16,16 @@
   compatbility with usethis.
 
 
+
+
 # testthis 1.0.1
 
 * Reorganized package documentation (README, vignette, `?testthis`)
 * all `pkg =` function arguments have been changed to `base_path =` for
   consistency with the **usethis** package.
 * `get_test_coverage()` now recognizes tests in test subdirs
+
+
 
 
 # testthis 1.0.0

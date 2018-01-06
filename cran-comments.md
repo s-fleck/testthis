@@ -1,22 +1,18 @@
 ## Test environments
-* local ubuntu 17.04 install, R 3.4.0
+* local ubuntu 17.10 install, R 3.4.2
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+None
 
 ## Notes
 
-* Most functions in this package modify the file system or are designed to be
-  run interactively. That is why most code examples in the documentation are
-  wrapped in `\dontrun{}`.
-* Removed all `:::` calls from the original submission.
+* vignette should now comply with CRAN guidelines
+* some minor improvements to the package (see NEWS.md)
 
 ---
