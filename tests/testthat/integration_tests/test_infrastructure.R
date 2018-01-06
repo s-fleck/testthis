@@ -1,6 +1,6 @@
 context("infrastructure-non cran tests")
 
-proj <- usethis::proj_get()
+proj <- rprojroot::find_package_root_file()
 
 test_that("use_testdata creates testdata dir", {
   #* @testing has_testdata
@@ -154,3 +154,4 @@ test_that("use_test_subdir works as expected", {
   expect_identical(package_state, list.files(".", recursive = TRUE))
   usethis::proj_set(proj)
 })
+

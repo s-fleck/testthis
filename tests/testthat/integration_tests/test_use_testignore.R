@@ -1,6 +1,6 @@
 context("use_testignore")
 
-proj <- usethis::proj_get()
+proj <- rprojroot::find_package_root_file()
 
 test_that("use_testignore works as expected", {
   fs   <- list.files(".")

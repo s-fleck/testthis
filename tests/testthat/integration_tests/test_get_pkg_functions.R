@@ -1,7 +1,7 @@
 context("get_package_functions")
 
 
-proj <- usethis::proj_get()
+proj <- rprojroot::find_package_root_file()
 
 test_that('get_pkg_tested_functions_from_desc works', {
   #* @testing get_pkg_tested_functions_from_desc
@@ -16,8 +16,9 @@ test_that('get_pkg_tested_functions_from_desc works', {
     get_pkg_tested_functions_from_desc()
   )
 
-  expect_identical(tres, tfuns[1:4])
+  expect_identical(names(tres[sapply(tres, length) > 0]), tfuns[1:4])
+
   usethis::proj_set(proj)
 })
 
-usethis::proj_set(proj)
+

@@ -1,6 +1,6 @@
 context("list_test_files")
 
-proj <- usethis::proj_get()
+proj <- rprojroot::find_package_root_file()
 
 test_that("list_test_files works as expected", {
   #* @testing list_test_files
