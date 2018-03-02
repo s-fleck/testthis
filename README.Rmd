@@ -8,7 +8,7 @@ output: github_document
 
 ## Overview
 
-Testhis provides utility functions and RStudio addins for common package 
+Testthis provides utility functions and RStudio addins for common package 
 development tasks:
 
 * `test_this()`: Run tests associated with the currently open R script file.
@@ -20,7 +20,7 @@ development tasks:
   the `/R` directory. Can be used to jump back and forth between both.
 
 
-It furhter provides functions for managing subdirectories of the 
+It further provides functions for managing subdirectories of the 
 `tests/testthat` directory of a package:
 
 * `use_testdata()` places a single R object in the `tests/testhat/testdata` 
