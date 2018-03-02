@@ -217,7 +217,8 @@ get_pkg_functions <- function(){
 get_pkg_exports <- function(){
   ns <- usethis::proj_get() %>%
     devtools::as.package() %>%
-    devtools::parse_ns_file()
+    magrittr::extract2("path") %>%
+    pkgload::parse_ns_file()
 
   if (identical(ns$exportPatterns, "^[[:alpha:]]+")){
     return(get_pkg_functions())
@@ -236,7 +237,8 @@ get_pkg_exports <- function(){
 get_pkg_S3methods <- function(){
   ns <- usethis::proj_get() %>%
     devtools::as.package() %>%
-    devtools::parse_ns_file()
+    magrittr::extract2("path") %>%
+    pkgload::parse_ns_file()
 
   if (identical(ns$exportPatterns, "^[[:alpha:]]+")){
     warning(

@@ -1,3 +1,8 @@
+# testthis 1.0.3.9000
+
+* Updated for compatbility with devtools > 1.13.5
+
+
 # testthis 1.0.3
 
 * Maintenance release to make vignette comply with new CRAN guidelines

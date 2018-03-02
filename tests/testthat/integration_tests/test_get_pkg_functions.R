@@ -5,7 +5,7 @@ proj <- rprojroot::find_package_root_file()
 
 test_that('get_pkg_tested_functions_from_desc works', {
   #* @testing get_pkg_tested_functions_from_desc
-  tpkg <- file.path(rprojroot::find_testthat_root_file('testdata', "test_pkg", "tests", "testthat", "testthat_parse_cases.R"))
+  tpkg <- file.path(rprojroot::find_testthat_root_file("testdata", "test_pkg", "tests", "testthat", "testthat_parse_cases.R"))
   usethis::proj_set(tpkg)
 
   tfuns <- c('fizzfun', 'buzzfun', 'foofun', '%barfun%', 'bafoon')
