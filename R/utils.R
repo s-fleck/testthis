@@ -45,15 +45,23 @@ get_pkg_testfile_names_from_tags <- function(){
   infiles <- list_rdir_files()
 
   res <- lapply(infiles, get_taglist) %>%
-    lapply(get_tag, 'testfile') %>%
+    lapply(get_tag, "testfile") %>%
     stats::setNames(infiles) %>%
     unlist()
 
-  data.frame(
-    rfile = names(res),
-    tfile = paste0(as.character(res), '.R'),
-    stringsAsFactors = FALSE
-  )
+
+  if (is_empty(res)){
+    data.frame(
+      rfile = character(),
+      tfile = character()
+    )
+  } else {
+    data.frame(
+      rfile = names(res),
+      tfile = paste0(as.character(res), ".R"),
+      stringsAsFactors = FALSE
+    )
+  }
 }
 
 
