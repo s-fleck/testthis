@@ -14,7 +14,7 @@
 #' @export
 #' @return `NULL` (invisibly)
 #'
-#' @rdname test_this.R
+#' @rdname test_this
 test_this <- function(...){
   fname <- get_testfile_name()
 
@@ -39,7 +39,7 @@ test_this <- function(...){
 
 #' \code{lest_this()} Deprecated. Please us `test_this()` instead.
 #' @export
-#' @rdname test_this.R
+#' @rdname test_this
 lest_this <- function(...){
   .Deprecated(
     msg = paste(

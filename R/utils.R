@@ -58,7 +58,11 @@ get_pkg_testfile_names_from_tags <- function(){
   } else {
     data.frame(
       rfile = names(res),
-      tfile = paste0(as.character(res), ".R"),
+      tfile = ifelse(
+        tools::file_ext(res) == "",
+        paste0(as.character(res), ".R"),
+        as.character(res)
+      ),
       stringsAsFactors = FALSE
     )
   }
@@ -78,7 +82,11 @@ get_testfile_name_from_tag <- function(infile){
 
   data.frame(
     rfile = infile,
-    tfile = paste0(res, '.R'),
+    tfile = ifelse(
+      tools::file_ext(res) == "",
+      paste0(as.character(res), ".R"),
+      as.character(res)
+    ),
     stringsAsFactors = FALSE
   )
 }
