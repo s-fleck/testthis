@@ -32,13 +32,14 @@ get_testfile_name <- function(sep = options('testthis.sep')){
 
       # Look for exisiting test file that matches testfile naming pattern
         bn <- basename(fname)
-        test_pattern <- sprintf('^test[_\\-]')
+        test_pattern <- sprintf("^test[_\\-]")
         test_bn_pattern <- paste0(test_pattern, bn)
 
-        testfile_name <- testthat::test_path() %>%
-          list.files() %>%
-          stringi::stri_subset_regex(test_bn_pattern) %>%
-          file.path(testthat::test_path(), .)
+        testfiles <- list.files(
+          testthat::test_path(),
+          pattern = test_bn_pattern
+        )
+        testfile_name <- file.path(testthat::test_path(), testfiles)
 
       # If no match is found, construct a new testfile name
         if (identical(length(testfile_name), 0L)){
