@@ -25,6 +25,7 @@ test_skeleton <- function(
   sep = options('testthis.sep')
 ){
   require_rstudio()
+  ensure_testthat()
 
   if(is.null(fname)){
     fname <- get_testfile_name(sep = sep)

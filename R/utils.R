@@ -90,3 +90,13 @@ get_testfile_name_from_tag <- function(infile){
     stringsAsFactors = FALSE
   )
 }
+
+
+
+
+ensure_testthat <- function(
+  base_path = usethis::proj_get()
+){
+  if (!dir.exists(file.path(base_path, "tests", "testthat")))
+    usethis::use_testthat()
+}
