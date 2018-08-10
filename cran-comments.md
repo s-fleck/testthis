@@ -1,5 +1,5 @@
 ## Test environments
-* local ubuntu 17.10 install, R 3.4.2
+* local ubuntu 17.10 install, R 3.4.3
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -12,7 +12,8 @@ None
 
 ## Notes
 
-* vignette should now comply with CRAN guidelines
-* some minor improvements to the package (see NEWS.md)
+maintenance release with compat to new devtools version and various minor
+bugfixes and improvements
+
 
 ---
