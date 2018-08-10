@@ -22,9 +22,9 @@ Imports:
   utils,
   stats,
   tools,
-  rprojroot,
   pkgload
 Suggests:
+  rprojroot,
   knitr,
   rmarkdown,
   rstudioapi,
