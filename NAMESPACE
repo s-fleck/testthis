@@ -2,7 +2,6 @@
 
 S3method(print,Test_coverage)
 export(get_test_coverage)
-export(lest_this)
 export(open_testfile)
 export(read_testdata)
 export(test_acceptance)
