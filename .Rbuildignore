@@ -8,3 +8,4 @@
 ^cran-comments\.md$
 ^docs$
 .*rsconnect.*
+revdep

@@ -12,8 +12,8 @@ None
 
 ## Notes
 
-maintenance release with compat to new devtools version and various minor
-bugfixes and improvements
-
+The last submission attempt accidentaly included some temporary fles 
+from checking reverse dependences wth `devtools::revdep_check()`. I must have
+created them in the last stage of the submission process, sorry.
 
 ---
