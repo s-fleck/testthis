@@ -1,3 +1,5 @@
+# testthis 1.0.4.9000
+
 # testthis 1.0.4
 
 * Import `parse_ns_file()` from pkgload instead of devtools
