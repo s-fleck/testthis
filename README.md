@@ -7,14 +7,13 @@ testthis
 Overview
 --------
 
-Testhis provides RStudio addins for common package development tasks:
+Testthis provides utility functions and RStudio addins for common package development tasks:
 
--   `test_this()`: Run tests associated with the currently open R script file.
--   `lest_this()`: "Load and test"; As above, but call `devtools::load_all()` first
--   `test_with_skip()`: Like `devtools::test()`, but does not run test files that contain the line `#' @skip.`
+-   `test_this()`: Reloads the package and runs tests associated with the currently open R script file.
+-   `test_with_skip()`: Like `devtools::test()`, but does not run test files that contain the line `#' @skip`. This function is deprecated and will eventually be removed. If you do find this feature useful and do not want to see it gone, please file an issue.
 -   `open_testfile()`: Opens the associated testfile in an editor window. If the currently open file already is a testfile, it opens the associated file in the `/R` directory. Can be used to jump back and forth between both.
 
-It furhter provides functions for managing subdirectories of the `tests/testthat` directory of a package:
+It further provides functions for managing subdirectories of the `tests/testthat` directory of a package:
 
 -   `use_testdata()` places a single R object in the `tests/testhat/testdata` directory. It is analoguous to `usethis::use_data()`, except that it saves the Object in the `.rds` format, which is more convenient for single R Objects than `.rda` or `.Rdata` (see `?readRDS`).
 -   `use_testdata_raw()` creates the directory `tests/testhat/testdata-raw`. Use this directory to put scripts that generate the data in `tests/testhat/testdata`.

@@ -10,6 +10,7 @@
 #'
 #' @export
 test_with_skip <- function(...){
+  .Deprecated(msg = "Use subfolders insteads")
   fltr <- list_test_files(
     full_names = FALSE,
     skip = TRUE

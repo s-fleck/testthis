@@ -11,10 +11,12 @@ output: github_document
 Testthis provides utility functions and RStudio addins for common package 
 development tasks:
 
-* `test_this()`: Run tests associated with the currently open R script file.
-* `lest_this()`: "Load and test"; As above, but call `devtools::load_all()` first
+* `test_this()`: Reloads the package and runs tests associated with the 
+  currently open R script file.
 * `test_with_skip()`: Like `devtools::test()`, but does not run test files that
-  contain the line `#' @skip.`
+  contain the line `#' @skip`. This function is deprecated and will eventually
+  be removed. If you do find this feature useful and do not want to see it gone,
+  please file an issue.
 * `open_testfile()`: Opens the associated testfile in an editor window. If the 
   currently open file already is a testfile, it opens the associated file in
   the `/R` directory. Can be used to jump back and forth between both.
@@ -40,7 +42,7 @@ Testthis also provides the experimental feature `get_test_coverage()`.
 In contrast to the popular [covr](https://github.com/r-lib/covr) package, this
 does *not* calculate the coverage automatically. It rather requires you
 to put special comment tags in your test-source files. You can use it like a 
-todo/checklist.
+todo/checklist. 
 
 
 
