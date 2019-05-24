@@ -126,16 +126,17 @@ read_testdata <- function(infile, subdir = NULL){
   # Preconditions
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
 
-
   # Find test_data dir
-  cache_dir <- file.path(usethis::proj_get(), 'tests', 'testthat', 'testdata')
+  cache_dir <- tryCatch(
+    expr  = file.path(usethis::proj_get(), 'tests', 'testthat', 'testdata'),
+    error = function(e) file.path(getwd(), 'testdata')
+  )
 
   if(!is.null(subdir)){
     cache_dir <- file.path(cache_dir, subdir)
   }
 
   assert_that(file.exists(cache_dir))
-
 
   # Read file
   path        <- file.path(cache_dir, infile)
