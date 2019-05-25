@@ -62,7 +62,7 @@ get_test_coverage <- function(
 
 test_coverage <- function(dat){
   class(dat) <- c("Test_coverage", "data.frame")
-  assert(is_valid(dat))
+  assert(is_valid.Test_coverage(dat))
   return(dat)
 }
 
