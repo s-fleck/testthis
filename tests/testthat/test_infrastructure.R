@@ -3,12 +3,13 @@ context("infrastructure-non cran tests")
 
 setup({
   tenv <- parent.env(environment())
-  assign("proj_old", usethis::proj_get(), pos = tenv)
+  proj_old <- tryCatch(usethis::proj_get(), error = function(e) NULL)
+  assign("proj_old", proj_old, tenv)
   assign("td", file.path(tempdir(), "testthis"), tenv)
   assign("proj_test", file.path(td, "test_pkg"), tenv)
 
   dir <- find_testdata("test_pkg", must_exist = TRUE)
-  fs::dir_copy(dir, proj_test, overwrite = TRUE)
+  fs::dir_copy(dir, proj_test)
   usethis::proj_set(proj_test)
 })
 
@@ -93,6 +94,10 @@ test_that("use_testdata creates testdata dir", {
 
 test_that("use_tester works as expected", {
   package_state <- list.files(proj_test, recursive = TRUE)
+
+  expect_true(dir.exists(proj_test))
+  print(list.files(proj_test))
+  expect_true(dir.exists(file.path(proj_test, "R")))
 
   # Check if tester file is created at the correct path and not empty
   expect_message(expect_true(

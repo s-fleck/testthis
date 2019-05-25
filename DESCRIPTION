@@ -1,7 +1,7 @@
 Package: testthis
 Type: Package
 Title: Utils and 'RStudio' Addins to Make Testing Even More Fun
-Version: 1.0.4.9003
+Version: 1.0.4.9004
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description:
@@ -23,7 +23,8 @@ Imports:
   stats,
   tools,
   pkgload,
-  rprojroot
+  rprojroot,
+  fs
 Suggests:
   knitr,
   rmarkdown,

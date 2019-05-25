@@ -88,6 +88,10 @@ use_tester <- function(
   tester_path = file.path("R", "testthis-testers.R")
 ){
   fname   <- file.path(usethis::proj_get(), tester_path)
+  assert(
+    dir.exists(dirname(fname)),
+    sprintf("Directory '%s' does not exist", dirname(fname))
+  )
   funname <- paste0("test_", path)
 
   message(sprintf("creating tester function %s() in %s", funname, fname))

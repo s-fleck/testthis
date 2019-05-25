@@ -13,11 +13,7 @@ test_this(...)
 \code{NULL} (invisibly)
 }
 \description{
-Runs testthat tests in a single .R file. If the file currently open in the
-RStudio editor is called \code{my_function.R}, \code{test_this()} calls
-\code{testthat::test_file()} on \file{tests/testthat/test_my_function.R}. If
-the filename of the currently open file with starts with \code{test_} it will
-call \code{testthat::test_file()} on the current file.
+Runs testthat tests in a single \code{.R`` file. If the file currently open in the RStudio editor is called }my_function.R\code{, }test_this()\code{calls}testthat::test_file()\code{on \file{tests/testthat/test_my_function.R}. If the filename of the currently open file with starts with}test_\code{it will call}testthat::test_file()` on the current file.
 }
 \details{
 This is useful in cases where you don't want to run all tests in a package
