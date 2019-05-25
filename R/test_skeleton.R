@@ -22,7 +22,7 @@
 test_skeleton <- function(
   fname = NULL,
   open = TRUE,
-  sep = options('testthis.sep')
+  sep = options("testthis.sep")
 ){
   require_rstudio()
   ensure_testthat()
@@ -32,9 +32,9 @@ test_skeleton <- function(
   }
 
   if(file.exists(fname)){
-    message(sprintf('* File alread exists: %s', fname))
+    message(sprintf("* File alread exists: %s", fname))
   } else {
-    message(sprintf('* Creating `%s`', fname))
+    message(sprintf("* Creating `%s`", fname))
     title_name <- stringi::stri_sub(
       tools::file_path_sans_ext(basename(fname)), 6
     )

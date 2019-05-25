@@ -31,8 +31,10 @@ use_testdata <- function(
   compress = TRUE
 ){
   # Preconditions
-  assert_that(is.flag(overwrite))
-  assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
+  assert_that(
+    is.flag(overwrite),
+    is.null(subdir) || (is.scalar(subdir) && is.character(subdir))
+  )
 
 
   # Find and prepare testdata directory

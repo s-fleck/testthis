@@ -63,7 +63,7 @@ test_subdir <- function(subdir, ...){
 #' @export
 test_integration <- function(...){
   test_subdir(
-    subdir = options('testthis.integration_tests_path'),
+    subdir = options("testthis.integration_tests_path"),
     ...)
 }
 
@@ -74,7 +74,7 @@ test_integration <- function(...){
 #' @export
 test_acceptance <- function(...){
   test_subdir(
-    subdir = options('testthis.acceptance_tests_path'),
+    subdir = options("testthis.acceptance_tests_path"),
     ...)
 }
 
@@ -85,7 +85,7 @@ test_acceptance <- function(...){
 #' @export
 test_manual <- function(...){
   test_subdir(
-    subdir = options('testthis.manual_tests_path'),
+    subdir = options("testthis.manual_tests_path"),
     ...)
 }
 

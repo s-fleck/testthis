@@ -45,7 +45,7 @@ get_testfile_name <- function(sep = options('testthis.sep')){
         if (identical(length(testfile_name), 0L)){
           testfile_name <- file.path(
             testthat::test_path(),
-            paste0('test', sep, bn)
+            paste0("test", sep, bn)
           )
         }
 
@@ -57,7 +57,7 @@ get_testfile_name <- function(sep = options('testthis.sep')){
   # Post processing
     if (length(testfile_name) > 1) {
       warning(
-        'More than one possible test file found. Using ',
+        "More than one possible test file found. Using ",
         testfile_name[[1]]
       )
 
@@ -69,8 +69,8 @@ get_testfile_name <- function(sep = options('testthis.sep')){
     if(!is_testfile(testfile_name)){
       stop(
         testfile_name,
-        ' is not a valid name for a test file. ',
-        'Test file names must start with either "test_" or "test-".'
+        " is not a valid name for a test file. ",
+        "Test file names must start with either 'test_' or 'test-'."
       )
     }
 

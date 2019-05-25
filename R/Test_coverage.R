@@ -62,7 +62,7 @@ get_test_coverage <- function(
 
 test_coverage <- function(dat){
   class(dat) <- c("Test_coverage", "data.frame")
-  assert_that(is_valid(dat))
+  assert(is_valid(dat))
   return(dat)
 }
 
@@ -72,11 +72,11 @@ test_coverage <- function(dat){
 is_valid.Test_coverage <- function(dat){
   res <- list()
 
-  res$names <- assert_that(identical(
+  res$names <- assert(identical(
     c("fun", "exp", "s3", "tested", "ignore", "paths"),
     names(dat))
   )
-  res$types <- assert_that(identical(
+  res$types <- assert(identical(
     unname(unlist(lapply(dat, class))),
     c("character", "logical", "logical", "logical", "logical", "AsIs"))
   )

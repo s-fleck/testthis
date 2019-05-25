@@ -1,9 +1,64 @@
-# sfmisc utils 0.0.1.9010
+# sfmisc utils 0.0.1.9029
 
 
 
 
 # utils -------------------------------------------------------------------
+
+# nocov start
+# commonly used utility functions included from the package sfmisc
+
+
+#' Paste and Truncate
+#'
+#' @param x a vector
+#' @param width (maximum) width of result
+#' @param dots `character` scalar. String to use for ellipses
+#' @inheritParams paste
+#'
+#' @return a `character` scalar
+#' @noRd
+#'
+#' @example
+#'   ptrunc(month.abb)
+#'   ptrunc(month.abb, month.name)
+#'
+ptrunc <- function(
+  ...,
+  width = 40L,
+  sep = ", ",
+  collapse = ", ",
+  dots = " ..."
+){
+  assert(width > 7L, "The minimum supported width is 8")
+  x <- paste(..., sep = sep, collapse = collapse)
+
+  sel <- vapply(x, nchar, integer(1), USE.NAMES = FALSE) > width
+
+  x[sel] <- strtrim(x[sel], width = width - 4L)
+  x[sel] <- paste0(gsub(",{0,1}\\s*$", "", x[sel]), dots)
+  x
+}
+
+
+
+
+fmt_class <- function(x){
+  paste0("<", paste(x, collapse = "/"), ">")
+}
+
+
+
+
+#' @param x any \R object
+#' @param ignore subclasses to ignore
+#' @noRd
+class_fmt <- function(x, ignore = NULL){
+  fmt_class(setdiff(class(x), ignore))
+}
+
+
+
 
 compact <- function(x){
   x[!vapply(x, is.null, FALSE)]
@@ -75,9 +130,31 @@ assert <- function(
 
 
 
-assert_namespace <- function(x){
-  assert(requireNamespace(x, quietly = TRUE))
-  invisible(TRUE)
+assert_namespace <- function(...){
+  res <- vapply(c(...), requireNamespace, logical(1), quietly = TRUE)
+  if (all(res)){
+    return(invisible(TRUE))
+
+  } else {
+    pkgs <- c(...)
+    if (identical(length(pkgs), 1L)){
+      msg <- sprintf(paste(
+        "This function requires the package '%s'. You can install it with",
+        '`install.packages("%s")`.'), pkgs, pkgs
+      )
+    } else {
+      msg <- sprintf(
+        paste(
+          "This function requires the packages %s. You can install them with",
+          "`install.packages(%s)`."
+        ),
+        paste(names(res)[!res], collapse = ", "),
+        deparse(names(res))
+      )
+    }
+  }
+
+  stop(msg)
 }
 
 
@@ -148,6 +225,23 @@ error <- function(subclass, message, call = sys.call(-1), ...) {
 
 
 # predicates --------------------------------------------------------------
+
+
+
+is_error <- function(x){
+  inherits(x, "error")
+}
+
+
+
+
+is_try_error <- function(x){
+  inherits(x, "try-error")
+}
+
+
+
+
 is_scalar <- function(x){
   identical(length(x), 1L)
 }
@@ -155,8 +249,71 @@ is_scalar <- function(x){
 
 
 
-is_scalar_character <- function(x){
-  is.character(x) && is_scalar(x)
+is_POSIXct <- function(x){
+  inherits(x, "POSIXct")
+}
+
+
+
+
+is_scalar_POSIXct <- function(x){
+  is_POSIXct(x) && is_scalar(x)
+}
+
+
+
+
+is_POSIXlt <- function(x){
+  inherits(x, "POSIXlt")
+}
+
+
+
+
+is_scalar_POSIXlt <- function(x){
+  is_POSIXlt(x) && is_scalar(x)
+}
+
+
+
+
+is_POSIXt <- function(x){
+  inherits(x, "POSIXt")
+}
+
+
+
+
+is_scalar_POSIXt <- function(x){
+  is_POSIXt(x) && is_scalar(x)
+}
+
+
+
+
+is_Date <- function(x){
+  inherits(x, "Date")
+}
+
+
+
+
+is_scalar_Date <- function(x){
+  is_Date(x) && is_scalar(x)
+}
+
+
+
+
+is_scalar_list <- function(x){
+  is_list(x) && is_scalar(x)
+}
+
+
+
+
+is_scalar_atomic <- function(x){
+  is.atomic(x) && is_scalar(x)
 }
 
 
@@ -169,27 +326,78 @@ is_scalar_logical <- function(x){
 
 
 
-is_scalar_integerish <- function(x){
-  is_scalar(x) && is_integerish(x)
+is_scalar_integer <- function(x){
+  is.integer(x) && is_scalar(x)
 }
 
 
 
 
-is_tf <- function(x){
+is_scalar_factor <- function(x){
+  is.factor(x) && is_scalar(x)
+}
+
+
+
+
+is_scalar_list <- function(x){
+  is.list(x) && is_scalar(x)
+}
+
+
+
+
+is_scalar_numeric <- function(x){
+  is.numeric(x) && is_scalar(x)
+}
+
+
+
+
+is_scalar_character <- function(x){
+  is.character(x) && is_scalar(x)
+}
+
+
+
+
+is_vector <- function(x){
+  is.atomic(x) || is.list(x)
+}
+
+
+
+
+is_bool <- function(x){
   is.logical(x) && !anyNA(x)
 }
 
 
 
 
-is_scalar_tf <- function(x){
+#' Check if Object is a Boolean
+#'
+#' Check wheter an object is either `TRUE` or `FALSE`.
+#'
+#' @param x Any \R Object.
+#' @return either `TRUE` or `FALSE`
+#' @noRd
+#'
+is_scalar_bool <- function(x){
   identical(x, TRUE) || identical(x, FALSE)
 }
 
 
 
 
+#' Check if Object is Integer-like
+#'
+#' Check wheter an object is either `TRUE` or `FALSE`.
+#'
+#' @param x Any \R Object.
+#' @return either `TRUE` or `FALSE`
+#' @noRd
+#'
 is_integerish <- function(x){
   if (!is.numeric(x)){
     FALSE
@@ -201,6 +409,33 @@ is_integerish <- function(x){
 
 
 
+is_scalar_integerish <- function(x){
+  is_scalar(x) && is_integerish(x)
+}
+
+
+
+
+is_n <- function(x){
+  is_scalar_integerish(x) && identical(x > 0, TRUE)
+}
+
+
+
+
+is_n0 <- function(x){
+  is_scalar_integerish(x) && identical(x >= 0, TRUE)
+}
+
+
+
+
+#' Check if Objects have the same length
+#'
+#' @param ... Any number of \R Objects.
+#'
+#' @return either `TRUE` or `FALSE`
+#' @noRd
 is_equal_length <- function(...){
   lengths <- vapply(list(...), length, 1L)
   identical(length(unique(lengths)), 1L)
@@ -209,6 +444,14 @@ is_equal_length <- function(...){
 
 
 
+#' Check if Object has length 0
+#'
+#' Check wheter an object is either `TRUE` or `FALSE`.
+#'
+#' @param x Any \R Object.
+#' @return either `TRUE` or `FALSE`
+#' @noRd
+#'
 is_empty <- function(x){
   identical(length(x), 0L)
 }
@@ -216,6 +459,14 @@ is_empty <- function(x){
 
 
 
+#' Check if a String is Blank
+#'
+#' Check wheter a character vector contains only of spaces
+#'
+#' @param x Any \R Object.
+#' @return either `TRUE` or `FALSE`
+#' @noRd
+#'
 is_blank <- function(x){
   trimws(x) == ""
 }
@@ -223,7 +474,149 @@ is_blank <- function(x){
 
 
 
+#' Test if a Vector or Combination of Vectors is a Candidate Key
+#'
+#' Checks if all elements of the atomic vector `x`, or the combination of
+#' all elements of `x` if `x` is a `list`, are unique and neither `NA` or
+#' `infinite`.
+#'
+#' @param x a atomic vector or a list of atomic vectors
+#'
+#' @return `TRUE/FALSE`
+#' @noRd
+#'
+#' @examples
+#'
+#' is_candidate_key(c(1, 2, 3))
+#' is_candidate_key(c(1, 2, NA))
+#' is_candidate_key(c(1, 2, Inf))
+#'
+#' td <- data.frame(
+#'   x = 1:10,
+#'   y = 1:2,
+#'   z = 1:5
+#' )
+#'
+#' is_candidate_key(list(td$x, td$z))
+#' # a data.frame is just a special list
+#' is_candidate_key(td[, c("y", "z")])
+is_candidate_key <- function(x){
+
+  if (is.atomic(x)){
+    # !is.infinite instead of is.finite because x can be a character vector
+    length(x) > 1 &&
+    all(!is.infinite(x)) &&
+    !any(is.na(x)) &&
+    identical(length(unique(x)), length(x))
+  } else if (is.list(x)){
+    length(x) > 0 &&
+    length(x[[1]] > 0) &&
+    do.call(is_equal_length, x) &&
+    all(vapply(x, function(.x) all(!is.infinite(.x)), logical(1))) &&
+    all(vapply(x, function(.x) !any(is.na(.x)), logical(1))) &&
+    !any(duplicated(as.data.frame(x)))
+  }
+}
+
+
+
+
+# https://modern-sql.com/feature/is-distinct-from
+is_not_distinct_from <- function(x, y){
+  ((x == y) & !is.na(x) & !is.na(y)) | (is.na(x) & is.na(y))
+}
+
+
+
+
+is_distinct_from <- function(x, y){
+  ((x != y) & !is.na(x) & !is.na(y)) | (is.na(x) != is.na(y))
+}
+
+
+
+
+is_windows_path <- function(x){
+  nchar(x) >= 2 & grepl("^[A-Za-z].*", x) & substr(x, 2, 2) == ":"
+}
+
+
+
+# equalish ----------------------------------------------------------------
+
+#' Check for equality within a tolerance level
+#'
+#'
+#'
+#' @param x,y `numeric` vectors
+#' @param tolerance `numeric` scalar. tolerance level (absolute value). Defaults
+#'   to `.Machine$double.eps^0.5` which is a sensible default for comparing
+#'   floating point numbers.
+#'
+#' @return `equalish()` returns TRUE if the absolute difference between `x` and
+#'   `y` is less than `tolerance`.
+#' @noRd
+#' @seealso [.Machine]
+#'
+#'
+#' @examples
+#' a <- 0.7
+#' b <- 0.2
+#' a - b == 0.5
+#' equalish(a - b, 0.5)
+#'
+equalish <- function(x, y, tolerance = .Machine$double.eps ^ 0.5){
+  assert(is_scalar_numeric(tolerance) && tolerance >= 0)
+  abs(x - y) < tolerance
+}
+
+
+
+
+#' @return `equalish_frac()` returns `TRUE` if the relative difference between
+#'   `x` and `y` is smaller than `tolerance`. The relative difference is
+#'   defined as `abs(x - y) / pmax(abs(x), abs(y))`. If both `x` and `y` are
+#'   `0` the relative difference is not defined, but this function will still
+#'   return `TRUE`.
+#'
+#' @noRd
+#' @examples
+#'
+#' equalish_frac(1000, 1010, tolerance = 0.01)
+#' equalish_frac(1000, 1010, tolerance = 0.009)
+#' equalish_frac(0, 0)
+#'
+equalish_frac <- function(x, y, tolerance = .Machine$double.eps ^ 0.5){
+  assert(is_scalar_numeric(tolerance) && tolerance >= 0)
+  res <- abs(x - y) / pmax(abs(x), abs(y)) < tolerance
+  res[x == 0 & y == 0] <- TRUE
+  res
+}
+
+
+
+
 # all_are -----------------------------------------------------------------
+
+#' Convert vector if identical elements to scalar
+#'
+#' Returns `unique(x)` if all elements of `x` are identical, throws an error if
+#' not.
+#'
+#' @inheritParams all_are_identical
+#'
+#' @return A scalar of the same type as `x`
+#' @noRd
+as_scalar <- function(x){
+  res <- unique(x)
+  if (is_scalar(res)){
+    return(res)
+  } else {
+    stop("Not all elements of x are identical")
+  }
+}
+
+
 
 
 #' Test if all elements of a vector are identical
@@ -300,3 +693,112 @@ all_are_distinct <- function(
     return(empty_value)
   }
 }
+
+
+
+
+n_distinct <- function(x){
+  length(unique(x))
+}
+
+
+
+
+# misc --------------------------------------------------------------------
+
+
+pad_left <- function(
+  x,
+  width = max(nchar(paste(x))),
+  pad = " "
+){
+  diff <- pmax(width - nchar(paste(x)), 0L)
+  padding <-
+    vapply(diff, function(i) paste(rep.int(pad, i), collapse = ""), character(1))
+  paste0(padding, x)
+}
+
+
+
+
+pad_right <- function(
+  x,
+  width = max(nchar(paste(x))),
+  pad = " "
+){
+  diff <- pmax(width - nchar(paste(x)), 0L)
+  padding <-
+    vapply(diff, function(i) paste(rep.int(pad, i), collapse = ""), character(1))
+  paste0(x, padding)
+}
+
+
+
+
+`%||%` <- function(x, y){
+  if (is.null(x))
+    y
+  else (x)
+}
+
+
+
+
+preview_object <- function(
+  x,
+  width = 32,
+  brackets = c("(", ")"),
+  quotes   = c("`", "`"),
+  dots = ".."
+){
+  if (!is.atomic(x))
+    return(class_fmt(x))
+
+  if (is.numeric(x))
+    x <- format(x, justify = "none", drop0trailing = TRUE, trim = TRUE)
+
+  res <- ptrunc(x, collapse = ", ", width = width, dots = dots)
+
+  if (length(x) > 1)
+    res <- paste0(brackets[[1]], res, brackets[[2]])
+  else
+    res <- paste0(quotes[[1]], res, quotes[[2]])
+
+  res
+}
+
+
+
+
+#' Clean up paths to make them comparable, inspired by fs::path_tidy
+#'
+#' @param x `character` vector
+#'
+#' @return a `character` vector
+#' @noRd
+path_tidy <- function(x){
+  x <- gsub("\\\\", "/", x)
+  x <- gsub("(?!^)/+", "/", x, perl = TRUE)
+
+  sel <- x != "/"
+  x[sel] <- gsub("/$", "", x[sel])
+
+  sel <- is_windows_path(x)
+
+  if (any(sel)){
+    clean_win <- function(.x){
+      substr(.x, 1, 1)  <- toupper(substr(.x, 1 ,1))
+      .sel <- nchar(.x) == 2
+      .x[.sel] <- paste0(.x[.sel], "/")
+      .x
+    }
+
+    x[sel] <- clean_win(x[sel])
+  }
+
+  x
+}
+
+
+
+# nocov end
