@@ -1,5 +1,10 @@
 # testthis 1.0.4.9000
 
+* fixed `read_testdata()` so that it works with R CMD CHECK (#11)
+* added `find_testdata()` which returns the path to the testdata directory
+
+
+
 # testthis 1.0.4
 
 * Import `parse_ns_file()` from pkgload instead of devtools

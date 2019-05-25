@@ -3,21 +3,18 @@
 \name{use_testdata}
 \alias{use_testdata}
 \alias{has_testdata}
-\alias{read_testdata}
 \title{Create \code{testdata} folder.}
 \usage{
 use_testdata(..., subdir = NULL, overwrite = FALSE, ignore = FALSE,
   compress = TRUE)
 
 has_testdata()
-
-read_testdata(infile, subdir = NULL)
 }
 \arguments{
 \item{...}{\R objects to save to the \file{testdata} dir. If empty,
 an empty directory is created.}
 
-\item{subdir}{Character scalar. Subdirectory of \file{test_data} to save
+\item{subdir}{Character scalar. Subdirectory of \file{testdata} to save
 to / read from.}
 
 \item{overwrite}{Logical scalar. Should existing files be overwritten?}
@@ -28,17 +25,12 @@ to / read from.}
     to use \code{"gzip"} compression, or one of \code{"gzip"},
     \code{"bzip2"} or \code{"xz"} to indicate the type of compression to
     be used.  Ignored if \code{file} is a connection.}
-
-\item{infile}{rds file to read (must end in .rds, otherwise .rds ending is
-automatically added)}
 }
 \value{
 \code{use_testdata()} returns \code{TRUE} if object was successfully saved.
 
 \code{has_testdata()} returns \code{TRUE} if package has a
 \file{tests/testthat/testdata} folder.
-
-\code{read_testdata()} returns a single \R object
 }
 \description{
 Save R objects to separate files \file{tests/testthat/testdata} in the
@@ -55,6 +47,8 @@ Save R objects to separate files \file{tests/testthat/testdata} in the
 }
 }
 \seealso{
+\code{\link[=read_testdata]{read_testdata()}}
+
 \code{\link[base:readRDS]{base::readRDS()}}
 
 Other infrastructure: \code{\link{use_test_subdir}},
