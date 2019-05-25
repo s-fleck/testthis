@@ -20,5 +20,3 @@ test_that('get_pkg_tested_functions_from_desc works', {
 
   usethis::proj_set(proj)
 })
-
-

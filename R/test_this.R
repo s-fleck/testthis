@@ -1,6 +1,6 @@
 #' Test this file
 #'
-#' Runs testthat tests in a single .R file. If the file currently open in the
+#' Runs testthat tests in a single `.R`` file. If the file currently open in the
 #' RStudio editor is called `my_function.R`, `test_this()` calls
 #' `testthat::test_file()` on \file{tests/testthat/test_my_function.R}. If
 #' the filename of the currently open file with starts with `test_` it will
