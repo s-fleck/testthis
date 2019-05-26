@@ -8,15 +8,15 @@
 #'
 get_test_index <- function(){
   ttfiles <- list_test_files(full_names = TRUE, recursive = TRUE)
-  descs   <- extract_test_that_desc2(ttfiles)
-
-  res <- do.call(rbind, descs)
+  res <- collect_testthat_source_info(ttfiles)
 
   structure(
     res,
     class = c("test_index", "data.frame")
   )
 }
+
+
 
 
 #' Print Test Index objects
@@ -26,17 +26,15 @@ get_test_index <- function(){
 #' @return `x` (invisibly)
 #' @export
 print.test_index <- function(x){
-
   common_path <- fs::path_common(x$path)
   dd <- x
 
   dd <- as.data.frame(dd)
 
-  dd[order(dd$path), ]
   dd$path_diff <- path_diff(x$path, common_path)
   dd$subdir <- dirname(dd$path_diff)
   dd$file <- basename(dd$path)
-  dd$line <- style_subtle(pad_left(dd$line))
+  dd$line <- style_subtle(pad_left(dd$line1))
   sep     <- style_subtle(":")
 
   dd <- dd[order(dd$subdir), ]
@@ -61,68 +59,101 @@ print.test_index <- function(x){
 }
 
 
-#' Extract "desc" arguments from all test_that functions from .R script files
+
+#' Collect source info on test_that calls
 #'
-#' @param infile character. Path to an .R script file, or a list of such paths;
-#' usually created with list.files("/path/to/directory")
-#' @return content of the "desc" arguments of test_that functions as a named
-#'   list (one element per file, names correspond to full file paths.)
-#' @noRd
-extract_test_that_desc2 <- function(infile){
+#' @param infiles a `character` vector of file paths
+#'
+#' @return
+collect_testthat_source_info <- function(
+  infiles
+){
+  tt  <-
+    infiles %>%
+    lapply(parse) %>%
+    extract_testthat_parse_data()
 
-  tt_files  <- lapply(infile, parse) %>%
-    setNames(infile)
+  tt <- lapply(seq_along(tt), function(i) {
+    .x <- tt[[i]]
+    if (identical(nrow(.x), 0L))
+      return(NULL)
 
-  # fun tries to account for all possibilities where desc is not the second
-  # argument of testthat
-  fun <- function(exps) {
-    .x <- as.list(exps)
-    if("desc" %in% names(.x)){
-      return(.x$desc)
-    } else if ("code" %in% names(.x)){
-      codepos <- which("code" == names(.x))
-      if(identical(codepos, 2L)){
-        return(.x[[3]])
-      }
-    } else {
-      return(.x[[2]])
-    }
+    .x$desc <- extract_testthat_desc(.x$text)
+    .x$path <- infiles[[i]]
+    .x
+  })
+
+  do.call(rbind, tt)
+}
+
+
+
+
+#' Extract test_that() call related parse data (see [getParseData()])
+#'
+#' @param exp a `character` scalar (to be parsed) or an `expression` or a
+#'   `list` of `expressions` (as returned by [parse()].
+#'
+#' @return a `data.frame`. See [getParseData()]
+extract_testthat_parse_data <- function(
+  exp
+){
+  if (is.list(exp)){
+    return(lapply(exp, extract_testthat_parse_data))
   }
 
+  if (is_scalar_character(exp))
+    exp <- parse(text = exp)
 
-  lapply(seq_along(tt_files), function(i) {
-    .x <- tt_files[[i]]
-    path <- names(tt_files)[[i]]
-
-    test_that_calls <- .x[grep("test_that", as.list(.x))]
-
-    pd <- getParseData(test_that_calls)
-    rids <- pd[grep("^test_that$", pd$text), ][["line1"]]
-
-    descs <- lapply(test_that_calls, fun)
-
-    if (!length(descs)){
-      path <- NULL
-    }
-
-    data.frame(
-      line = as.integer(rids),
-      desc = unlist(descs),
-      path = path,
-      stringsAsFactors = FALSE
-    )
-  })
+  assert(is.expression(exp))
+  pd <- getParseData(exp, includeText = TRUE)
+  tt <- pd[grep("^test_that\\s*\\(", pd$text), ]
 }
+
+
+
+
+extract_testthat_desc <- function(
+  exp
+){
+  if (!is_scalar(exp)){
+    return(vapply(exp, extract_testthat_desc, character(1)))
+  }
+
+  if (is_scalar_character(exp))
+    exp <- parse(text = exp)
+  else
+    assert(is.expression(exp))
+
+  exp <- exp[[1]]
+  assert(is.call(exp))
+  exp <- as.list(exp)
+
+  if("desc" %in% names(exp)){
+    res <- exp$desc
+  } else if ("code" %in% names(exp)){
+    codepos <- which("code" == names(exp))
+    if(identical(codepos, 2L)){
+      res <- exp[[3]]
+    }
+  } else {
+    res <- exp[[2]]
+  }
+
+  format(res)
+}
+
+
+
+
 
 
 
 path_diff <- function(x, y){
   assert(is.character(x))
   assert(is_scalar_character(y))
-
   xs <- fs::path_split(x)
   ys <- unlist(fs::path_split(y))
-
 
   vapply(
     xs,
