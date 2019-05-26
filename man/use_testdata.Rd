@@ -6,7 +6,7 @@
 \title{Create \code{testdata} folder.}
 \usage{
 use_testdata(..., subdir = NULL, overwrite = FALSE, ignore = FALSE,
-  compress = TRUE)
+  compress = TRUE, refhook = NULL, version = NULL)
 
 has_testdata()
 }
@@ -25,6 +25,12 @@ to / read from.}
     to use \code{"gzip"} compression, or one of \code{"gzip"},
     \code{"bzip2"} or \code{"xz"} to indicate the type of compression to
     be used.  Ignored if \code{file} is a connection.}
+
+\item{refhook}{a hook function for handling reference objects.}
+
+\item{version}{the workspace format version to use.  \code{NULL}
+    specifies the current default version (3). The only other supported
+    value is 2, the default from \R 1.4.0 to \R 3.5.0.}
 }
 \value{
 \code{use_testdata()} returns \code{TRUE} if object was successfully saved.

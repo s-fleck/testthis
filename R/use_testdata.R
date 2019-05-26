@@ -28,7 +28,9 @@ use_testdata <- function(
   subdir = NULL,
   overwrite = FALSE,
   ignore = FALSE,
-  compress = TRUE
+  compress = TRUE,
+  refhook = NULL,
+  version = NULL
 ){
   # Preconditions
   assert_that(
@@ -62,7 +64,6 @@ use_testdata <- function(
 
     obj         <- vapply(to_save, as.character, character(1))
     save_files  <- paste0(file.path(save_path, obj), '.rds')
-
     existing_files <- save_files[file.exists(save_files)]
 
     if(!overwrite && length(existing_files) > 0L){
@@ -78,7 +79,13 @@ use_testdata <- function(
     )
 
     for(i in seq_along(save_files)){
-      saveRDS(list(...)[[i]], file = save_files[i], compress = compress)
+      saveRDS(
+        list(...)[[i]],
+        file = save_files[i],
+        compress = compress,
+        version = version,
+        refhook = refhook
+      )
     }
 
 
