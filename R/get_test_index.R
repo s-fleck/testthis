@@ -101,7 +101,7 @@ collect_testthat_source_info <- function(
   assert(all(file.exists(infiles)))
   tt  <-
     infiles %>%
-    lapply(parse) %>%
+    lapply(parse, keep.source = TRUE) %>%
     extract_testthat_parse_data()
 
   tt <- lapply(seq_along(tt), function(i) {
@@ -134,7 +134,7 @@ extract_testthat_parse_data <- function(
   }
 
   if (is_scalar_character(exp))
-    exp <- parse(text = exp)
+    exp <- parse(text = exp, keep.source = TRUE)
 
   assert(is.expression(exp))
 
@@ -153,7 +153,7 @@ extract_testthat_desc <- function(
   }
 
   if (is_scalar_character(exp))
-    exp <- parse(text = exp)
+    exp <- parse(text = exp, keep.source = TRUE)
   else
     assert(is.expression(exp))
 

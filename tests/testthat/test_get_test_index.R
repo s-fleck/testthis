@@ -34,7 +34,7 @@ test_that("extract_testthat_parse_data works as expected", {
 
   # works with expressions
   txt <- "test_that(x = y, desc = 'blubb')"
-  x <- extract_testthat_parse_data(parse(text = txt))
+  x <- extract_testthat_parse_data(parse(text = txt, keep.source = TRUE))
   expect_identical(x$text, txt)
 
   # works with nested expressions
@@ -54,7 +54,7 @@ test_that("extract_testthat_desc works as expected", {
 
   # works with expressions
   txt <- "test_that(x = y, desc = 'blubb', {  x <- y \n z = 3})"
-  x <- extract_testthat_desc(parse(text = txt))
+  x <- extract_testthat_desc(parse(text = txt, keep.source = TRUE))
   expect_identical(x, "blubb")
 
   # works with nested expressions
