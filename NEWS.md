@@ -5,6 +5,8 @@
 * added `version` and `refhook` argument to `use_testdata()` (which is passed
   on to `saveRDS()`). You can use `version = 2` to create testdata that is
   compatible with R < 3.5.0.
+* added `get_test_index()` which displays an index / table of contents of all 
+  `test_that()` cals in a package's `tests/testthat` directory
 
 
 
