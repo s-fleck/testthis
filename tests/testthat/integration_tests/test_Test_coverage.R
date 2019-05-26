@@ -42,8 +42,8 @@ test_that("get_pkg_tested_functions_from_desc", {
 
 
 
-test_that("get_test_coverage works", {
-  expect_silent(get_test_coverage())
-  expect_silent(get_test_coverage(from_tags = FALSE))
-  expect_silent(get_test_coverage(from_desc = FALSE))
+test_that("test_coverage works", {
+  expect_silent(test_coverage())
+  expect_silent(test_coverage(from_tags = FALSE))
+  expect_silent(test_coverage(from_desc = FALSE))
 })

@@ -96,7 +96,6 @@ test_that("use_tester works as expected", {
   package_state <- list.files(proj_test, recursive = TRUE)
 
   expect_true(dir.exists(proj_test))
-  print(list.files(proj_test))
   expect_true(dir.exists(file.path(proj_test, "R")))
 
   # Check if tester file is created at the correct path and not empty

@@ -26,7 +26,7 @@ teardown({
 
 
 
-test_that("extract_test_that_parse_data works as expected", {
+test_that("extract_testthat_parse_data works as expected", {
   # works with text
   txt <- "test_that(\n\n'blubb')"
   x <- extract_testthat_parse_data(txt)
@@ -46,7 +46,7 @@ test_that("extract_test_that_parse_data works as expected", {
 
 
 
-test_that("extract_test_that_desc works as expected", {
+test_that("extract_testthat_desc works as expected", {
   # works with text
   txt <- "test_that(\n\n'blubb')"
   x <- extract_testthat_desc(txt)

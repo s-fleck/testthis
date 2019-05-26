@@ -4,10 +4,12 @@
 \alias{print.test_index}
 \title{Print Test Index objects}
 \usage{
-\method{print}{test_index}(x)
+\method{print}{test_index}(x, ...)
 }
 \arguments{
-\item{x}{see \code{\link[=get_test_index]{get_test_index()}}}
+\item{x}{see \code{\link[=test_index]{test_index()}}}
+
+\item{...}{currently ignored}
 }
 \value{
 \code{x} (invisibly)

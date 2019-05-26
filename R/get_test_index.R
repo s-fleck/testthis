@@ -3,13 +3,43 @@
 #' Display the `desc` arguments of all `test_that(` calls in the
 #' `tests/testthat` directory of a package`
 #'
-#' @return A `test_index` `data.frame`
+#' @param markers `logical` scalar. Display RStudio markers. If `FALSE`, the
+#'   index is printed to the console instead.
+#'
+#' @return A `test_index` `data.frame` (invisibly if `markers == TRUE`)
 #' @export
 #'
+test_index <- function(
+  markers = requireNamespace("rstudioapi", quietly = TRUE)
+){
+  assert(is_scalar_bool(markers))
+  idx <- get_test_index()
+
+  if (markers){
+    rstudioapi::sourceMarkers(
+      name = "testthat index",
+      markers = data.frame(
+        type = "info",
+        file = idx$path,
+        line = idx$line1,
+        column = idx$col1,
+        message = idx$desc,
+        stringsAsFactors = FALSE
+      ),
+      basePath = fs::path_common(idx$path)
+    )
+    invisible(idx)
+  } else {
+    idx
+  }
+}
+
+
+
+
 get_test_index <- function(){
   ttfiles <- list_test_files(full_names = TRUE, recursive = TRUE)
   res <- collect_testthat_source_info(ttfiles)
-
   structure(
     res,
     class = c("test_index", "data.frame")
@@ -21,11 +51,12 @@ get_test_index <- function(){
 
 #' Print Test Index objects
 #'
-#' @param x see [get_test_index()]
+#' @param x see [test_index()]
+#' @param ... currently ignored
 #'
 #' @return `x` (invisibly)
 #' @export
-print.test_index <- function(x){
+print.test_index <- function(x, ...){
   common_path <- fs::path_common(x$path)
   dd <- x
 
@@ -53,8 +84,6 @@ print.test_index <- function(x){
     cat("\n\n")
   }
 
-
-
   invisible(x)
 }
 
@@ -64,11 +93,12 @@ print.test_index <- function(x){
 #' Collect source info on test_that calls
 #'
 #' @param infiles a `character` vector of file paths
-#'
 #' @return a `data.frame` similar to what [getParseData()] returns
+#' @noRd
 collect_testthat_source_info <- function(
   infiles
 ){
+  assert(all(file.exists(infiles)))
   tt  <-
     infiles %>%
     lapply(parse) %>%
@@ -107,8 +137,9 @@ extract_testthat_parse_data <- function(
     exp <- parse(text = exp)
 
   assert(is.expression(exp))
-  pd <- getParseData(exp, includeText = TRUE)
-  tt <- pd[grep("^test_that\\s*\\(", pd$text), ]
+
+  pd <- utils::getParseData(exp, includeText = TRUE)
+  pd[grep("^test_that\\s*\\(", pd$text), ]
 }
 
 
@@ -129,6 +160,8 @@ extract_testthat_desc <- function(
   exp <- exp[[1]]
   assert(is.call(exp))
   exp <- as.list(exp)
+
+  assert(identical(as.character(exp[[1]]), "test_that"))
 
   if("desc" %in% names(exp)){
     res <- exp$desc

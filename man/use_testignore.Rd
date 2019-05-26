@@ -14,7 +14,7 @@ use_testignore(x)
 }
 \description{
 Tell testthis that a function does not need to be tested
-(for \code{\link[=get_test_coverage]{get_test_coverage()}})
+(for \code{\link[=test_coverage]{test_coverage()}})
 }
 \examples{
 

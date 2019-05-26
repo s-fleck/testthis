@@ -28,11 +28,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' x <- get_test_coverage()
+#' x <- test_coverage()
 #' as.data.frame(x)
 #' }
 #'
-get_test_coverage <- function(
+test_coverage <- function(
   from_tags = TRUE,
   from_desc = TRUE
 ){
@@ -54,13 +54,30 @@ get_test_coverage <- function(
 
 
   attr(res, "package") <- usethis::proj_get()
-  test_coverage(res)
+  as_test_coverage(res)
 }
 
 
 
 
-test_coverage <- function(dat){
+#' Get Test Coverage
+#'
+#' Deprecated in favour of [test_coverage()]
+#' @param from_tags,from_desc see [test_coverage()]
+#'
+#' @export
+get_test_coverage <- function(
+  from_tags = TRUE,
+  from_desc = TRUE
+){
+  .Deprecated("test_coverage()")
+  test_coverage(from_tags = from_tags, from_desc = from_desc)
+}
+
+
+
+
+as_test_coverage <- function(dat){
   class(dat) <- c("Test_coverage", "data.frame")
   assert(is_valid.Test_coverage(dat))
   return(dat)
@@ -180,9 +197,9 @@ print.Test_coverage <- function(x, ...){
 
 #' Get functions defined in target package
 #'
-#' Helper functions internally by used internally by [get_test_coverage()].
+#' Helper functions internally by used internally by [test_coverage()].
 #'
-#' @inheritParams get_test_coverage
+#' @inheritParams test_coverage
 #' @noRd
 #' @return `get_pkg_functions()` returns a character vector of *all* functions
 #'   defined in package.

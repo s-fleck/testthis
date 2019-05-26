@@ -1,7 +1,7 @@
 #' Tell testthis that a function does not need to be tested
 #'
 #' Tell testthis that a function does not need to be tested
-#' (for [get_test_coverage()])
+#' (for [test_coverage()])
 #'
 #' @param x a character vector of ignores (function names).
 #'

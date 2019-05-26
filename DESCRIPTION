@@ -30,7 +30,8 @@ Suggests:
     rmarkdown,
     rstudioapi,
     roxygen2 (>= 5.0.0),
-    covr
+    covr,
+    crayon
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
