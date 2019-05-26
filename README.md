@@ -7,6 +7,8 @@
 status](http://www.r-pkg.org/badges/version/testthis)](https://cran.r-project.org/package=testthis)
 [![Travis build
 status](https://travis-ci.org/s-fleck/testthis.svg?branch=master)](https://travis-ci.org/s-fleck/testthis)
+[![Codecov test
+coverage](https://codecov.io/gh/s-fleck/testthis/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/testthis?branch=master)
 <!-- badges: end -->
 
 ## Overview
