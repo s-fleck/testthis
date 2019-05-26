@@ -26,10 +26,11 @@ Imports:
   rprojroot,
   fs
 Suggests:
-  knitr,
-  rmarkdown,
-  rstudioapi,
-  roxygen2 (>= 5.0.0)
+    knitr,
+    rmarkdown,
+    rstudioapi,
+    roxygen2 (>= 5.0.0),
+    covr
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)

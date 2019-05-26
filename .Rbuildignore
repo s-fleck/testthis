@@ -10,3 +10,4 @@
 .*rsconnect.*
 ^revdep$
 ^\.travis\.yml$
+^codecov\.yml$
