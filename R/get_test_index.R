@@ -60,11 +60,12 @@ print.test_index <- function(x){
 
 
 
+
 #' Collect source info on test_that calls
 #'
 #' @param infiles a `character` vector of file paths
 #'
-#' @return
+#' @return a `data.frame` similar to what [getParseData()] returns
 collect_testthat_source_info <- function(
   infiles
 ){
@@ -140,11 +141,11 @@ extract_testthat_desc <- function(
     res <- exp[[2]]
   }
 
+  if (is.symbol(res))
+    res <- deparse(res)
+
   format(res)
 }
-
-
-
 
 
 
