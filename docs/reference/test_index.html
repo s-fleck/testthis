@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guess tested functions based on contents of test_that desc argument — test_index • testthis</title>
+<title>Generate an index of all test_that calls — test_index • testthis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Guess tested functions based on contents of test_that desc argument — test_index" />
+<meta property="og:title" content="Generate an index of all test_that calls — test_index" />
 
-<meta property="og:description" content="Display the desc arguments of all test_that( calls in the
-tests/testthat directory of a package`" />
+<meta property="og:description" content="Generates an index the desc arguments of all test_that() calls in the
+tests/testthat directory of a package." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,19 +103,23 @@ tests/testthat directory of a package`" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Guess tested functions based on contents of test_that desc argument</h1>
+    <h1>Generate an index of all test_that calls</h1>
     <small class="dont-index">Source: <a href='https://github.com/s-fleck/testthis/blob/master/R/test_index.R'><code>R/test_index.R</code></a></small>
     <div class="hidden name"><code>test_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Display the <code>desc</code> arguments of all <code>test_that(</code> calls in the
-<code>tests/testthat</code> directory of a package`</p>
+    <p>Generates an index the <code>desc</code> arguments of all <code>test_that()</code> calls in the
+<code>tests/testthat</code> directory of a package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>test_index</span>(<span class='kw'>markers</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"rstudioapi"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))</pre>
+    <pre class="usage"><span class='fu'>test_index</span>(<span class='kw'>markers</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>() <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"rstudioapi"</span>,
+  <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+
+<span class='co'># S3 method for test_index</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -124,6 +128,14 @@ tests/testthat directory of a package`" />
       <th>markers</th>
       <td><p><code>logical</code> scalar. Display RStudio markers. If <code>FALSE</code>, the
 index is printed to the console instead.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>a <code>data.frame</code> of subclass <code>"test_index"</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>currently ignored</p></td>
     </tr>
     </table>
     

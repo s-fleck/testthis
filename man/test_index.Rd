@@ -2,18 +2,26 @@
 % Please edit documentation in R/test_index.R
 \name{test_index}
 \alias{test_index}
-\title{Guess tested functions based on contents of test_that desc argument}
+\alias{print.test_index}
+\title{Generate an index of all test_that calls}
 \usage{
-test_index(markers = requireNamespace("rstudioapi", quietly = TRUE))
+test_index(markers = interactive() && requireNamespace("rstudioapi",
+  quietly = TRUE))
+
+\method{print}{test_index}(x, ...)
 }
 \arguments{
 \item{markers}{\code{logical} scalar. Display RStudio markers. If \code{FALSE}, the
 index is printed to the console instead.}
+
+\item{x}{a \code{data.frame} of subclass \code{"test_index"}}
+
+\item{...}{currently ignored}
 }
 \value{
 A \code{test_index} \code{data.frame} (invisibly if \code{markers == TRUE})
 }
 \description{
-Display the \code{desc} arguments of all \code{test_that(} calls in the
-\code{tests/testthat} directory of a package`
+Generates an index the \code{desc} arguments of all \code{test_that()} calls in the
+\code{tests/testthat} directory of a package.
 }

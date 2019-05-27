@@ -66,8 +66,8 @@ Testthis also provuides some primtivie code analys tools
     can function as a simple todo list for testing, but does not replace
     a proper test coverage analyzer like
     [covr](https://github.com/r-lib/covr).
-  - `test_index` produces an index of all `test_that()` calls. Supports
-    RStudio Markers when run interactively from within RStudio.
+  - `test_index()` produces an index of all `test_that()` calls.
+    Supports RStudio Markers when run interactively from within RStudio.
 
 For more details see the [function
 reference](https://s-fleck.github.io/testthis/reference/index.html)

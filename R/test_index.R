@@ -1,7 +1,7 @@
-#' Guess tested functions based on contents of test_that desc argument
+#' Generate an index of all test_that calls
 #'
-#' Display the `desc` arguments of all `test_that(` calls in the
-#' `tests/testthat` directory of a package`
+#' Generates an index the `desc` arguments of all `test_that()` calls in the
+#' `tests/testthat` directory of a package.
 #'
 #' @param markers `logical` scalar. Display RStudio markers. If `FALSE`, the
 #'   index is printed to the console instead.
@@ -10,7 +10,7 @@
 #' @export
 #'
 test_index <- function(
-  markers = requireNamespace("rstudioapi", quietly = TRUE)
+  markers = interactive() && requireNamespace("rstudioapi", quietly = TRUE)
 ){
   assert(is_scalar_bool(markers))
   idx <- get_test_index()
@@ -49,12 +49,10 @@ get_test_index <- function(){
 
 
 
-#' Print Test Index objects
-#'
-#' @param x see [test_index()]
+#' @param x a `data.frame` of subclass `"test_index"`
 #' @param ... currently ignored
 #'
-#' @return `x` (invisibly)
+#' @rdname test_index
 #' @export
 print.test_index <- function(x, ...){
   common_path <- fs::path_common(x$path)
