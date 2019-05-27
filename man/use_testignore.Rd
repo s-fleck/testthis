@@ -25,7 +25,6 @@ use_testignore("helperfunction")
 }
 \seealso{
 Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_testdata_raw}},
   \code{\link{use_testdata}}, \code{\link{use_tester}}
 }
 \concept{infrastructure}

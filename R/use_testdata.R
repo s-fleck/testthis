@@ -17,7 +17,6 @@
 #'
 #' @export
 #' @family infrastructure
-#' @seealso [read_testdata()]
 #' @seealso [base::readRDS()]
 #' @examples
 #' \dontrun{
@@ -95,12 +94,10 @@ use_testdata <- function(
 
 
 
-#' Create \code{testdata-raw} folder.
-#'
-#' A folder to put scripts in that produce the files in \file{testdata}
-#'
+#' `use_testdata_raw()` creates a folder for scripts that produce the files in
+#' \file{testdata}
+#' @rdname use_testdata
 #' @export
-#' @family infrastructure
 use_testdata_raw <- function(){
   usethis::use_directory(
     file.path("tests", "testthat", "testdata-raw"),
@@ -113,7 +110,6 @@ use_testdata_raw <- function(){
 
 
 #' @rdname use_testdata
-#'
 #' @return `has_testdata()` returns `TRUE` if package has a
 #' \file{tests/testthat/testdata} folder.
 #'
@@ -126,12 +122,9 @@ has_testdata <- function(){
 
 
 
-#' Find / Read Test Data
-#'
-#' @inheritParams use_testdata
 #' @param infile rds file to read (must end in .rds, otherwise .rds ending is
 #'   automatically added)
-#' @seealso [use_testdata()]
+#' @rdname use_testdata
 #'
 #' @return `read_testdata()` returns a single \R object
 #' @export
@@ -169,7 +162,7 @@ read_testdata <- function(infile, subdir = NULL){
 #'   in the testdata directory
 #'
 #' @export
-#' @rdname read_testdata
+#' @rdname use_testdata
 find_testdata <- function(..., path = ".", must_exist = FALSE){
   p <- rprojroot::find_testthat_root_file("testdata", ..., path = path)
   if (must_exist){

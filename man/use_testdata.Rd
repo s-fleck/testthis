@@ -2,13 +2,22 @@
 % Please edit documentation in R/use_testdata.R
 \name{use_testdata}
 \alias{use_testdata}
+\alias{use_testdata_raw}
 \alias{has_testdata}
+\alias{read_testdata}
+\alias{find_testdata}
 \title{Create \code{testdata} folder.}
 \usage{
 use_testdata(..., subdir = NULL, overwrite = FALSE, ignore = FALSE,
   compress = TRUE, refhook = NULL, version = NULL)
 
+use_testdata_raw()
+
 has_testdata()
+
+read_testdata(infile, subdir = NULL)
+
+find_testdata(..., path = ".", must_exist = FALSE)
 }
 \arguments{
 \item{...}{\R objects to save to the \file{testdata} dir. If empty,
@@ -32,12 +41,25 @@ to / read from.}
     specifies the current default version (2), which has been the default
     since \R 1.4.0. The only other supported value is 3, introduced in
     \R 3.5.0.}
+
+\item{infile}{rds file to read (must end in .rds, otherwise .rds ending is
+automatically added)}
+
+\item{path}{Path of the directory to create, relative to the project.}
+
+\item{must_exist}{\code{logical} scalar. Assert that path specified in \code{...}
+exists}
 }
 \value{
 \code{use_testdata()} returns \code{TRUE} if object was successfully saved.
 
 \code{has_testdata()} returns \code{TRUE} if package has a
 \file{tests/testthat/testdata} folder.
+
+\code{read_testdata()} returns a single \R object
+
+\code{find_testdata()} returns the normalized path to a file in a
+in the testdata directory
 }
 \description{
 Save R objects to separate files \file{tests/testthat/testdata} in the
@@ -54,12 +76,9 @@ Save R objects to separate files \file{tests/testthat/testdata} in the
 }
 }
 \seealso{
-\code{\link[=read_testdata]{read_testdata()}}
-
 \code{\link[base:readRDS]{base::readRDS()}}
 
 Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_testdata_raw}}, \code{\link{use_tester}},
-  \code{\link{use_testignore}}
+  \code{\link{use_tester}}, \code{\link{use_testignore}}
 }
 \concept{infrastructure}
