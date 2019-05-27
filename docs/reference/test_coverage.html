@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Test Coverage of Package — test_coverage • testthis</title>
+<title>Test coverage of package — test_coverage • testthis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,11 @@
 
 
 
-<meta property="og:title" content="Get Test Coverage of Package — test_coverage" />
+<meta property="og:title" content="Test coverage of package — test_coverage" />
 
-<meta property="og:description" content="This extracts the test coverage of the target package (usually the package
-you are working on). Bear in mind that testthis uses a checklist-approach for
-this, and depends that you either put the function name in your
-test_that() calls, or used test_this tags. If you want automatic
-analysis of test coverage, you must look in other packages such as covr." />
+<meta property="og:description" content="This determines the test coverage of the target package based on the desc
+argument of test_that() calls. If you require a more comprehensive analysis
+of thest coverage, try the package covr instead." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,18 +104,16 @@ analysis of test coverage, you must look in other packages such as covr." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Test Coverage of Package</h1>
+    <h1>Test coverage of package</h1>
     <small class="dont-index">Source: <a href='https://github.com/s-fleck/testthis/blob/master/R/test_coverage.R'><code>R/test_coverage.R</code></a></small>
     <div class="hidden name"><code>test_coverage.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This extracts the test coverage of the target package (usually the package
-you are working on). Bear in mind that testthis uses a checklist-approach for
-this, and depends that you either put the function name in your
-<code>test_that()</code> calls, or used test_this tags. If you want automatic
-analysis of test coverage, you must look in other packages such as <code>covr</code>.</p>
+    <p>This determines the test coverage of the target package based on the <code>desc</code>
+argument of <code>test_that()</code> calls. If you require a more comprehensive analysis
+of thest coverage, try the package <strong>covr</strong> instead.</p>
     
     </div>
 
@@ -128,13 +124,13 @@ analysis of test coverage, you must look in other packages such as <code>covr</c
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>from_tags</th>
-      <td><p>Logical scalar. Checks the files if your test directory for
+      <td><p><code>logical</code> scalar. Checks the files if your test directory for
 testthis tags. Specifically, if you have the comment <code>#* @testing myfunction</code>
 in any of your test files, myfunction will be marked as tested.</p></td>
     </tr>
     <tr>
       <th>from_desc</th>
-      <td><p>Logical scalar. Checks the <code>desc</code> argument
+      <td><p><code>logical</code> scalar. Checks the <code>desc</code> argument
 <code>test_that(...)</code> of the tests in your test directory for functions
 names. E.g. if you have a testfile that contains
 <code>test_that("myfunction works", {...})</code>, myfunction will be marked as

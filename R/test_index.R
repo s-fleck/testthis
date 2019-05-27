@@ -3,8 +3,9 @@
 #' Generates an index the `desc` arguments of all `test_that()` calls in the
 #' `tests/testthat` directory of a package.
 #'
-#' @param markers `logical` scalar. Display RStudio markers. If `FALSE`, the
-#'   index is printed to the console instead.
+#' @param markers `logical` scalar. If `TRUE`, new markers are created in the
+#'   RStudio markers pane. If `FALSE`, the index is printed to the console
+#'   instead.
 #'
 #' @return A `test_index` `data.frame` (invisibly if `markers == TRUE`)
 #' @export

@@ -12,13 +12,16 @@ coverage](https://codecov.io/gh/s-fleck/testthis/branch/master/graph/badge.svg)]
 <!-- badges: end -->
 
 **testthis** makes unit testing in R more comfortable. It is designed to
-complement the packages **testthat**, **devtools** and **usethis**.
+complement the packages [testthat](https://github.com/r-lib/testthat),
+[devtools](https://github.com/r-lib/devtools) and
+[usethis](https://github.com/r-lib/usethis).
 
 ## Overview
 
-testthis provides RStudio addins for common tasks. These can be called
-like normal R function, but it is also possible to assigned to hotkeys
-to them in RStudio (*Tools/Modify Keyboard Shortcuts*).
+testthis provides RStudio addins for working with files that contain
+tests. These can be called like normal R function, but it is also
+possible to assigned them to hotkeys RStudio (*Tools/Modify Keyboard
+Shortcuts*).
 
   - `test_this()`: Reloads the package and runs tests associated with
     the currently open R script file.
@@ -37,7 +40,7 @@ testthis also provides functions for managing tests in subdirectories of
 
   - `use_testdata()` places a single R object in the
     `tests/testhat/testdata` directory. It is analoguous to
-    `usethis::use_data()`, except that it saves the Object in the `.rds`
+    `usethis::use_data()`, except that it saves the object in the `.rds`
     format, which is more appropriate for single R objects than `.rda`
     or `.Rdata` (see `?readRDS`).
 
@@ -50,21 +53,22 @@ testthis also provides functions for managing tests in subdirectories of
 
   - `use_test_subdir()` and `test_subdir()` for putting/running tests in
     subdirectories of `tests/testhat/`. These tests will *not* be run on
-    CRAN or by `devtools::test()`. This is useful for tests that require
-    external ressources (web, databases) or take long to execute.
+    CRAN or by `devtools::test()`. This is useful for tests that take a
+    long time to execute, or that require external ressources (web,
+    databases) that may not always be availabe.
     
     `test_acceptance()`, `test_manual()` and `test_integration()` are
     presets to run tests in the `integration_tests`, `acceptance_tests`
     and `manual_tests` subdirectories of `test/testthat`.
 
-Testthis also provuides some primtivie code analys tools
+Testthis also provides some simple code analysis tools
 
   - `test_coverage()` lists all functions of package and shows whether
-    they are mentioned in anny `test_that(` calls’s desc argument;
+    they are mentioned in any `test_that()` calls’ desc argument;
     e.g. if you have a testfile containing `test_that("testing that
-    function foo works", <...>)`, `foo()` will show up as tested. This
-    can function as a simple todo list for testing, but does not replace
-    a proper test coverage analyzer like
+    function foo works", <...>)`, `foo()` will show up marked as tested.
+    This can be used as a simple todo list for testing, but does not
+    replace a proper test coverage analyzer like
     [covr](https://github.com/r-lib/covr).
   - `test_index()` produces an index of all `test_that()` calls.
     Supports RStudio Markers when run interactively from within RStudio.

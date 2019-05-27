@@ -5,7 +5,7 @@
 #'
 #' @param ... \R objects to save to the \file{testdata} dir. If empty,
 #'   an empty directory is created.
-#' @param subdir Character scalar. Subdirectory of \file{testdata} to save
+#' @param subdir `character` scalar. Subdirectory of \file{testdata} to save
 #'   to / read from.
 #' @inheritParams base::readRDS
 #' @template overwrite
@@ -33,8 +33,9 @@ use_testdata <- function(
 ){
   # Preconditions
   assert_that(
-    is.flag(overwrite),
-    is.null(subdir) || (is.scalar(subdir) && is.character(subdir))
+    is_scalar_bool(overwrite),
+    is_scalar_bool(ignore),
+    is.null(subdir) || is_scalar_character(subdir)
   )
 
 

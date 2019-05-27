@@ -11,8 +11,9 @@ test_index(markers = interactive() && requireNamespace("rstudioapi",
 \method{print}{test_index}(x, ...)
 }
 \arguments{
-\item{markers}{\code{logical} scalar. Display RStudio markers. If \code{FALSE}, the
-index is printed to the console instead.}
+\item{markers}{\code{logical} scalar. If \code{TRUE}, new markers are created in the
+RStudio markers pane. If \code{FALSE}, the index is printed to the console
+instead.}
 
 \item{x}{a \code{data.frame} of subclass \code{"test_index"}}
 

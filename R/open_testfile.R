@@ -1,9 +1,10 @@
-#' Open associated test_file
+#' Open associated test file
 #'
 #' If the currently open file in the RStudio editor is called \file{myfun.R} this
 #' opens \file{tests/testthat/test_myfun.R} in a new tab. This function can also
-#' be used to jump back and forth between an R script and the associated test
-#' file.
+#' be used to jump back and forth between a script and the associated test
+#' file. You can modify this behaviour by putting the comment
+#' `#* @testfile anotherfile` anywhere in \file{myfun.R}.
 #'
 #' @export
 open_testfile <- function(){

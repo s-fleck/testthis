@@ -35,12 +35,12 @@
 #' own test subdirs instead.
 #'
 #' @inheritParams devtools::test
-#' @param subdir subdir of `inst/tests/` or `tests/testthat` that contains the
-#'   tests
+#' @param subdir `character` scalar. subdir of `inst/tests/` or `tests/testthat`
+#'   that contains the tests
 #' @param ... passed on to `devtools::test()`
 #' @seealso [`use_test_subdir()`]
 #'
-#' @return A [testthat_results] object (invisibly)
+#' @return A [testthat::testthat_results] object (invisibly)
 #'
 #' @export
 test_subdir <- function(subdir, ...){

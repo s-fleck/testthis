@@ -7,7 +7,7 @@
 #' call `testthat::test_file()` on the current file.
 #'
 #' This is useful in cases where you don't want to run all tests in a package
-#' via `devtools::test()` (CTRL+SHIFT+T).
+#' via `devtools::test()` (CTRL+SHIFT+T in RStudio).
 #'
 #' @param ... passed on to [testthat::test_file()]
 #'

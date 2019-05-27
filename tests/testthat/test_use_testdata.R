@@ -39,7 +39,7 @@ test_that("saving and loading testdata works", {
 
 
   # Test saving and loading
-  expect_output(expect_message(use_testdata(iris), "Saving to"))
+  expect_message(use_testdata(iris), "Saving to")
   expect_true(file.exists(efile))
   tdat <- read_testdata("iris.rds")
   expect_identical(iris, tdat)

@@ -23,7 +23,7 @@ find_testdata(..., path = ".", must_exist = FALSE)
 \item{...}{\R objects to save to the \file{testdata} dir. If empty,
 an empty directory is created.}
 
-\item{subdir}{Character scalar. Subdirectory of \file{testdata} to save
+\item{subdir}{\code{character} scalar. Subdirectory of \file{testdata} to save
 to / read from.}
 
 \item{overwrite}{Logical scalar. Should existing files be overwritten?}

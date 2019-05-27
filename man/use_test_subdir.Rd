@@ -16,17 +16,17 @@ use_acceptance_tests()
 use_manual_tests()
 }
 \arguments{
-\item{path}{Character scalar. Will be processed with \code{\link[base:make.names]{base::make.names()}} to
+\item{path}{\code{character} scalar. Will be processed with \code{\link[base:make.names]{base::make.names()}} to
 make a syntactically valid name.}
 
-\item{make_tester}{Logical or character scalar. Create an R script with a
+\item{make_tester}{\code{logical} or \code{character} scalar. Create an R script with a
 test helper function. If \code{TRUE} an R script file will be placed into the
 \file{R/} directory of the current package, containing a function definition
 for running the tests in \code{path}. The file will be named
 \file{testthis-testers.R}, but you can specify  your own name by
-passing a character scalar to make_tester. See \code{\link[=use_tester]{use_tester()}} for details.}
+passing a character scalar to \code{make_tester()}. See \code{\link[=use_tester]{use_tester()}} for details.}
 
-\item{ignore_tester}{Logical. Add \file{tester} file to \file{.Rbuildignore}?}
+\item{ignore_tester}{\code{logical} scalar`. Add \file{tester} file to \file{.Rbuildignore}?}
 }
 \value{
 \code{TRUE} on success (invisibly).

@@ -19,13 +19,13 @@ test_manual(...)
 test_all(...)
 }
 \arguments{
-\item{subdir}{subdir of \code{inst/tests/} or \code{tests/testthat} that contains the
-tests}
+\item{subdir}{\code{character} scalar. subdir of \code{inst/tests/} or \code{tests/testthat}
+that contains the tests}
 
 \item{...}{passed on to \code{devtools::test()}}
 }
 \value{
-A \link{testthat_results} object (invisibly)
+A \link[testthat:testthat_results]{testthat::testthat_results} object (invisibly)
 }
 \description{
 This is a simple wrapper for \code{\link[devtools:test]{devtools::test()}}, but rather than running

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Open associated test_file — open_testfile • testthis</title>
+<title>Open associated test file — open_testfile • testthis</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,13 @@
 
 
 
-<meta property="og:title" content="Open associated test_file — open_testfile" />
+<meta property="og:title" content="Open associated test file — open_testfile" />
 
 <meta property="og:description" content="If the currently open file in the RStudio editor is called myfun.R this
 opens tests/testthat/test_myfun.R in a new tab. This function can also
-be used to jump back and forth between an R script and the associated test
-file." />
+be used to jump back and forth between a script and the associated test
+file. You can modify this behaviour by putting the comment
+#* @testfile anotherfile anywhere in myfun.R." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,7 +106,7 @@ file." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Open associated test_file</h1>
+    <h1>Open associated test file</h1>
     <small class="dont-index">Source: <a href='https://github.com/s-fleck/testthis/blob/master/R/open_testfile.R'><code>R/open_testfile.R</code></a></small>
     <div class="hidden name"><code>open_testfile.Rd</code></div>
     </div>
@@ -114,8 +115,9 @@ file." />
     
     <p>If the currently open file in the RStudio editor is called <code class="file">myfun.R</code> this
 opens <code class="file">tests/testthat/test_myfun.R</code> in a new tab. This function can also
-be used to jump back and forth between an R script and the associated test
-file.</p>
+be used to jump back and forth between a script and the associated test
+file. You can modify this behaviour by putting the comment
+<code>#* @testfile anotherfile</code> anywhere in <code class="file">myfun.R</code>.</p>
     
     </div>
 

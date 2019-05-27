@@ -7,10 +7,10 @@
 #' @section Side effects:
 #'   Creates an R script file in the file system.
 #'
-#' @param fname Character scalar. Target R script file to open. If empty the file
+#' @param fname `character` scalar. Target R script file to open. If empty the file
 #'   currently open in the editor will be used.
-#' @param open Logical scalar. Should the test file be opened after it is created?
-#' @param sep Character scalar. Separator between \file{test} and \file{fname}
+#' @param open `logical` scalar. Should the test file be opened after it is created?
+#' @param sep `character` scalar. Separator between \file{test} and \file{fname}
 #'   when constructing the test file name. Should either be `"_"` or `"-"` for
 #'   compatibility with testthat.
 #'

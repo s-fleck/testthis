@@ -13,7 +13,8 @@ testthis also provides utility function to manage tests in subdirectories of
 the test/testthis directory.
 }
 \details{
-For details please refer to \code{vignette("testthis")}
+For details please refer to the
+\href{https://s-fleck.github.io/testthis/index.html}{README}
 }
 \section{Setting the project path}{
 
@@ -59,7 +60,7 @@ usually start with \code{test_}. This is used by \code{test_this()}, \code{lest_
 \itemize{
 \item \code{@testing <functionname>}:  mark \code{functionname} as tested.
 Should usually go next the associated \code{test_that()} call. This is used by
-\code{get_test_coverage()}.
+\code{test_coverage()}.
 }
 }
 

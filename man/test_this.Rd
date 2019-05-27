@@ -21,5 +21,5 @@ call \code{testthat::test_file()} on the current file.
 }
 \details{
 This is useful in cases where you don't want to run all tests in a package
-via \code{devtools::test()} (CTRL+SHIFT+T).
+via \code{devtools::test()} (CTRL+SHIFT+T in RStudio).
 }

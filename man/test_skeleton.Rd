@@ -8,12 +8,12 @@ test_skeleton(fname = NULL, open = TRUE,
   sep = options("testthis.sep"))
 }
 \arguments{
-\item{fname}{Character scalar. Target R script file to open. If empty the file
+\item{fname}{\code{character} scalar. Target R script file to open. If empty the file
 currently open in the editor will be used.}
 
-\item{open}{Logical scalar. Should the test file be opened after it is created?}
+\item{open}{\code{logical} scalar. Should the test file be opened after it is created?}
 
-\item{sep}{Character scalar. Separator between \file{test} and \file{fname}
+\item{sep}{\code{character} scalar. Separator between \file{test} and \file{fname}
 when constructing the test file name. Should either be \code{"_"} or \code{"-"} for
 compatibility with testthat.}
 }

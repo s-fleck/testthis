@@ -2,16 +2,16 @@
 % Please edit documentation in R/test_coverage.R
 \name{test_coverage}
 \alias{test_coverage}
-\title{Get Test Coverage of Package}
+\title{Test coverage of package}
 \usage{
 test_coverage(from_tags = TRUE, from_desc = TRUE)
 }
 \arguments{
-\item{from_tags}{Logical scalar. Checks the files if your test directory for
+\item{from_tags}{\code{logical} scalar. Checks the files if your test directory for
 testthis tags. Specifically, if you have the comment \code{#* @testing myfunction}
 in any of your test files, myfunction will be marked as tested.}
 
-\item{from_desc}{Logical scalar. Checks the \code{desc} argument
+\item{from_desc}{\code{logical} scalar. Checks the \code{desc} argument
 \code{test_that(...)} of the tests in your test directory for functions
 names. E.g. if you have a testfile that contains
 \code{test_that("myfunction works", {...})}, myfunction will be marked as
@@ -29,11 +29,9 @@ following columns:
 }
 }
 \description{
-This extracts the test coverage of the target package (usually the package
-you are working on). Bear in mind that testthis uses a checklist-approach for
-this, and depends that you either put the function name in your
-\code{test_that()} calls, or used test_this tags. If you want automatic
-analysis of test coverage, you must look in other packages such as \code{covr}.
+This determines the test coverage of the target package based on the \code{desc}
+argument of \code{test_that()} calls. If you require a more comprehensive analysis
+of thest coverage, try the package \strong{covr} instead.
 }
 \details{
 \code{test_coverage} looks in \code{.covrignore} for functions that should be ignored

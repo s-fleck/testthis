@@ -6,7 +6,8 @@
 #' testthis also provides utility function to manage tests in subdirectories of
 #' the test/testthis directory.
 #'
-#' For details please refer to `vignette("testthis")`
+#' For details please refer to the
+#' [README](https://s-fleck.github.io/testthis/index.html)
 #'
 #' @name testthis
 #' @import assertthat
@@ -53,7 +54,7 @@
 #'
 #' * `@testing <functionname>`:  mark `functionname` as tested.
 #' Should usually go next the associated `test_that()` call. This is used by
-#' `get_test_coverage()`.
+#' `test_coverage()`.
 #'
 #'
 #' @seealso [usethis::edit_r_profile()]
@@ -84,8 +85,6 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
   toset <- !(names(op.testthis) %in% names(op))
   if(any(toset)) options(op.testthis[toset])
 
-
-
   if (requireNamespace("crayon", quietly = TRUE) && crayon::has_color()){
 
     style_error   <- crayon::make_style("#BB3333", colors = 256)
@@ -110,8 +109,6 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
   assign("style_subtle", style_subtle, envir = parent.env(environment()))
   assign("style_accent", style_accent, envir = parent.env(environment()))
   assign("col_nchar", col_nchar, envir = parent.env(environment()))
-
-
 
   invisible()
 }

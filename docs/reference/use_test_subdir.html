@@ -134,21 +134,21 @@ you do not want to run on CRAN or during R CMD Check. For running tests in
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Character scalar. Will be processed with <code><a href='https://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code> to
+      <td><p><code>character</code> scalar. Will be processed with <code><a href='https://www.rdocumentation.org/packages/base/topics/make.names'>base::make.names()</a></code> to
 make a syntactically valid name.</p></td>
     </tr>
     <tr>
       <th>make_tester</th>
-      <td><p>Logical or character scalar. Create an R script with a
+      <td><p><code>logical</code> or <code>character</code> scalar. Create an R script with a
 test helper function. If <code>TRUE</code> an R script file will be placed into the
 <code class="file">R/</code> directory of the current package, containing a function definition
 for running the tests in <code>path</code>. The file will be named
 <code class="file">testthis-testers.R</code>, but you can specify  your own name by
-passing a character scalar to make_tester. See <code><a href='use_tester.html'>use_tester()</a></code> for details.</p></td>
+passing a character scalar to <code>make_tester()</code>. See <code><a href='use_tester.html'>use_tester()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>ignore_tester</th>
-      <td><p>Logical. Add <code class="file">tester</code> file to <code class="file">.Rbuildignore</code>?</p></td>
+      <td><p><code>logical</code> scalar`. Add <code class="file">tester</code> file to <code class="file">.Rbuildignore</code>?</p></td>
     </tr>
     </table>
     

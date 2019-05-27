@@ -34,12 +34,9 @@ test_that("use_testdata creates testdata dir", {
   expect_false(has_testdata())
 
   # Check creation of testdata dir
-  expect_output(
-    expect_message(
-      use_testdata(iris),
-      "You can save data files for tests via"
-    ),
-    "Creating"
+  expect_message(
+    use_testdata(iris),
+    "You can save data files for tests via"
   )
 
   expect_true(dir.exists(file.path(proj_test, "tests/testthat/testdata")))
