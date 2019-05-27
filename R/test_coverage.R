@@ -6,6 +6,9 @@
 #' `test_that()` calls, or used test_this tags. If you want automatic
 #' analysis of test coverage, you must look in other packages such as `covr`.
 #'
+#' `test_coverage` looks in `.covrignore` for functions that should be ignored
+#' for coverage analysis (see [usethis::use_covr_ignore()])
+#'
 #' @param from_tags Logical scalar. Checks the files if your test directory for
 #'   testthis tags. Specifically, if you have the comment `#* @testing myfunction`
 #'   in any of your test files, myfunction will be marked as tested.
@@ -311,11 +314,15 @@ get_pkg_tested_functions <- function(from_tags, from_desc){
 #' @noRd
 get_pkg_testignore <- function(){
   tfile <- file.path(usethis::proj_get(), "tests", "testthat", "_testignore")
+  cfile <- file.path(usethis::proj_get(), ".covrignore")
 
   if (file.exists(tfile)){
-    return(readLines(tfile))
+    warning("_testignore is deprecated. Please use usethis::use_covr_ignore instead.")
+    readLines(tfile)
+  } else if (file.exists(cfile)){
+    readLines(cfile)
   } else {
-    return(NULL)
+    NULL
   }
 }
 

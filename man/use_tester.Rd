@@ -25,6 +25,6 @@ of \code{\link[=use_test_subdir]{use_test_subdir()}} and you will likely not nee
 }
 \seealso{
 Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_testdata}}, \code{\link{use_testignore}}
+  \code{\link{use_testdata}}
 }
 \concept{infrastructure}

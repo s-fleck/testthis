@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">testthis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4.9006</span>
       </span>
     </div>
 
@@ -99,9 +99,9 @@
 <li>
 <code><a href="reference/use_testdata.html">use_testdata()</a></code> places a single R object in the <code>tests/testhat/testdata</code> directory. It is analoguous to <code><a href="https://usethis.r-lib.org/reference/use_data.html">usethis::use_data()</a></code>, except that it saves the Object in the <code>.rds</code> format, which is more appropriate for single R objects than <code>.rda</code> or <code>.Rdata</code> (see <code><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">?readRDS</a></code>).</li>
 <li>
-<code><a href="reference/use_testdata_raw.html">use_testdata_raw()</a></code> creates the directory <code>tests/testhat/testdata-raw</code>. Use this directory to put scripts that generate the data in <code>tests/testhat/testdata</code>.</li>
+<code><a href="reference/use_testdata.html">use_testdata_raw()</a></code> creates the directory <code>tests/testhat/testdata-raw</code>. Use this directory to put scripts that generate the data in <code>tests/testhat/testdata</code>.</li>
 <li>
-<code><a href="reference/read_testdata.html">find_testdata()</a></code> and <code><a href="reference/read_testdata.html">read_testdata()</a></code> are simple helpers to read files saved with <code><a href="reference/use_testdata.html">use_testdata()</a></code>.</li>
+<code><a href="reference/use_testdata.html">find_testdata()</a></code> and <code><a href="reference/use_testdata.html">read_testdata()</a></code> are simple helpers to read files saved with <code><a href="reference/use_testdata.html">use_testdata()</a></code>.</li>
 <li>
 <p><code><a href="reference/use_test_subdir.html">use_test_subdir()</a></code> and <code><a href="reference/test_subdir.html">test_subdir()</a></code> for putting/running tests in subdirectories of <code>tests/testhat/</code>. These tests will <em>not</em> be run on CRAN or by <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>. This is useful for tests that require external ressources (web, databases) or take long to execute.</p>
 <p><code><a href="reference/test_subdir.html">test_acceptance()</a></code>, <code><a href="reference/test_subdir.html">test_manual()</a></code> and <code><a href="reference/test_subdir.html">test_integration()</a></code> are presets to run tests in the <code>integration_tests</code>, <code>acceptance_tests</code> and <code>manual_tests</code> subdirectories of <code>test/testthat</code>.</p>
@@ -114,7 +114,7 @@
 <li>
 <code>test_index</code> produces an index of all <code>test_that()</code> calls. Supports RStudio Markers when run interactively from within RStudio.</li>
 </ul>
-<p>For more details see the <a href="https://s-fleck.github.io/testthis/">function reference</a></p>
+<p>For more details see the <a href="https://s-fleck.github.io/testthis/reference/index.html">function reference</a></p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">

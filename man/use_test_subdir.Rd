@@ -83,6 +83,6 @@ test_special_tests()
 \code{\link[=test_subdir]{test_subdir()}}
 
 Other infrastructure: \code{\link{use_testdata}},
-  \code{\link{use_tester}}, \code{\link{use_testignore}}
+  \code{\link{use_tester}}
 }
 \concept{infrastructure}

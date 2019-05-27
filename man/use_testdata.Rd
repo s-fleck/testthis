@@ -79,6 +79,6 @@ Save R objects to separate files \file{tests/testthat/testdata} in the
 \code{\link[base:readRDS]{base::readRDS()}}
 
 Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_tester}}, \code{\link{use_testignore}}
+  \code{\link{use_tester}}
 }
 \concept{infrastructure}

@@ -9,6 +9,7 @@
   `test_that()` calls in a package's `tests/testthat` directory. Uses
   source markers if called from RStudio.
 * renamed `get_test_coverage()` to just `test_coverage()`
+* added `.covrignore` support to `test_coverage()`
 
 
 
