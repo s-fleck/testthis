@@ -10,14 +10,5 @@
 #'
 #' @export
 test_with_skip <- function(...){
-  fltr <- list_test_files(
-    full_names = FALSE,
-    skip = TRUE
-  )
-  fltr <- gsub("^test-?", "", fltr)
-  fltr <- gsub("\\.[rR]", "", fltr)
-  fltr <- paste(fltr, collapse = '|')
-  assert_that(is.scalar(fltr) && is.character(fltr))
-
-  devtools::test(filter = fltr, ...)
+  .Defunct(msg = "This function has been removed. Use subfolders insteads")
 }

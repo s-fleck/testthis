@@ -4,13 +4,6 @@ Description: Calls testthat::test_file on the associated test file of the
 Binding: test_this
 Interactive: TRUE
 
-Name: Load and test
-Description: Calls `devtools::load_all()` followed by `testthat::test_file` on
-  the associated test file of the currently open file (usually
-  "tests/test_that/test_CURRENT_FILE_NAME.R")
-Binding: lest_this
-Interactive: TRUE
-
 Name: Open testfile
 Description: Jump back and forth between the currently open file and its
   associated test file (usually "tests/test_that/test_CURRENT_FILE_NAME.R").

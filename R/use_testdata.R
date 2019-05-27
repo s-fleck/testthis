@@ -5,7 +5,7 @@
 #'
 #' @param ... \R objects to save to the \file{testdata} dir. If empty,
 #'   an empty directory is created.
-#' @param subdir Character scalar. Subdirectory of \file{test_data} to save
+#' @param subdir Character scalar. Subdirectory of \file{testdata} to save
 #'   to / read from.
 #' @inheritParams base::readRDS
 #' @template overwrite
@@ -17,6 +17,7 @@
 #'
 #' @export
 #' @family infrastructure
+#' @seealso [read_testdata()]
 #' @seealso [base::readRDS()]
 #' @examples
 #' \dontrun{
@@ -27,14 +28,18 @@ use_testdata <- function(
   subdir = NULL,
   overwrite = FALSE,
   ignore = FALSE,
-  compress = TRUE
+  compress = TRUE,
+  refhook = NULL,
+  version = NULL
 ){
   # Preconditions
-  assert_that(is.flag(overwrite))
-  assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
+  assert_that(
+    is.flag(overwrite),
+    is.null(subdir) || (is.scalar(subdir) && is.character(subdir))
+  )
 
 
-  # Find and prepare test_data directory
+  # Find and prepare testdata directory
   pkg <- usethis::proj_get()
   tdata_dir <- file.path("tests", "testthat", "testdata")
 
@@ -59,7 +64,6 @@ use_testdata <- function(
 
     obj         <- vapply(to_save, as.character, character(1))
     save_files  <- paste0(file.path(save_path, obj), '.rds')
-
     existing_files <- save_files[file.exists(save_files)]
 
     if(!overwrite && length(existing_files) > 0L){
@@ -75,7 +79,13 @@ use_testdata <- function(
     )
 
     for(i in seq_along(save_files)){
-      saveRDS(list(...)[[i]], file = save_files[i], compress = compress)
+      saveRDS(
+        list(...)[[i]],
+        file = save_files[i],
+        compress = compress,
+        version = version,
+        refhook = refhook
+      )
     }
 
 
@@ -116,9 +126,12 @@ has_testdata <- function(){
 
 
 
+#' Find / Read Test Data
+#'
+#' @inheritParams use_testdata
 #' @param infile rds file to read (must end in .rds, otherwise .rds ending is
 #'   automatically added)
-#' @rdname use_testdata
+#' @seealso [use_testdata()]
 #'
 #' @return `read_testdata()` returns a single \R object
 #' @export
@@ -126,22 +139,41 @@ read_testdata <- function(infile, subdir = NULL){
   # Preconditions
   assert_that(is.null(subdir) || (is.scalar(subdir) && is.character(subdir)))
 
+  # Find testdata dir
+  path <- tryCatch(usethis::proj_get(), error = function(e) ".")
 
-  # Find test_data dir
-  cache_dir <- file.path(usethis::proj_get(), 'tests', 'testthat', 'testdata')
-
-  if(!is.null(subdir)){
-    cache_dir <- file.path(cache_dir, subdir)
+  if(is.null(subdir)){
+    cache_dir <- find_testdata(must_exist = TRUE, path = path)
+  } else {
+    cache_dir <- find_testdata(subdir, must_exist = TRUE, path = path)
   }
-
   assert_that(file.exists(cache_dir))
 
-
   # Read file
-  path        <- file.path(cache_dir, infile)
+  path  <- file.path(cache_dir, infile)
   if(!grepl('.*\\.rds$', path)){
     path <- paste0(path, '.rds')
   }
 
   readRDS(path)
+}
+
+
+
+
+#' @inheritParams rprojroot::find_testthat_root_file
+#' @param must_exist `logical` scalar. Assert that path specified in `...`
+#'   exists
+#'
+#' @return `find_testdata()` returns the normalized path to a file in a
+#'   in the testdata directory
+#'
+#' @export
+#' @rdname read_testdata
+find_testdata <- function(..., path = ".", must_exist = FALSE){
+  p <- rprojroot::find_testthat_root_file("testdata", ..., path = path)
+  if (must_exist){
+    assert(file.exists(p), "Could not find '", p, "'")
+  }
+  p
 }

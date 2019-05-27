@@ -8,3 +8,6 @@
 ^cran-comments\.md$
 ^docs$
 .*rsconnect.*
+^revdep$
+^\.travis\.yml$
+^codecov\.yml$

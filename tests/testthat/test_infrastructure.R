@@ -1,13 +1,33 @@
 context("infrastructure-non cran tests")
 
-proj <- rprojroot::find_package_root_file()
+
+setup({
+  tenv <- parent.env(environment())
+  proj_old <- tryCatch(usethis::proj_get(), error = function(e) NULL)
+  assign("proj_old", proj_old, tenv)
+  assign("td", file.path(tempdir(), "testthis"), tenv)
+  assign("proj_test", file.path(td, "test_pkg"), tenv)
+
+  dir <- find_testdata("test_pkg", must_exist = TRUE)
+  fs::dir_copy(dir, proj_test)
+  usethis::proj_set(proj_test)
+})
+
+
+
+
+teardown({
+  usethis::proj_set(proj_old)
+  unlink(td, recursive = TRUE)
+})
+
+
+
 
 test_that("use_testdata creates testdata dir", {
   #* @testing has_testdata
   #* @testing use_testdata
-  package_state <- list.files(".", recursive = TRUE)
-  tpkg <- file.path(rprojroot::find_testthat_root_file("testdata", "test_pkg"))
-  usethis::proj_set(tpkg)
+  package_state <- list.files(proj_test, recursive = TRUE)
 
 
   # Check for clean state
@@ -22,12 +42,12 @@ test_that("use_testdata creates testdata dir", {
     "Creating"
   )
 
-  expect_true(dir.exists(file.path(tpkg, "tests/testthat/testdata")))
+  expect_true(dir.exists(file.path(proj_test, "tests/testthat/testdata")))
   expect_true(has_testdata())
 
   # Cleanup
   unlink(
-    file.path(tpkg, "tests/testthat/testdata"),
+    file.path(proj_test, "tests/testthat/testdata"),
     recursive = TRUE
   )
   expect_false(has_testdata())
@@ -51,34 +71,32 @@ test_that("use_testdata creates testdata dir", {
   )
 
   expect_true(
-    file.exists(file.path(tpkg, "tests/testthat/testdata/iris.rds"))
+    file.exists(file.path(proj_test, "tests/testthat/testdata/iris.rds"))
   )
 
   expect_true(
-    file.exists(file.path(tpkg, "tests/testthat/testdata/iris/iris.rds"))
+    file.exists(file.path(proj_test, "tests/testthat/testdata/iris/iris.rds"))
   )
 
   # Cleanup
   unlink(
-    file.path(tpkg, "tests/testthat/testdata"),
+    file.path(proj_test, "tests/testthat/testdata"),
     recursive = TRUE
   )
 
   # Check for unexpected changes to package
-  package_state_new <- list.files(".", recursive = TRUE)
+  package_state_new <- list.files(proj_test, recursive = TRUE)
   expect_identical(package_state, package_state_new)
-  usethis::proj_set(proj)
 })
 
 
 
 
 test_that("use_tester works as expected", {
-  package_state <- list.files(".", recursive = TRUE)
+  package_state <- list.files(proj_test, recursive = TRUE)
 
-  #* @testing use_tester
-  tpkg <- rprojroot::find_testthat_root_file("testdata", "test_pkg")
-  usethis::proj_set(tpkg)
+  expect_true(dir.exists(proj_test))
+  expect_true(dir.exists(file.path(proj_test, "R")))
 
   # Check if tester file is created at the correct path and not empty
   expect_message(expect_true(
@@ -86,7 +104,7 @@ test_that("use_tester works as expected", {
     "creating tester function test_footests()"
   )
 
-  efile <- file.path(tpkg, "R", "testthis-testers.R")
+  efile <- file.path(proj_test, "R", "testthis-testers.R")
 
   expect_true(file.exists(efile))
   expect_true(file.size(efile) > 10)
@@ -97,9 +115,8 @@ test_that("use_tester works as expected", {
 
 
   # Check for unexpected changes to package
-  package_state_new <- list.files(".", recursive = TRUE)
+  package_state_new <- list.files(proj_test, recursive = TRUE)
   expect_identical(package_state, package_state_new)
-  usethis::proj_set(proj)
 })
 
 
@@ -110,10 +127,7 @@ test_that("use_test_subdir works as expected", {
   #* @testing use_acceptance_tests
   #* @testing use_integration_tests
   #* @testing use_manual_tests
-
-  package_state <- list.files(".", recursive = TRUE)
-  tpkg <- rprojroot::find_testthat_root_file("testdata", "test_pkg")
-  usethis::proj_set(tpkg)
+  package_state <- list.files(proj_test, recursive = TRUE)
 
   # Check if tester file is created at the correct path and not empty
   expect_output(
@@ -123,8 +137,8 @@ test_that("use_test_subdir works as expected", {
   ),
     "Creating"
   )
-  edir  <- file.path(tpkg, "tests", "testthat", "footests")
-  efile <- file.path(tpkg, "R", "testthis-testers.R")
+  edir  <- file.path(proj_test, "tests", "testthat", "footests")
+  efile <- file.path(proj_test, "R", "testthis-testers.R")
 
   expect_true(dir.exists(edir))
   expect_true(file.exists(efile))
@@ -134,24 +148,22 @@ test_that("use_test_subdir works as expected", {
 
 
   # Check if preset subdir creators work
-  edir <- file.path(tpkg, "tests/testthat/integration_tests/")
+  edir <- file.path(proj_test, "tests/testthat/integration_tests/")
   expect_output(expect_true(use_integration_tests()), "Creating")
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 
-  edir <- file.path(tpkg, "tests/testthat/acceptance_tests/")
+  edir <- file.path(proj_test, "tests/testthat/acceptance_tests/")
   expect_output(expect_true(use_acceptance_tests()), "Creating")
-  expect_true(file.exists(file.path(tpkg, "tests/testthat/acceptance_tests/")))
+  expect_true(file.exists(file.path(proj_test, "tests/testthat/acceptance_tests/")))
   unlink(edir, recursive = TRUE)
 
-  edir <- file.path(tpkg, "tests/testthat/manual_tests/")
+  edir <- file.path(proj_test, "tests/testthat/manual_tests/")
   expect_output(expect_true(use_manual_tests()), "Creating")
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 
 
   # Check for unexpected changes to package
-  expect_identical(package_state, list.files(".", recursive = TRUE))
-  usethis::proj_set(proj)
+  expect_identical(package_state, list.files(proj_test, recursive = TRUE))
 })
-

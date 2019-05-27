@@ -1,6 +1,24 @@
-# testthis 1.0.3.9000
+# testthis 1.0.4.9000
 
-* Updated for compatbility with devtools > 1.13.5
+* fixed `read_testdata()` so that it works with R CMD CHECK (#11)
+* added `find_testdata()` which returns the path to the testdata directory
+* added `version` and `refhook` argument to `use_testdata()` (which is passed
+  on to `saveRDS()`). You can use `version = 2` to create testdata that is
+  compatible with R < 3.5.0.
+* added `test_index()` which displays an index / table of contents of all 
+  `test_that()` calls in a package's `tests/testthat` directory. Uses
+  source markers if called from RStudio.
+* renamed `get_test_coverage()` to just `test_coverage()`
+
+
+
+# testthis 1.0.4
+
+* Import `parse_ns_file()` from pkgload instead of devtools
+* #* @testfile tag paths can now contain the script file extension `.R`
+* removed deprecated `lest_this()` function
+* various small bugfixes and improvements
+
 
 
 # testthis 1.0.3
