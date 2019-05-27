@@ -1,8 +1,9 @@
+# testthis (development version)
+
 # testthis 1.1.0
 
-* fixed `read_testdata()` so that it works with R CMD CHECK (#11)
 * added `find_testdata()` which returns the path to the testdata directory
-* added `version` and `refhook` argument to `use_testdata()` (which is passed
+* added `version` and `refhook` argument to `use_testdata()` (which are passed
   on to `saveRDS()`). You can use `version = 2` to create testdata that is
   compatible with R < 3.5.0.
 * added `test_index()` which displays an index / table of contents of all 
