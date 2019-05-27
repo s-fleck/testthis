@@ -14,7 +14,7 @@ None
 
 ## Notes
 
-Ironed out a few old bugs, added some new functionality and improved 
-documentation
+Ironed out a few old bugs, added new functionality and improved 
+documentation.
 
 ---

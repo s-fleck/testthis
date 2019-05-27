@@ -16,13 +16,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -68,7 +70,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -83,7 +85,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/s-fleck/testthis">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -103,14 +105,14 @@
       <small>Source: <a href='https://github.com/s-fleck/testthis/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="testthis-1-0-4-9000" class="section level1">
+    <div id="testthis-1-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#testthis-1-0-4-9000" class="anchor"></a>testthis 1.0.4.9000<small> Unreleased </small>
+<a href="#testthis-1-1-0" class="anchor"></a>testthis 1.1.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>fixed <code><a href="../reference/use_testdata.html">read_testdata()</a></code> so that it works with R CMD CHECK (<a href='https://github.com/s-fleck/testthis/issues/11'>#11</a>)</li>
 <li>added <code><a href="../reference/use_testdata.html">find_testdata()</a></code> which returns the path to the testdata directory</li>
-<li>added <code>version</code> and <code>refhook</code> argument to <code><a href="../reference/use_testdata.html">use_testdata()</a></code> (which is passed on to <code><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">saveRDS()</a></code>). You can use <code>version = 2</code> to create testdata that is compatible with R &lt; 3.5.0.</li>
+<li>added <code>version</code> and <code>refhook</code> argument to <code><a href="../reference/use_testdata.html">use_testdata()</a></code> (which is passed on to <code><a href="https://rdrr.io/r/base/readRDS.html">saveRDS()</a></code>). You can use <code>version = 2</code> to create testdata that is compatible with R &lt; 3.5.0.</li>
 <li>added <code><a href="../reference/test_index.html">test_index()</a></code> which displays an index / table of contents of all <code>test_that()</code> calls in a package’s <code>tests/testthat</code> directory. Uses source markers if called from RStudio.</li>
 <li>renamed <code><a href="../reference/get_test_coverage.html">get_test_coverage()</a></code> to just <code><a href="../reference/test_coverage.html">test_coverage()</a></code>
 </li>
@@ -150,7 +152,7 @@
 </h1>
 <ul>
 <li>added <code><a href="../reference/test_subdir.html">test_all()</a></code> to run tests in all subdirectories</li>
-<li>Use <code><a href="https://usethis.r-lib.org/reference/proj_utils.html">usethis::proj_get()</a></code> instead of the <code>base_path</code> function argument for compatbility with usethis.</li>
+<li>Use <code><a href="https://usethis.r-lib.org/reference/proj_utils.html">usethis::proj_get()</a></code> instead of the <code>base_path</code> function argument for compatibility with usethis.</li>
 </ul>
 </div>
     <div id="testthis-1-0-1" class="section level1">
@@ -184,7 +186,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#testthis-1-0-4-9000">1.0.4.9000</a></li>
+        <li><a href="#testthis-1-1-0">1.1.0</a></li>
         <li><a href="#testthis-1-0-4">1.0.4</a></li>
         <li><a href="#testthis-1-0-3">1.0.3</a></li>
         <li><a href="#testthis-1-0-2">1.0.2</a></li>
@@ -202,7 +204,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
    </div>

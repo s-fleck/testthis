@@ -1,4 +1,4 @@
-# testthis 1.0.4.9000
+# testthis 1.1.0
 
 * fixed `read_testdata()` so that it works with R CMD CHECK (#11)
 * added `find_testdata()` which returns the path to the testdata directory

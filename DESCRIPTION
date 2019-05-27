@@ -36,6 +36,5 @@ Suggests:
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
 URL: https://github.com/s-fleck/testthis
 BugReports: https://github.com/s-fleck/testthis/issues
