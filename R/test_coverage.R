@@ -166,13 +166,13 @@ print.Test_coverage <- function(x, ...){
 
     hline <- paste(paste(rep(".", 20), collapse = ""), "\n")
 
-    if(nrow(res$exp) > 0){
+    if (!is.null(res$exp) && nrow(res$exp) > 0){
       cat(" exported functions", hline)
       print(res$exp[, !colnames(res$exp) %in% "grp"], row.names = FALSE, right = FALSE)
     }
 
 
-    if(nrow(res$s3) > 0){
+    if (!is.null(res$s3) && nrow(res$s3) > 0){
       if(nrow(res$exp) > 0){
         cat("\n")
       }
@@ -181,7 +181,7 @@ print.Test_coverage <- function(x, ...){
     }
 
 
-    if(nrow(res$int) > 0){
+    if (!is.null(res$int) && nrow(res$int) > 0){
       if(nrow(res$s3) > 0 || nrow(res$exp) > 0){
         cat("\n")
       }
