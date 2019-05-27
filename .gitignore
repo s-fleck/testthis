@@ -8,5 +8,4 @@ rsconnect
 rpubs
 *.rds
 *.directory
-docs
 R/testthis-testers.R

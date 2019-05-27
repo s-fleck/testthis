@@ -11,3 +11,5 @@
 ^revdep$
 ^\.travis\.yml$
 ^codecov\.yml$
+^_pkgdown\.yml$
+^pkgdown$

@@ -41,6 +41,28 @@ you want your files to be named \code{test_foofunction.R} or \code{test-foofunct
 }
 }
 
+\section{Testthis Tags}{
+
+
+Test_this tags are special comments that modify the behavious of the
+functions supplied by this package. They are of the form \code{#* @tag <value>}.
+Please not that only some test_this tags really require a \code{<value>}.
+
+\strong{Valid tags for script files in the /R/ dir (\code{pkg/R/*.R})}
+\itemize{
+\item \code{@testfile <filename>}: manually specifiy associated test file. Should
+usually start with \code{test_}. This is used by \code{test_this()}, \code{lest_this()} and
+\code{open_testfile()}.
+}
+
+\strong{Valid tags or test files (\code{pkg/tests/testthat/test_*.R})}
+\itemize{
+\item \code{@testing <functionname>}:  mark \code{functionname} as tested.
+Should usually go next the associated \code{test_that()} call. This is used by
+\code{get_test_coverage()}.
+}
+}
+
 \seealso{
 \code{\link[usethis:edit_r_profile]{usethis::edit_r_profile()}}
 }

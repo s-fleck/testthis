@@ -11,20 +11,8 @@ status](https://travis-ci.org/s-fleck/testthis.svg?branch=master)](https://travi
 coverage](https://codecov.io/gh/s-fleck/testthis/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/testthis?branch=master)
 <!-- badges: end -->
 
-Testthis contains tools to make unit testing in R more comfortable. It
-is designed to complement the packages **testthat**, **devtools** and
-**usethis**.
-
-The functions above assume that if the current filename is
-`currentfile.R`, the associated test file is
-`/tests/testthat/test_currentfile.R`. If you want to modify this
-behaviour you can put the tagnywhere in your code, usually the top or
-bottom of your `.R` file. Each R script can only have a single
-associated testfile.
-
-The following example will associate the file
-`/tests/testthat/other_test_file.R` instead of
-`/tests/testthat/test_open_testfile.R` with `R/open_testfile`:
+**testthis** makes unit testing in R more comfortable. It is designed to
+complement the packages **testthat**, **devtools** and **usethis**.
 
 ## Overview
 
@@ -80,6 +68,9 @@ Testthis also provuides some primtivie code analys tools
     [covr](https://github.com/r-lib/covr).
   - `test_index` produces an index of all `test_that()` calls. Supports
     RStudio Markers when run interactively from within RStudio.
+
+For more details see the [function
+reference](https://s-fleck.github.io/testthis/reference/index.html)
 
 ## Installation
 
