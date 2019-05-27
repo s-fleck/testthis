@@ -10,6 +10,7 @@
   source markers if called from RStudio.
 * renamed `get_test_coverage()` to just `test_coverage()`
 * added `.covrignore` support to `test_coverage()`
+* `read_testdata()` now works in R CMD Check thanks to JakeVestal (#11)
 
 
 
