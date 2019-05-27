@@ -126,6 +126,7 @@ collect_testthat_source_info <- function(
 #'   `list` of `expressions` (as returned by [parse()].
 #'
 #' @return a `data.frame`. See [getParseData()]
+#' @noRd
 extract_testthat_parse_data <- function(
   exp
 ){
@@ -145,6 +146,12 @@ extract_testthat_parse_data <- function(
 
 
 
+#' Extract desc argument from test_that calls
+#'
+#' @inheritParams extract_testthat_parse_data
+#'
+#' @return a `character` vector
+#' @noRd
 extract_testthat_desc <- function(
   exp
 ){
@@ -178,20 +185,4 @@ extract_testthat_desc <- function(
     res <- deparse(res)
 
   format(res)
-}
-
-
-
-
-path_diff <- function(x, y){
-  assert(is.character(x))
-  assert(is_scalar_character(y))
-  xs <- fs::path_split(x)
-  ys <- unlist(fs::path_split(y))
-
-  vapply(
-    xs,
-    function(.x) do.call(file.path, as.list(setdiff(unlist(.x), ys))),
-    character(1)
-  )
 }

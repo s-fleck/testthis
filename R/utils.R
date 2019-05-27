@@ -100,3 +100,20 @@ ensure_testthat <- function(
   if (!dir.exists(file.path(base_path, "tests", "testthat")))
     usethis::use_testthat()
 }
+
+
+
+
+path_diff <- function(x, y){
+  assert(is.character(x))
+  assert(is_scalar_character(y))
+  xs <- fs::path_split(x)
+  ys <- unlist(fs::path_split(y))
+
+  vapply(
+    xs,
+    function(.x) do.call(file.path, as.list(setdiff(unlist(.x), ys))),
+    character(1)
+  )
+}
+
