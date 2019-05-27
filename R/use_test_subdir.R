@@ -39,9 +39,11 @@ use_test_subdir <- function(
   ignore_tester = TRUE
 ){
   # Preconditions
-  assert_that(is.scalar(path) && is.character(path))
-  assert_that(is.scalar(make_tester))
-  assert_that(is.scalar(is.logical(make_tester) || is.character(make_tester)))
+  assert_that(
+    is.scalar(path) && is.character(path),
+    is.scalar(make_tester),
+    is.scalar(is.logical(make_tester) || is.character(make_tester))
+  )
 
   # Process arguments
   path <- make.names(path)
