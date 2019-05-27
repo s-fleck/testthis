@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">testthis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -116,6 +116,8 @@
 </li>
 <li>added <code>.covrignore</code> support to <code><a href="../reference/test_coverage.html">test_coverage()</a></code>
 </li>
+<li>
+<code><a href="../reference/use_testdata.html">read_testdata()</a></code> now works in R CMD Check thanks to JakeVestal (<a href='https://github.com/s-fleck/testthis/issues/11'>#11</a>)</li>
 </ul>
 </div>
     <div id="testthis-1-0-4" class="section level1">
@@ -127,7 +129,7 @@
 <li>#* <a href='https://github.com/testfile'>@testfile</a> tag paths can now contain the script file extension <code>.R</code>
 </li>
 <li>removed deprecated <code>lest_this()</code> function</li>
-<li>various small bugfixes and improvements</li>
+<li>various small bug fixes and improvements</li>
 </ul>
 </div>
     <div id="testthis-1-0-3" class="section level1">
@@ -136,7 +138,7 @@
 </h1>
 <ul>
 <li>Maintenance release to make vignette comply with new CRAN guidelines</li>
-<li>test (<code><a href="../reference/test_this.html">test_this()</a></code>, <code><a href="../reference/test_subdir.html">test_subdir()</a></code>, etc..) functions now save all files in Rstudio and reload the package before running tests.</li>
+<li>test (<code><a href="../reference/test_this.html">test_this()</a></code>, <code><a href="../reference/test_subdir.html">test_subdir()</a></code>, etc..) functions now save all files in RStudio and reload the package before running tests.</li>
 <li>
 <code>lest_this()</code> has been deprecated. <code><a href="../reference/test_this.html">test_this()</a></code> now behaves like <code>lest_this()</code>
 </li>
@@ -167,9 +169,9 @@
 <a href="#testthis-1-0-0" class="anchor"></a>testthis 1.0.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>Reworked an expanded infrastructure functions, such as <code><a href="../reference/use_testdata.html">use_testdata()</a></code> and <code><a href="../reference/use_test_subdir.html">use_test_subdir()</a></code>. See readme for details.</li>
+<li>Reworked an expanded infrastructure functions, such as <code><a href="../reference/use_testdata.html">use_testdata()</a></code> and <code><a href="../reference/use_test_subdir.html">use_test_subdir()</a></code>. See README for details.</li>
 <li>
-<code><a href="../reference/test_skeleton.html">test_skeleton()</a></code> now honours the <code>#* <a href='https://github.com/testfile'>@testfile</a></code> tag</li>
+<code><a href="../reference/test_skeleton.html">test_skeleton()</a></code> now honors the <code>#* <a href='https://github.com/testfile'>@testfile</a></code> tag</li>
 <li>
 <code>open_test()</code> can now jump back and forth between source and test file, and does no longer automatically create test files.</li>
 <li>testthis now depends on the new usethis package that replaces some of the functionality from devtools</li>

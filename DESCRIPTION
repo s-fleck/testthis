@@ -1,15 +1,16 @@
 Package: testthis
 Type: Package
 Title: Utils and 'RStudio' Addins to Make Testing Even More Fun
-Version: 1.0.4.9006
+Version: 1.1.0
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description:
-  Utility functions and 'RStudio' addins to ease the life of people using
-  'testthat', 'devtools' and 'usethis' in their package development workflow.
-  Hotkeyable addins are provided for such common tasks as switching between a 
-  source file and an associated test file, or running unit tests in a single 
-  file. 'testthis' also provides utility function to manage and run tests in 
+  Utility functions and 'RStudio' addins for writing, running and organizing 
+  automated tests. Integrates tightly with the packages 'testthat', 'devtools' 
+  and 'usethis'.
+  Hotkeys can be assigned to the 'RStudio' addins for running tests in a single
+  file or to switch between a source file and the associated test file. In
+  addition, testthis provides function to manage and run tests in 
   subdirectories of the test/testthat directory.
 License: MIT + file LICENSE
 Imports:

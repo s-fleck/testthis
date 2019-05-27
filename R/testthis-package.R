@@ -39,13 +39,13 @@
 #'
 #' @section Testthis Tags:
 #'
-#' Test_this tags are special comments that modify the behavious of the
+#' test_this tags are special comments that modify the behaviour of the
 #' functions supplied by this package. They are of the form `#* @tag <value>`.
 #' Please not that only some test_this tags really require a `<value>`.
 #'
 #' **Valid tags for script files in the /R/ dir (`pkg/R/*.R`)**
 #'
-#' * `@testfile <filename>`: manually specifiy associated test file. Should
+#' * `@testfile <filename>`: manually specify associated test file. Should
 #' usually start with `test_`. This is used by `test_this()`, `lest_this()` and
 #' `open_testfile()`.
 #'

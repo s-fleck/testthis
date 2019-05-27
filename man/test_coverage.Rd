@@ -13,7 +13,7 @@ in any of your test files, myfunction will be marked as tested.}
 
 \item{from_desc}{\code{logical} scalar. Checks the \code{desc} argument
 \code{test_that(...)} of the tests in your test directory for functions
-names. E.g. if you have a testfile that contains
+names. E.g. if you have a test file that contains
 \code{test_that("myfunction works", {...})}, myfunction will be marked as
 tested.}
 }
@@ -31,7 +31,7 @@ following columns:
 \description{
 This determines the test coverage of the target package based on the \code{desc}
 argument of \code{test_that()} calls. If you require a more comprehensive analysis
-of thest coverage, try the package \strong{covr} instead.
+of test coverage, try the package \strong{covr} instead.
 }
 \details{
 \code{test_coverage} looks in \code{.covrignore} for functions that should be ignored

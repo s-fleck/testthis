@@ -25,21 +25,21 @@ Shortcuts*).
 
   - `test_this()`: Reloads the package and runs tests associated with
     the currently open R script file.
-  - `open_testfile()`: Opens the associated testfile in an editor
-    window. If the currently open file already is a testfile, it opens
+  - `open_testfile()`: Opens the associated test file in an editor
+    window. If the currently open file already is a test file, it opens
     the associated file in the `/R` directory. Can be used to jump back
     and forth between both.
 
 The *associated test file* for a file `R/foo.R` is usually
 `/tests/testhat/test_foo.R` (or `test-foo.R`). You can modify this
-behaviour by putting the comment `#* @testfile anotherfile` anywhere in
+behavior by putting the comment `#* @testfile anotherfile` anywhere in
 `R/foo.R`.
 
 testthis also provides functions for managing tests in subdirectories of
 `tests/testthat`:
 
   - `use_testdata()` places a single R object in the
-    `tests/testhat/testdata` directory. It is analoguous to
+    `tests/testhat/testdata` directory. It is analogous to
     `usethis::use_data()`, except that it saves the object in the `.rds`
     format, which is more appropriate for single R objects than `.rda`
     or `.Rdata` (see `?readRDS`).
@@ -54,8 +54,8 @@ testthis also provides functions for managing tests in subdirectories of
   - `use_test_subdir()` and `test_subdir()` for putting/running tests in
     subdirectories of `tests/testhat/`. These tests will *not* be run on
     CRAN or by `devtools::test()`. This is useful for tests that take a
-    long time to execute, or that require external ressources (web,
-    databases) that may not always be availabe.
+    long time to execute, or that require external resources (web,
+    databases) that may not always be available.
     
     `test_acceptance()`, `test_manual()` and `test_integration()` are
     presets to run tests in the `integration_tests`, `acceptance_tests`
@@ -65,7 +65,7 @@ Testthis also provides some simple code analysis tools
 
   - `test_coverage()` lists all functions of package and shows whether
     they are mentioned in any `test_that()` calls’ desc argument;
-    e.g. if you have a testfile containing `test_that("testing that
+    e.g. if you have a test file containing `test_that("testing that
     function foo works", <...>)`, `foo()` will show up marked as tested.
     This can be used as a simple todo list for testing, but does not
     replace a proper test coverage analyzer like
@@ -91,7 +91,7 @@ reference](https://s-fleck.github.io/testthis/reference/index.html)
 library(testthis)
 ```
 
-Rstudio addins (can be assigned to hotkeys):
+RStudio addins (can be assigned to hotkeys):
 
 ``` r
 open_testfile()

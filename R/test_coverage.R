@@ -2,7 +2,7 @@
 #'
 #' This determines the test coverage of the target package based on the `desc`
 #' argument of `test_that()` calls. If you require a more comprehensive analysis
-#' of thest coverage, try the package **covr** instead.
+#' of test coverage, try the package **covr** instead.
 #'
 #' `test_coverage` looks in `.covrignore` for functions that should be ignored
 #' for coverage analysis (see [usethis::use_covr_ignore()])
@@ -12,7 +12,7 @@
 #'   in any of your test files, myfunction will be marked as tested.
 #' @param from_desc `logical` scalar. Checks the `desc` argument
 #'   `test_that(...)` of the tests in your test directory for functions
-#'   names. E.g. if you have a testfile that contains
+#'   names. E.g. if you have a test file that contains
 #'   `test_that("myfunction works", {...})`, myfunction will be marked as
 #'   tested.
 #'
@@ -63,7 +63,7 @@ test_coverage <- function(
 
 #' Get Test Coverage
 #'
-#' Deprecated in favour of [test_coverage()]
+#' Deprecated in favor of [test_coverage()]
 #' @param from_tags,from_desc see [test_coverage()]
 #'
 #' @export

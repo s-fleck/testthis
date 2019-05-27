@@ -10,5 +10,5 @@ get_test_coverage(from_tags = TRUE, from_desc = TRUE)
 \item{from_tags, from_desc}{see \code{\link[=test_coverage]{test_coverage()}}}
 }
 \description{
-Deprecated in favour of \code{\link[=test_coverage]{test_coverage()}}
+Deprecated in favor of \code{\link[=test_coverage]{test_coverage()}}
 }
