@@ -1,40 +1,43 @@
-Package: testthis
 Type: Package
+Package: testthis
 Title: Utils and 'RStudio' Addins to Make Testing Even More Fun
 Version: 1.1.0.9000
-Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
+Authors@R: 
+    person(given = "Stefan",
+           family = "Fleck",
+           role = c("aut", "cre"),
+           email = "stefan.b.fleck@gmail.com")
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description:
-  Utility functions and 'RStudio' addins for writing, running and organizing 
-  automated tests. Integrates tightly with the packages 'testthat', 'devtools' 
-  and 'usethis'.
-  Hotkeys can be assigned to the 'RStudio' addins for running tests in a single
-  file or to switch between a source file and the associated test file. In
-  addition, testthis provides function to manage and run tests in 
-  subdirectories of the test/testthat directory.
+Description: Utility functions and 'RStudio' addins for
+    writing, running and organizing automated tests. Integrates tightly
+    with the packages 'testthat', 'devtools' and 'usethis'.  Hotkeys can
+    be assigned to the 'RStudio' addins for running tests in a single file
+    or to switch between a source file and the associated test file. In
+    addition, testthis provides function to manage and run tests in
+    subdirectories of the test/testthat directory.
 License: MIT + file LICENSE
+URL: https://s-fleck.github.io/testthis
+BugReports: https://github.com/s-fleck/testthis/issues
 Imports:
-  assertthat,
-  devtools,
-  usethis (>= 0.1.0),
-  testthat,
-  stringi,
-  magrittr,
-  utils,
-  stats,
-  tools,
-  pkgload,
-  rprojroot,
-  fs
+    assertthat,
+    devtools,
+    fs,
+    magrittr,
+    pkgload,
+    rprojroot,
+    stats,
+    stringi,
+    testthat,
+    tools,
+    usethis (>= 0.1.0),
+    utils
 Suggests:
+    covr,
+    crayon,
     knitr,
     rmarkdown,
-    rstudioapi,
     roxygen2 (>= 5.0.0),
-    covr,
-    crayon
+    rstudioapi
 Encoding: UTF-8
-RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/s-fleck/testthis
-BugReports: https://github.com/s-fleck/testthis/issues
+RoxygenNote: 6.1.1
