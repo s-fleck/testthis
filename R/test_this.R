@@ -22,12 +22,14 @@ test_this <- function(...){
     rstudioapi::documentSaveAll()
   }
 
-  devtools::load_all(usethis::proj_get())
+  if (file.exists(fname)){
+    filter <- paste0("^", gsub("^.*test-([^/]*)[.][rR]$", "\\1", fname), "$")
 
-  if(file.exists(fname)){
-    message("Running tests in ", fname)
-    testthat::test_file(fname, ..., load_helpers = FALSE)
+    message("Running tests using filter: ", filter)
+    devtools::test(usethis::proj_get(), filter = filter, ...)
   } else {
+    devtools::load_all(usethis::proj_get())
+
     msg_testfile_does_not_exist(fname)
   }
 
