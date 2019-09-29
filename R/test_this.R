@@ -26,7 +26,7 @@ test_this <- function(...){
 
   if(file.exists(fname)){
     message("Running tests in ", fname)
-    testthat::test_file(fname, ...)
+    testthat::test_file(fname, ..., load_helpers = FALSE)
   } else {
     msg_testfile_does_not_exist(fname)
   }
