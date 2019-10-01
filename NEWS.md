@@ -1,5 +1,7 @@
 # testthis (development version)
 
+* dont load helpers twice in `test_this()` (#13, thanks @krlmlr)
+
 # testthis 1.1.0
 
 * added `find_testdata()` which returns the path to the testdata directory

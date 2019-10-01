@@ -23,13 +23,11 @@ test_this <- function(...){
   }
 
   if (file.exists(fname)){
-    filter <- paste0("^", gsub("^.*test-([^/]*)[.][rR]$", "\\1", fname), "$")
+    message("Running tests in ", fname)
+    devtools::load_all(usethis::proj_get(), helpers = FALSE)
+    testthat::test_file(fname, ...)
 
-    message("Running tests using filter: ", filter)
-    devtools::test(usethis::proj_get(), filter = filter, ...)
   } else {
-    devtools::load_all(usethis::proj_get())
-
     msg_testfile_does_not_exist(fname)
   }
 
