@@ -10,3 +10,4 @@ rpubs
 *.directory
 R/testthis-testers.R
 CRAN-RELEASE
+docs/
