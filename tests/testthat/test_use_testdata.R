@@ -61,7 +61,7 @@ test_that("use_testdata_raw works", {
   efile <- file.path(proj_test, "tests", "testthat", "testdata-raw")
 
   # Test saving and loading
-  expect_output(use_testdata_raw(), "Creating")
+  use_testdata_raw()
   expect_true(dir.exists(efile))
   unlink(efile, recursive = TRUE)
 

@@ -51,20 +51,14 @@ test_that("use_testdata creates testdata dir", {
 
 
   # Check creation of testdata dfiles
-  expect_output(
-    expect_message(
-      use_testdata(iris),
-      "You can save data files for tests via"
-    ),
-    "Creating"
+  expect_message(
+    use_testdata(iris),
+    "You can save data files for tests via"
   )
 
-  expect_output(
-    expect_message(
-      use_testdata(iris, subdir = "iris"),
-      "You can save data files for tests via"
-    ),
-    "Creating"
+  expect_message(
+    use_testdata(iris, subdir = "iris"),
+    "You can save data files for tests via"
   )
 
   expect_true(
@@ -127,13 +121,11 @@ test_that("use_test_subdir works as expected", {
   package_state <- list.files(proj_test, recursive = TRUE)
 
   # Check if tester file is created at the correct path and not empty
-  expect_output(
   expect_message(expect_true(
     use_test_subdir("footests", ignore_tester = FALSE)),
     "creating tester function test_footests()"
-  ),
-    "Creating"
   )
+
   edir  <- file.path(proj_test, "tests", "testthat", "footests")
   efile <- file.path(proj_test, "R", "testthis-testers.R")
 
@@ -146,17 +138,17 @@ test_that("use_test_subdir works as expected", {
 
   # Check if preset subdir creators work
   edir <- file.path(proj_test, "tests/testthat/integration_tests/")
-  expect_output(expect_true(use_integration_tests()), "Creating")
+  expect_message(expect_true(use_integration_tests()), "Creating")
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 
   edir <- file.path(proj_test, "tests/testthat/acceptance_tests/")
-  expect_output(expect_true(use_acceptance_tests()), "Creating")
+  expect_true(use_acceptance_tests())
   expect_true(file.exists(file.path(proj_test, "tests/testthat/acceptance_tests/")))
   unlink(edir, recursive = TRUE)
 
   edir <- file.path(proj_test, "tests/testthat/manual_tests/")
-  expect_output(expect_true(use_manual_tests()), "Creating")
+  expect_message(expect_true(use_manual_tests()), "Creating")
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 
