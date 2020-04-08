@@ -97,13 +97,39 @@ use_testdata <- function(
 
 #' `use_testdata_raw()` creates a folder for scripts that produce the files in
 #' \file{testdata}
+#'
+#' @param name a `character` scalar or `NULL`. Name of the dataset for which
+#'   to create a script file in \file{testthat/testdata-raw}. If `NULL` an empty
+#'   \file{testthat/testdata-raw} directory is created (if it does not exist
+#'   already).
+#'
 #' @rdname use_testdata
 #' @export
-use_testdata_raw <- function(){
-  usethis::use_directory(
-    file.path("tests", "testthat", "testdata-raw"),
-    ignore = FALSE
-  )
+use_testdata_raw <- function(
+  name = NULL
+){
+  assert(is.null(name) || is_scalar_character(name))
+  dir <- file.path("tests", "testthat", "testdata-raw")
+  usethis::use_directory(dir, ignore = FALSE)
+
+  if (!is.null(name)){
+
+    if (!grepl("\\.R$", name, ignore.case = TRUE)){
+      file <- paste0(name, ".R")
+    } else {
+      file <- name
+      name <- gsub("\\.R$", "", name)
+    }
+
+    path <- file.path(dir, file)
+    file.create(path)
+    cat(sprintf('\n\ntestthis::use_testdata(%s)', name), file = path)
+
+    if (requireNamespace("rstudioapi", quietly = TRUE)){
+      rstudioapi::navigateToFile(path)
+    }
+  }
+
   invisible(TRUE)
 }
 

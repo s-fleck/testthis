@@ -1,6 +1,11 @@
 # testthis (development version)
 
-* dont load helpers twice in `test_this()` (#13, thanks @krlmlr)
+* don't load helpers twice in `test_this()` (#13, thanks @krlmlr)
+* removed some brittle tests for compatibility with usethis 1.6.0 (#16, thanks @jennybc)
+* `use_testdata_raw()` gains `name` argument similar to `usethis::use_data()`.
+  If `name` is provided, a script file for a dataset of that name is created
+  (and opened if you are using RStudio) (#15, thanks @TylerGrantSmith)
+
 
 # testthis 1.1.0
 
