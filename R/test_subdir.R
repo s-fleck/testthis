@@ -34,7 +34,6 @@
 #' by setting the respective `options()`, but it is recommended to create your
 #' own test subdirs instead.
 #'
-#' @inheritParams devtools::test
 #' @param subdir `character` scalar. subdir of `inst/tests/` or `tests/testthat`
 #'   that contains the tests
 #' @param ... passed on to `devtools::test()`
