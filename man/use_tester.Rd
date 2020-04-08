@@ -4,8 +4,11 @@
 \alias{use_tester}
 \title{Use a tester function}
 \usage{
-use_tester(path, ignore = TRUE, tester_path = file.path("R",
-  "testthis-testers.R"))
+use_tester(
+  path,
+  ignore = TRUE,
+  tester_path = file.path("R", "testthis-testers.R")
+)
 }
 \arguments{
 \item{path}{\code{character} scalar. Name of the subdirectory of
@@ -25,7 +28,8 @@ in a predefined directory. This function powers the \code{make_tester} option
 of \code{\link[=use_test_subdir]{use_test_subdir()}} and you will likely not need to run it manually.
 }
 \seealso{
-Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_testdata}}
+Other infrastructure: 
+\code{\link{use_test_subdir}()},
+\code{\link{use_testdata}()}
 }
 \concept{infrastructure}

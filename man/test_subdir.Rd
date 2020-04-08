@@ -19,7 +19,7 @@ test_manual(...)
 test_all(...)
 }
 \arguments{
-\item{subdir}{\code{character} scalar. subdir of \code{inst/tests/} or \code{tests/testthat}
+\item{subdir}{\code{character} scalar. subdir of \verb{inst/tests/} or \code{tests/testthat}
 that contains the tests}
 
 \item{...}{passed on to \code{devtools::test()}}
@@ -29,7 +29,7 @@ A \link[testthat:testthat_results]{testthat::testthat_results} object (invisibly
 }
 \description{
 This is a simple wrapper for \code{\link[devtools:test]{devtools::test()}}, but rather than running
-the tests in \file{inst/tests/} or \file{tests/testthat}, it runs the tests
+the tests in \file{inst/tests/} or \file{tests/testthat/}, it runs the tests
 in a subdirectory of that folder. For creating such subdirectories,
 please also see \code{\link[=use_test_subdir]{use_test_subdir()}}.
 }
@@ -42,15 +42,12 @@ Three preset test subdirs are defined at the moment:
 \item{\code{test_integration()}}{Integration tests, also called component tests.
 Put tests here that test if several functions / parts of your program
 work together as expected. You can create the relevant subdir
-\file{testthat/integration_tests/} with \code{use_integration_tests()}.\preformatted{}
-}
-
+\file{testthat/integration_tests/} with \code{use_integration_tests()}.}
 \item{\code{test_acceptance()}}{Acceptance tests. This is the highest levels of
 tests. Put tests here that verifies if your package fulfills the
 goals/requirements you set out to achieve with your package were met.
 You can create the relevant subdir \file{testthat/acceptance_tests/}
-with \code{use_acceptance_tests()}.
-}
+with \code{use_acceptance_tests()}.}
 \item{\code{test_manual()}}{Manual tests. Put tests here that produce output
 that has to be manually verified, such as: console output, pdf files,
 plots. It is recommended you collect the output files of such tests in

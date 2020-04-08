@@ -8,7 +8,7 @@ test_coverage(from_tags = TRUE, from_desc = TRUE)
 }
 \arguments{
 \item{from_tags}{\code{logical} scalar. Checks the files if your test directory for
-testthis tags. Specifically, if you have the comment \code{#* @testing myfunction}
+testthis tags. Specifically, if you have the comment \verb{#* @testing myfunction}
 in any of your test files, myfunction will be marked as tested.}
 
 \item{from_desc}{\code{logical} scalar. Checks the \code{desc} argument

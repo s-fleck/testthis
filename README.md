@@ -44,9 +44,11 @@ testthis also provides functions for managing tests in subdirectories of
     format, which is more appropriate for single R objects than `.rda`
     or `.Rdata` (see `?readRDS`).
 
-  - `use_testdata_raw()` creates the directory
-    `tests/testhat/testdata-raw`. Use this directory to put scripts that
-    generate the data in `tests/testhat/testdata`.
+  - `use_testdata_raw()` creates a script-file in the directory
+    `tests/testhat/testdata-raw`. The `testdata-raw` directory should
+    contain all script files used to generate the data in
+    `tests/testhat/testdata`, analogous to the relationship between
+    `/data` and `/data-raw` as recommended by *devtools*/*usethis*.
 
   - `find_testdata()` and `read_testdata()` are simple helpers to read
     files saved with `use_testdata()`.
@@ -64,7 +66,7 @@ testthis also provides functions for managing tests in subdirectories of
 Testthis also provides some simple code analysis tools
 
   - `test_coverage()` lists all functions of package and shows whether
-    they are mentioned in any `test_that()` calls’ desc argument;
+    they are mentioned in any `test_that()` call’s desc argument;
     e.g. if you have a test file containing `test_that("testing that
     function foo works", <...>)`, `foo()` will show up marked as tested.
     This can be used as a simple todo list for testing, but does not
@@ -82,8 +84,8 @@ reference](https://s-fleck.github.io/testthis/reference/index.html)
     install.packages("testthis")
     
     # You can also install the development version from GitHub:
-    # install.packages("devtools")
-    devtools::install_github("s-fleck/testthis")
+    # install.packages("remotes")
+    remotes::install_github("s-fleck/testthis")
 
 ## Usage
 
@@ -95,7 +97,7 @@ RStudio addins (can be assigned to hotkeys):
 
 ``` r
 open_testfile()
-## The file `tests/testthat/test_README.Rmd` does not exist. 
+## The file `tests/testthat/test_myscript.R` does not exist. 
 ## You can create it with testthis::test_skeleton().
 
 test_skeleton()

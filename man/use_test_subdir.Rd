@@ -47,15 +47,12 @@ Three preset test subdirs are defined at the moment:
 \item{\code{test_integration()}}{Integration tests, also called component tests.
 Put tests here that test if several functions / parts of your program
 work together as expected. You can create the relevant subdir
-\file{testthat/integration_tests/} with \code{use_integration_tests()}.\preformatted{}
-}
-
+\file{testthat/integration_tests/} with \code{use_integration_tests()}.}
 \item{\code{test_acceptance()}}{Acceptance tests. This is the highest levels of
 tests. Put tests here that verifies if your package fulfills the
 goals/requirements you set out to achieve with your package were met.
 You can create the relevant subdir \file{testthat/acceptance_tests/}
-with \code{use_acceptance_tests()}.
-}
+with \code{use_acceptance_tests()}.}
 \item{\code{test_manual()}}{Manual tests. Put tests here that produce output
 that has to be manually verified, such as: console output, pdf files,
 plots. It is recommended you collect the output files of such tests in
@@ -82,7 +79,8 @@ test_special_tests()
 \seealso{
 \code{\link[=test_subdir]{test_subdir()}}
 
-Other infrastructure: \code{\link{use_testdata}},
-  \code{\link{use_tester}}
+Other infrastructure: 
+\code{\link{use_testdata}()},
+\code{\link{use_tester}()}
 }
 \concept{infrastructure}

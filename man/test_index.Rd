@@ -5,8 +5,9 @@
 \alias{print.test_index}
 \title{Generate an index of all test_that calls}
 \usage{
-test_index(markers = interactive() && requireNamespace("rstudioapi",
-  quietly = TRUE))
+test_index(
+  markers = interactive() && requireNamespace("rstudioapi", quietly = TRUE)
+)
 
 \method{print}{test_index}(x, ...)
 }

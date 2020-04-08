@@ -1,7 +1,7 @@
 ## Test environments
-* local ubuntu 16.04 install, R 3.5.3
-* local ubuntu 18.10 install, R 3.6.0
-* win-builder (devel and release)
+* local ubuntu 18.04 install, R 3.6.3
+* local ubuntu 18.10 install, R 3.6.2
+* win-builder (devel)
 * rhub::check_for_cran
 
 ## R CMD check results
@@ -14,7 +14,6 @@ None
 
 ## Notes
 
-Ironed out a few old bugs, added new functionality and improved 
-documentation.
+Maintenance release for compat with usthis 1.6.0
 
 ---

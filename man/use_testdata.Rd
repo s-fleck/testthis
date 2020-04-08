@@ -8,10 +8,17 @@
 \alias{find_testdata}
 \title{Create \code{testdata} folder.}
 \usage{
-use_testdata(..., subdir = NULL, overwrite = FALSE, ignore = FALSE,
-  compress = TRUE, refhook = NULL, version = NULL)
+use_testdata(
+  ...,
+  subdir = NULL,
+  overwrite = FALSE,
+  ignore = FALSE,
+  compress = TRUE,
+  refhook = NULL,
+  version = NULL
+)
 
-use_testdata_raw()
+use_testdata_raw(name = NULL)
 
 has_testdata()
 
@@ -40,6 +47,11 @@ to / read from.}
 \item{version}{the workspace format version to use.  \code{NULL}
     specifies the current default version (3). The only other supported
     value is 2, the default from \R 1.4.0 to \R 3.5.0.}
+
+\item{name}{a \code{character} scalar or \code{NULL}. Name of the dataset for which
+to create a script file in \file{testthat/testdata-raw}. If \code{NULL} an empty
+\file{testthat/testdata-raw} directory is created (if it does not exist
+already).}
 
 \item{infile}{rds file to read (must end in .rds, otherwise .rds ending is
 automatically added)}
@@ -77,7 +89,8 @@ Save R objects to separate files \file{tests/testthat/testdata} in the
 \seealso{
 \code{\link[base:readRDS]{base::readRDS()}}
 
-Other infrastructure: \code{\link{use_test_subdir}},
-  \code{\link{use_tester}}
+Other infrastructure: 
+\code{\link{use_test_subdir}()},
+\code{\link{use_tester}()}
 }
 \concept{infrastructure}

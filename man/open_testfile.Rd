@@ -11,5 +11,5 @@ If the currently open file in the RStudio editor is called \file{myfun.R} this
 opens \file{tests/testthat/test_myfun.R} in a new tab. This function can also
 be used to jump back and forth between a script and the associated test
 file. You can modify this behaviour by putting the comment
-\code{#* @testfile anotherfile} anywhere in \file{myfun.R}.
+\verb{#* @testfile anotherfile} anywhere in \file{myfun.R}.
 }

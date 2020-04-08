@@ -33,7 +33,7 @@ your \file{.Rprofile} to make them permanent across sessions.
 \describe{
 
 \item{\code{testthis.sep}}{Default separator to use when creating test files with
-\code{test_skeleton()}. Defaults to \code{_}, must be either \code{_} or \code{-}; i.e whether
+\code{test_skeleton()}. Defaults to \verb{_}, must be either \verb{_} or \code{-}; i.e whether
 you want your files to be named \code{test_foofunction.R} or \code{test-foofunction.R}}
 
 \item{\code{testthis.integration_tests_path}, \code{testthis.acceptance_tests_path},
@@ -46,19 +46,19 @@ you want your files to be named \code{test_foofunction.R} or \code{test-foofunct
 
 
 test_this tags are special comments that modify the behaviour of the
-functions supplied by this package. They are of the form \code{#* @tag <value>}.
-Please not that only some test_this tags really require a \code{<value>}.
+functions supplied by this package. They are of the form \verb{#* @tag <value>}.
+Please not that only some test_this tags really require a \verb{<value>}.
 
-\strong{Valid tags for script files in the /R/ dir (\code{pkg/R/*.R})}
+\strong{Valid tags for script files in the /R/ dir (\verb{pkg/R/*.R})}
 \itemize{
-\item \code{@testfile <filename>}: manually specify associated test file. Should
+\item \verb{@testfile <filename>}: manually specify associated test file. Should
 usually start with \code{test_}. This is used by \code{test_this()}, \code{lest_this()} and
 \code{open_testfile()}.
 }
 
 \strong{Valid tags or test files (\code{pkg/tests/testthat/test_*.R})}
 \itemize{
-\item \code{@testing <functionname>}:  mark \code{functionname} as tested.
+\item \verb{@testing <functionname>}:  mark \code{functionname} as tested.
 Should usually go next the associated \code{test_that()} call. This is used by
 \code{test_coverage()}.
 }
@@ -68,6 +68,6 @@ Should usually go next the associated \code{test_that()} call. This is used by
 \code{\link[usethis:edit_r_profile]{usethis::edit_r_profile()}}
 }
 \author{
-\strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com}
+\strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
 
 }

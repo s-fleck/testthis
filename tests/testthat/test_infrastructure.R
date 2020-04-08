@@ -138,7 +138,7 @@ test_that("use_test_subdir works as expected", {
 
   # Check if preset subdir creators work
   edir <- file.path(proj_test, "tests/testthat/integration_tests/")
-  expect_message(expect_true(use_integration_tests()), "Creating")
+  expect_true(use_integration_tests())
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 
@@ -148,7 +148,7 @@ test_that("use_test_subdir works as expected", {
   unlink(edir, recursive = TRUE)
 
   edir <- file.path(proj_test, "tests/testthat/manual_tests/")
-  expect_message(expect_true(use_manual_tests()), "Creating")
+  expect_true(use_manual_tests())
   expect_true(file.exists(edir))
   unlink(edir, recursive = TRUE)
 

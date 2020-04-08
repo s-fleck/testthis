@@ -4,8 +4,7 @@
 \alias{test_skeleton}
 \title{Create a test skeleton file for the currently open .R file}
 \usage{
-test_skeleton(fname = NULL, open = TRUE,
-  sep = options("testthis.sep"))
+test_skeleton(fname = NULL, open = TRUE, sep = options("testthis.sep"))
 }
 \arguments{
 \item{fname}{\code{character} scalar. Target R script file to open. If empty the file
