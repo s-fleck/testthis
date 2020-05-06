@@ -1,7 +1,7 @@
 Type: Package
 Package: testthis
 Title: Utils and 'RStudio' Addins to Make Testing Even More Fun
-Version: 1.1.1
+Version: 1.1.1.9000
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",

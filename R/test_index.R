@@ -11,7 +11,7 @@
 #' @export
 #'
 test_index <- function(
-  markers = interactive() && requireNamespace("rstudioapi", quietly = TRUE)
+  markers = interactive() && requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()
 ){
   assert(is_scalar_bool(markers))
   idx <- get_test_index()

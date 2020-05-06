@@ -1,3 +1,10 @@
+# testthis (dev)
+
+* When checking for RStudio, check if RStudio is actually running, and not just
+  if **rstudioapi** is installed. This fixes bugs with non-interactive use of
+  `test_subdir()` and co.
+
+
 # testthis 1.1.1
 
 * `use_testdata_raw()` gains `name` argument similar to `usethis::use_data()`.

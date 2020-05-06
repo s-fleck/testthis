@@ -125,7 +125,7 @@ use_testdata_raw <- function(
     file.create(path)
     cat(sprintf('\n\ntestthis::use_testdata(%s)', name), file = path)
 
-    if (requireNamespace("rstudioapi", quietly = TRUE)){
+    if (is_rstudio_available() && interactive()){
       rstudioapi::navigateToFile(path)
     }
   }

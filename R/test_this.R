@@ -18,7 +18,7 @@
 test_this <- function(...){
   fname <- get_testfile_name()
 
-  if (requireNamespace("rstudioapi", quietly = TRUE)){
+  if (is_rstudio_available()){
     rstudioapi::documentSaveAll()
   }
 

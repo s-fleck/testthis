@@ -117,3 +117,9 @@ path_diff <- function(x, y){
   )
 }
 
+
+
+
+is_rstudio_available <- function(){
+  requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()
+}

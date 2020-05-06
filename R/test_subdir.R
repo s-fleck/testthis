@@ -40,7 +40,7 @@
 #'
 #' @export
 test_subdir <- function(subdir, ...){
-  if (requireNamespace("rstudioapi", quietly = TRUE)){
+  if (is_rstudio_available() && interactive()){
     rstudioapi::documentSaveAll()
   }
 
@@ -95,7 +95,7 @@ test_manual <- function(...){
 test_all <- function(
   ...
 ){
-  if (requireNamespace("rstudioapi", quietly = TRUE)){
+  if (is_rstudio_available() && interactive()){
     rstudioapi::documentSaveAll()
   }
 
