@@ -35,7 +35,7 @@ of test coverage, try the package \strong{covr} instead.
 }
 \details{
 \code{test_coverage} looks in \code{.covrignore} for functions that should be ignored
-for coverage analysis (see \code{\link[usethis:use_covr_ignore]{usethis::use_covr_ignore()}})
+for coverage analysis (see \code{\link[usethis:use_coverage]{usethis::use_covr_ignore()}})
 }
 \examples{
 

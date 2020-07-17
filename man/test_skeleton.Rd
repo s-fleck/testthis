@@ -30,5 +30,5 @@ Creates an R script file in the file system.
 }
 
 \seealso{
-\code{\link[usethis:use_test]{usethis::use_test()}}
+\code{\link[usethis:use_r]{usethis::use_test()}}
 }

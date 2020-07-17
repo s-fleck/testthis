@@ -19,9 +19,9 @@ For details please refer to the
 \section{Setting the project path}{
 
 
-Testthis uses \code{\link[usethis:proj_get]{usethis::proj_get()}} to detect project root of the current
+Testthis uses \code{\link[usethis:proj_utils]{usethis::proj_get()}} to detect project root of the current
 working directory. You can override the project root with
-\code{\link[usethis:proj_set]{usethis::proj_set()}}.
+\code{\link[usethis:proj_utils]{usethis::proj_set()}}.
 }
 
 \section{Package options}{
@@ -65,7 +65,7 @@ Should usually go next the associated \code{test_that()} call. This is used by
 }
 
 \seealso{
-\code{\link[usethis:edit_r_profile]{usethis::edit_r_profile()}}
+\code{\link[usethis:edit]{usethis::edit_r_profile()}}
 }
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
