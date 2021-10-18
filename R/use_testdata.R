@@ -185,7 +185,7 @@ read_testdata <- function(infile, subdir = NULL){
 #' @param must_exist `logical` scalar. Assert that path specified in `...`
 #'   exists
 #'
-#' @return `find_testdata()` returns the normalized path to a file in a
+#' @return `find_testdata()` returns the normalized path to a file
 #'   in the testdata directory
 #'
 #' @export
