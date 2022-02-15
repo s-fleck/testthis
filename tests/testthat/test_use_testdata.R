@@ -1,7 +1,3 @@
-context("use_testdata")
-
-
-
 test_that("test_parse_testthis_comments works as expected", {
   x <- read_testdata("read_testdata_testfile.rds")
   expect_identical(x, "185")
@@ -9,7 +5,7 @@ test_that("test_parse_testthis_comments works as expected", {
 
 
 
-setup({
+setup <- function(){
   tenv <- parent.env(environment())
   proj_old <- tryCatch(usethis::proj_get(), error = function(e) NULL)
   assign("proj_old", proj_old, tenv)
@@ -19,20 +15,21 @@ setup({
   dir <- find_testdata("test_pkg", must_exist = TRUE)
   fs::dir_copy(dir, proj_test)
   usethis::proj_set(proj_test)
-})
+}
 
 
-
-
-teardown({
+teardown <- function(){
   usethis::proj_set(proj_old)
   unlink(td, recursive = TRUE)
-})
+}
 
 
 
 
 test_that("saving and loading testdata works", {
+  setup()
+  on.exit(teardown())
+
   # Check for clean state
   package_state <- list.files(proj_test, recursive = TRUE)
   efile <- file.path(proj_test, "tests", "testthat", "testdata", "iris.rds")
@@ -57,6 +54,9 @@ test_that("saving and loading testdata works", {
 
 
 test_that("use_testdata_raw works", {
+  setup()
+  on.exit(teardown())
+
   package_state <- list.files(proj_test, recursive = TRUE)
   efile <- file.path(proj_test, "tests", "testthat", "testdata-raw")
 

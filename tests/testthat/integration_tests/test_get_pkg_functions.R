@@ -1,9 +1,7 @@
-context("get_package_functions")
-
-
 proj <- rprojroot::find_package_root_file()
 
 test_that('get_pkg_tested_functions_from_desc works', {
+  skip("Update to user mockery")
   #* @testing get_pkg_tested_functions_from_desc
   tpkg <- file.path(rprojroot::find_testthat_root_file("testdata", "test_pkg", "tests", "testthat"))
   usethis::proj_set(tpkg)

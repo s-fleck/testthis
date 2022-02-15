@@ -3,6 +3,7 @@
 * When checking for RStudio, check if RStudio is actually running, and not just
   if **rstudioapi** is installed. This fixes bugs with non-interactive use of
   `test_subdir()` and co.
+* Make `test_subdir()` work with testthat 3 and parallel testing (#18)
 
 
 # testthis 1.1.1

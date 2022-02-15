@@ -44,12 +44,13 @@ test_subdir <- function(subdir, ...){
     rstudioapi::documentSaveAll()
   }
 
-  devtools::load_all(usethis::proj_get())
+  project <- usethis::proj_get()
+  devtools::load_all(project)
 
-  testthat::test_dir(file.path(
-    usethis::proj_get(), testthat::test_path(), subdir
-  ))
-
+  testthat::test_dir(
+    file.path(usethis::proj_get(), testthat::test_path(), subdir),
+    package = devtools::as.package(project)[["package"]]
+  )
 }
 
 

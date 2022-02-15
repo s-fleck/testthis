@@ -1,7 +1,5 @@
-context("infrastructure-non cran tests")
 
-
-setup({
+setup <- function(){
   tenv <- parent.env(environment())
   proj_old <- tryCatch(usethis::proj_get(), error = function(e) NULL)
   assign("proj_old", proj_old, tenv)
@@ -11,20 +9,21 @@ setup({
   dir <- find_testdata("test_pkg", must_exist = TRUE)
   fs::dir_copy(dir, proj_test)
   usethis::proj_set(proj_test)
-})
+}
 
 
-
-
-teardown({
+teardown <- function(){
   usethis::proj_set(proj_old)
   unlink(td, recursive = TRUE)
-})
+}
 
 
 
 
 test_that("use_testdata creates testdata dir", {
+  setup()
+  on.exit(teardown())
+
   #* @testing has_testdata
   #* @testing use_testdata
   package_state <- list.files(proj_test, recursive = TRUE)
@@ -84,6 +83,9 @@ test_that("use_testdata creates testdata dir", {
 
 
 test_that("use_tester works as expected", {
+  setup()
+  on.exit(teardown())
+
   package_state <- list.files(proj_test, recursive = TRUE)
 
   expect_true(dir.exists(proj_test))
@@ -114,6 +116,9 @@ test_that("use_tester works as expected", {
 
 
 test_that("use_test_subdir works as expected", {
+  setup()
+  on.exit(teardown())
+
   #* @testing use_test_subdir
   #* @testing use_acceptance_tests
   #* @testing use_integration_tests
